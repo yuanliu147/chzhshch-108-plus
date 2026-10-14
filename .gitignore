@@ -106,3 +106,7 @@ dist
 # temp release files
 **/108-*.md
 **/*.pdf
+
+quant-lab/.venv/
+quant-lab/data/
+quant-lab/out/
