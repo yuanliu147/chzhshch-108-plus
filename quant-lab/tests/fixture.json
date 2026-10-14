@@ -1,0 +1,5 @@
+{"ok": true, "command": "market history", "data": {"item": [
+  {"date_ms": 1767225600000, "volume": 100, "turnover": 1000.0, "open_price": 10.0, "high_price": 11.0, "low_price": 9.5, "close_price": 10.5},
+  {"date_ms": 1767312000000, "volume": 200, "turnover": 2100.0, "open_price": 10.5, "high_price": 10.8, "low_price": 10.0, "close_price": 10.2},
+  {"date_ms": 1767398400000, "volume": 150, "turnover": 1600.0, "open_price": 10.2, "high_price": 10.6, "low_price": 9.8, "close_price": 10.4}
+]}}
