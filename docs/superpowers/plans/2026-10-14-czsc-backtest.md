@@ -16,27 +16,24 @@
 - 成交价 = 信号确认那根 K 线的收盘价；严禁一次性全量算信号再回填（逐 bar `ct.update(bar)`）
 - 全仓多头单笔，手续费 `FEE_RATE = 0`（常量预留），滑点 0
 - 环境变量 `CZSC_MIN_BI_LEN` 不设（用默认 6）、`CZSC_MAX_BI_NUM` 不设（用默认 50）
-- **不执行任何 git commit / git push**（用户未要求）；完成后向用户汇报，由用户决定是否提交
+- **Git 策略（用户 2026-10-14 批准）**：在 `quant-lab` 分支上执行；每个任务完成后做一次任务级 commit，**只提交本任务相关文件**（quant-lab/ 与 docs/ 下相关文件），不碰仓库中已有的未提交内容（MISSION.md、assets/ 等）；不 push；分支合并/删除由用户决定
 - 所有命令的工作目录为仓库根 `/Users/xianyi/self_dir/chzhshch-108-plus`，Python 一律用 `quant-lab/.venv/bin/python`
 
-## 已核实的 czsc 1.0 API 事实（实施时不要凭记忆改动）
+## 已核实的 czsc 1.0.1（PyPI wheel）API 事实（实施时不要凭记忆改动）
 
-以下签名/字符串均已从 waditu/czsc 源码（master 分支）核实：
+以下事实已由 Task 1 调查在 czsc 1.0.1 上实际运行验证（详见 .superpowers/sdd/task-1-report.md 的"1.0.1 API 调查"节）：
 
+- **没有** `czsc._native.signals.cxt.*` 函数路径 API；`get_signals_config` 接收**解析后的信号串列表**：
+  `czsc.get_signals_config(["日线_D1B_BUY1V221126_一买_任意_任意_0", "日线_D1#SMA#21_BS2辅助V230320_二买_任意_任意_0", ...])`
+- **双轨不对称**（用错则静默 0 匹配，无报错）：
+  - 配置串（给 get_signals_config）：BUY1/SELL1 **带**版本号（`日线_D1B_BUY1V221126_...`）
+  - 事件匹配串（给 Event）：BUY1/SELL1 **不带**版本号（`日线_D1B_BUY1_...`），BS2/BS3 **带**版本号（`日线_D1#SMA#21_BS2辅助V230320_...`）
+- `Event.load({"operate": "开多", "signals_all": ["<信号串>"]})` 可用
+- `Position(symbol=..., name=..., opens=[...], exits=[...], interval=0, timeout=250, stop_loss=500)`
+- `bg = BarGenerator("日线", [])`；`ct = CzscTrader(bg, positions, get_signals_config(SIGNAL_STRINGS), ensemble_method="mean")`
+- **`CzscTrader` 会克隆 positions**：交易结果必须读 `ct.positions[i].pairs` / `ct.positions[i].holds`，构造时传入的原 Python Position 对象永远是空的
 - `format_standard_kline(df, freq)`：df 必须含 8 列 `dt, symbol, open, close, high, low, vol, amount`；freq 传 `"日线"` 字符串即可
-- 信号注册名（signals_seq 元素）：
-  - `czsc._native.signals.cxt.cxt_first_buy_V221126`
-  - `czsc._native.signals.cxt.cxt_first_sell_V221126`
-  - `czsc._native.signals.cxt.cxt_second_bs_V230320`
-  - `czsc._native.signals.cxt.cxt_third_bs_V230318`
-- 信号运行时 key（Rust 源码核实，模板文档中的版本号不在 key 里）：
-  - 一买: `日线_D1B_BUY1`（v1=`一买`/`其他`）；一卖: `日线_D1B_SELL1`
-  - 二买/二卖: `日线_D1#SMA#21_BS2辅助V230320`
-  - 三买/三卖: `日线_D1#SMA#34_BS3辅助V230318`
-- `Event.load({"operate": "开多", "signals_all": ["<信号串>"]})`；信号串 7 段下划线分隔，末段 score=0 表示最低置信门槛，`任意` 为通配
-- `Position(symbol=..., name=..., opens=[Event,...], exits=[Event,...], interval=0, timeout=250, stop_loss=500)`
-- `bg = BarGenerator("日线", [])`；`ct = CzscTrader(bg, positions, get_signals_config(signals_seq), ensemble_method="mean")`
-- `ct.update(bar)` 逐根推进；`pos.pairs` 返回记录列表（DataFrame 列：`标的代码,策略标记,交易方向,开仓时间,平仓时间,开仓价格,平仓价格,持仓K线数,事件序列,持仓天数,盈亏比例`）
+- `ct.update(bar)` 逐根推进；pairs 为记录列表（含 开仓时间/开仓价格/平仓时间/平仓价格/盈亏比例(BP) 等列，列名以实际输出断言为准）
 
 ---
 
@@ -65,22 +62,26 @@ quant-lab/.venv/bin/pip install -U pip czsc pandas
 
 预期：`Successfully installed czsc-1.0.x ...`。**若报没有 cp313 wheel 且源码构建失败（缺 Rust 工具链）：立即停止**，向用户报告触发 spec 已知风险 4（降级方案A需重新确认），不要尝试改装系统环境。
 
-- [ ] **Step 3: 验证 import 与信号注册名可用**
+- [ ] **Step 3: 验证信号配置串可用（1.0.1 wheel 实测 API）**
 
 ```bash
 quant-lab/.venv/bin/python - <<'EOF'
 import czsc
 print("czsc version:", getattr(czsc, "__version__", "unknown"))
-from czsc import CZSC, BarGenerator, CzscTrader, Event, Position, Freq, format_standard_kline, get_signals_config
-for name in ["cxt_first_buy_V221126", "cxt_first_sell_V221126", "cxt_second_bs_V230320", "cxt_third_bs_V230318"]:
-    full = f"czsc._native.signals.cxt.{name}"
-    freqs = czsc.get_signals_freqs([full])
-    assert freqs == ["日线"] or "日线" in freqs, (full, freqs)
-    print("OK signal:", full, "freqs:", freqs)
+from czsc import get_signals_config
+SIGNAL_STRINGS = [
+    "日线_D1B_BUY1V221126_一买_任意_任意_0",
+    "日线_D1B_SELL1V221126_一卖_任意_任意_0",
+    "日线_D1#SMA#21_BS2辅助V230320_二买_任意_任意_0",
+    "日线_D1#SMA#34_BS3辅助V230318_三买_任意_任意_0",
+]
+config = get_signals_config(SIGNAL_STRINGS)
+assert len(config) == 4, config
+print("config OK:", config)
 EOF
 ```
 
-预期：4 行 `OK signal: ...`，无 AssertionError（证明信号名在已装版本中存在且默认跑在日线上）。
+预期：`config OK: [...]`（4 项配置，无异常）。**若 get_signals_config 对任何串报解析错：停止**，把错误原样报告（说明 1.0.1 的信号串格式与调查结论不符，需重新调查）。
 
 - [ ] **Step 4: .gitignore**
 
@@ -92,7 +93,7 @@ quant-lab/data/
 quant-lab/out/
 ```
 
-并创建 `quant-lab/.gitignore` 内容同上三行（防御单独移动目录的情况）。不写 README（YAGNI，用法最终体现在 backtest.py 的命令行帮助和最终汇报里）。
+并创建 `quant-lab/.gitignore`，内容为三行相对模式 `.venv/`、`data/`、`out/`（注意：gitignore 模式相对所在目录解析且含 `/` 时锚定该目录——**不能**写成 `quant-lab/.venv/`，那会匹配 `quant-lab/quant-lab/.venv/` 永不生效）。不写 README（YAGNI，用法最终体现在 backtest.py 的命令行帮助和最终汇报里）。
 
 ---
 
@@ -251,8 +252,8 @@ EOF
 - Test: `quant-lab/tests/test_strategy.py`
 
 **Interfaces:**
-- Consumes: Task 1 API 事实（信号串常量）
-- Produces: `strategy.SIGNALS_SEQ: list[str]`（4 个信号全名）；`strategy.build_positions() -> list[Position]`（单多头仓位，3 开 3 平 6 事件）；`strategy.build_trader(positions) -> CzscTrader`
+- Consumes: Task 1 验证过的 1.0.1 API 事实（信号配置串/事件串常量，见 plan Global Constraints）
+- Produces: `strategy.SIGNAL_STRINGS: list[str]`（4 个**配置串**，带版本号，给 get_signals_config）；`strategy.build_positions() -> list[Position]`（单多头仓位，3 开 3 平 6 事件，事件串为**运行时 key 格式**）；`strategy.build_trader(positions) -> CzscTrader`
 
 - [ ] **Step 1: 写失败测试**
 
@@ -262,11 +263,12 @@ EOF
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from strategy import SIGNALS_SEQ, build_positions, build_trader
+from strategy import SIGNAL_STRINGS, build_positions, build_trader
 
-def test_signals_seq():
-    assert len(SIGNALS_SEQ) == 4
-    assert all(s.startswith("czsc._native.signals.cxt.") for s in SIGNALS_SEQ)
+def test_signal_strings():
+    assert len(SIGNAL_STRINGS) == 4
+    assert all(s.count("_") == 6 for s in SIGNAL_STRINGS)  # 7 段下划线分隔
+    assert "BUY1V221126" in SIGNAL_STRINGS[0]
 
 def test_build_positions():
     positions = build_positions()
@@ -297,17 +299,19 @@ from czsc import BarGenerator, CzscTrader, Event, Position, get_signals_config
 
 SYMBOL = "600519.SH"
 
-SIGNALS_SEQ = [
-    "czsc._native.signals.cxt.cxt_first_buy_V221126",
-    "czsc._native.signals.cxt.cxt_first_sell_V221126",
-    "czsc._native.signals.cxt.cxt_second_bs_V230320",
-    "czsc._native.signals.cxt.cxt_third_bs_V230318",
+# 配置串（带版本号，喂给 get_signals_config）
+SIGNAL_STRINGS = [
+    "日线_D1B_BUY1V221126_一买_任意_任意_0",
+    "日线_D1B_SELL1V221126_一卖_任意_任意_0",
+    "日线_D1#SMA#21_BS2辅助V230320_二买_任意_任意_0",
+    "日线_D1#SMA#34_BS3辅助V230318_三买_任意_任意_0",
 ]
 
 def _event(operate: str, sig: str) -> Event:
     return Event.load({"operate": operate, "signals_all": [sig]})
 
 def build_positions() -> list[Position]:
+    # 事件串 = 运行时 key 格式：BUY1/SELL1 不带版本号，BS2/BS3 带版本号
     opens = [
         _event("开多", "日线_D1B_BUY1_一买_任意_任意_0"),
         _event("开多", "日线_D1#SMA#21_BS2辅助V230320_二买_任意_任意_0"),
@@ -323,7 +327,7 @@ def build_positions() -> list[Position]:
 
 def build_trader(positions: list[Position]) -> CzscTrader:
     bg = BarGenerator("日线", [])
-    config = get_signals_config(SIGNALS_SEQ)
+    config = get_signals_config(SIGNAL_STRINGS)
     return CzscTrader(bg, positions, config, ensemble_method="mean")
 ```
 
@@ -333,7 +337,7 @@ def build_trader(positions: list[Position]) -> CzscTrader:
 quant-lab/.venv/bin/python -m pytest quant-lab/tests/test_strategy.py -v
 ```
 
-预期：3 个 PASS。若 `Event.load` 对信号串报错（格式不符），不要改 guess——把错误原样带回给用户并核对 spec「已核实的 API 事实」。
+预期：3 个 PASS。若 `Event.load` 对信号串报错（格式不符），不要改 guess——把错误原样带回并核对 plan Global Constraints 的 1.0.1 事实。
 
 - [ ] **Step 5: 300 根K线推进冒烟（防"组装完跑不动"）**
 
@@ -341,12 +345,12 @@ quant-lab/.venv/bin/python -m pytest quant-lab/tests/test_strategy.py -v
 quant-lab/.venv/bin/python - <<'EOF'
 import sys; sys.path.insert(0, "quant-lab")
 from datafeed import load_bars
-from strategy import build_positions, build_trader, SIGNALS_SEQ
+from strategy import build_positions, build_trader
 _, bars = load_bars("quant-lab/data/600519.SH.daily.json")
 ct = build_trader(build_positions())
 for bar in bars[:300]:
     ct.update(bar)
-keys = [k for k in ct.s.keys() if "BUY1" in k or "BS2" in k or "BS3" in k]
+keys = [k for k in ct.s.keys() if "BUY1" in k or "SELL1" in k or "BS2" in k or "BS3" in k]
 print("信号key样例:", keys)
 assert any("日线_D1B_BUY1" in k for k in keys), keys
 print("SMOKE OK, end_dt:", ct.end_dt)
@@ -405,8 +409,13 @@ def main() -> None:
     for bar in bars:  # 逐根推进，禁止任何形式的回看/回填
         ct.update(bar)
 
-    pos = ct.positions[0]
+    pos = ct.positions[0]  # 注意：CzscTrader 克隆 positions，必须从 ct.positions 取结果
     dfp = pd.DataFrame(pos.pairs)
+    if len(dfp) == 0:
+        raise SystemExit("10 年回测 0 笔交易——信号配置串与事件串可能静默不匹配，停止并报告，勿静默通过")
+    need = {"开仓时间", "平仓时间", "开仓价格", "平仓价格", "事件序列"}
+    missing = need - set(dfp.columns)
+    assert not missing, f"pairs 缺列: {missing}; 实际列: {list(dfp.columns)}"
     OUT.mkdir(exist_ok=True)
     dfp.to_csv(OUT / "trades.csv", index=False, encoding="utf-8-sig")
 
@@ -456,9 +465,9 @@ s = json.load(open("quant-lab/out/summary.json", encoding="utf-8"))
 df = pd.read_csv("quant-lab/out/trades.csv")
 rets = df["平仓价格"] / df["开仓价格"] - 1
 assert s["交易笔数"] == len(df)
-assert abs(s["累计收益(复利)"] - (math.prod(1 + rets) - 1)) < 1e-6
-assert abs(s["胜率"] - (rets > 0).mean()) < 1e-6
-# 成交价 = 收盘价口径抽查：开仓价格必须出现在当根K线 [low, high] 区间内（收盘价天然满足）
+# 舍入感知校验：summary 存 4 位小数，精确等式 + 宽松容差（1e-6 与 round(…,4) 数学上不可兼得）
+assert s["累计收益(复利)"] == round(float(math.prod(1 + rets) - 1), 4)
+assert abs(s["胜率"] - round(float((rets > 0).mean()), 4)) < 1e-4
 assert (df["开仓价格"] > 0).all() and (df["平仓价格"] > 0).all()
 print("CONSISTENCY OK:", s["交易笔数"], "trades, total", s["累计收益(复利)"])
 EOF
