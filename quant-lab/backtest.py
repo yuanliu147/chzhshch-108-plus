@@ -3,6 +3,8 @@
 用法: .venv/bin/python backtest.py
 口径: 成交价 = 信号确认当根收盘价（CzscTrader 逐 bar 语义保证）；
       收益按 平仓价格/开仓价格-1 复算，不依赖 czsc BP 单位；手续费 FEE_RATE 预留。
+止损语义: czsc 1.0.1 的 stop_loss 为移动止损——自持仓期间最高价回撤 stop_loss BP 触发，
+      非相对开仓价的固定止损，故止损出场笔可能仍盈利。
 已知口子: 前复权数据的复权因子含未来信息（spec 已知风险 1）。
 """
 import json
@@ -42,11 +44,18 @@ def main() -> None:
     missing = need - set(dfp.columns)
     assert not missing, f"pairs 缺列: {missing}; 实际列: {list(dfp.columns)}"
     OUT.mkdir(exist_ok=True)
+    # 事件序列为 "开多_一买#hash@... -> 平多@500BP止损\"" 形式；剥离 #hash 后缀，
+    # 并去掉 czsc 止损事件名内嵌的引号字符
+    dfp["开仓信号"] = (dfp["事件序列"].str.split(" -> ").str[0].str.split("#").str[0]
+                   .str.replace('"', '', regex=False))
+    dfp["平仓原因"] = (dfp["事件序列"].str.split(" -> ").str[-1].str.split("#").str[0]
+                   .str.replace('"', '', regex=False))
     dfp.to_csv(OUT / "trades.csv", index=False, encoding="utf-8-sig")
 
     rets = (dfp["平仓价格"] / dfp["开仓价格"] - 1 - 2 * FEE_RATE).tolist()
     wins = [r for r in rets if r > 0]
     losses = [r for r in rets if r <= 0]
+    stop_mask = dfp["事件序列"].str.contains("止损")
     summary = {
         "标的": SYMBOL,
         "区间": f"{bars[0].dt:%Y-%m-%d}~{bars[-1].dt:%Y-%m-%d}",
@@ -60,7 +69,10 @@ def main() -> None:
         "盈亏比": round((sum(wins) / len(wins)) / abs(sum(losses) / len(losses)), 2)
                   if wins and losses else None,
         "手续费率": FEE_RATE,
-        "平仓原因分布": dfp["事件序列"].str.extract(r"平多#([^_]+)")[0].value_counts().to_dict()
+        "止损语义": "移动止损(峰值回撤500BP，非相对开仓价)",
+        "止损出场笔数": int(stop_mask.sum()),
+        "止损中盈利笔数": int((stop_mask & (dfp["平仓价格"] > dfp["开仓价格"])).sum()),
+        "平仓原因分布": dfp["平仓原因"].value_counts().to_dict()
                       if len(dfp) else {},
     }
     (OUT / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
