@@ -1,0 +1,373 @@
+/* ============================================================
+   缠论课程共享样式 —— 所有 lessons/*.html 与 reference/*.html 引用
+   设计取向：纸上讲义。宋体正文、克制用色、适合打印与反复翻阅
+   ============================================================ */
+
+:root {
+  --ink: #1c1a17;
+  --paper: #fdfcf7;
+  --muted: #6b655c;
+  --faint: #a39a8c;
+  --rule: #d8d2c4;
+  --accent: #8c2f1b;      /* 朱砂红：涨、重点 */
+  --green: #2e6b46;       /* 竹青：跌 */
+  --gold: #9a7b1c;        /* 批注、标记 */
+  --ok-bg: #eef5ee;
+  --err-bg: #f9efec;
+  --maxw: 44rem;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0 auto;
+  max-width: var(--maxw);
+  padding: 3.2rem 1.4rem 4rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Songti SC", "STSong", "Noto Serif SC", "Source Han Serif SC", serif;
+  font-size: 1.06rem;
+  line-height: 1.85;
+}
+
+/* ---------- 标题 ---------- */
+
+.kicker {
+  font-family: "PingFang SC", "Hiragino Sans GB", sans-serif;
+  font-size: .8rem;
+  letter-spacing: .28em;
+  color: var(--muted);
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 .6rem;
+}
+
+h1 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-align: center;
+  margin: 0 0 .4rem;
+  line-height: 1.4;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: .95rem;
+  margin: 0 0 2.2rem;
+}
+
+h2 {
+  font-size: 1.28rem;
+  font-weight: 700;
+  margin: 2.6rem 0 1rem;
+  padding-top: .4rem;
+}
+
+h2 .secno {
+  color: var(--accent);
+  margin-right: .5em;
+  font-family: "PingFang SC", sans-serif;
+  font-size: .95rem;
+}
+
+h3 {
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin: 1.8rem 0 .6rem;
+}
+
+/* ---------- 正文 ---------- */
+
+p { margin: .9em 0; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(140, 47, 27, .35);
+}
+a:hover { border-bottom-color: var(--accent); }
+
+strong { font-weight: 700; }
+
+blockquote {
+  margin: 1.2em 0;
+  padding: .4em 1.2em;
+  border-left: 3px solid var(--rule);
+  color: var(--muted);
+  font-size: .98rem;
+}
+
+.muted { color: var(--muted); }
+.small { font-size: .88rem; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 2.4rem 0;
+}
+
+/* ---------- 定义框 / 提示框 ---------- */
+
+.box {
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1rem 1.3rem;
+  margin: 1.4rem 0;
+  background: #fff;
+}
+
+.box.def { border-left: 4px solid var(--accent); }
+.box.warn { border-left: 4px solid var(--gold); background: #fbf8ef; }
+.box.why {
+  border-left: 4px solid var(--ink);
+  background: #f6f4ee;
+  font-size: .98rem;
+}
+
+.box .box-title {
+  font-family: "PingFang SC", sans-serif;
+  font-weight: 700;
+  font-size: .92rem;
+  letter-spacing: .12em;
+  margin: 0 0 .4rem;
+}
+
+.box.why .box-title::before { content: "为何学此 · "; color: var(--muted); font-weight: 400; }
+
+/* ---------- 路线图 ---------- */
+
+.roadmap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem;
+  margin: 1.2rem 0;
+  font-family: "PingFang SC", sans-serif;
+  font-size: .88rem;
+}
+.roadmap .node {
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: .18em .8em;
+  background: #fff;
+  color: var(--muted);
+}
+.roadmap .node.here {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+  background: var(--err-bg);
+}
+.roadmap .arrow { color: var(--faint); }
+
+/* ---------- 图表与练习 ---------- */
+
+figure {
+  margin: 1.6rem 0;
+  text-align: center;
+}
+
+figure svg {
+  max-width: 100%;
+  height: auto;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+
+figcaption {
+  font-size: .86rem;
+  color: var(--muted);
+  margin-top: .5rem;
+  font-family: "PingFang SC", sans-serif;
+}
+
+svg .axis-label { font-family: "PingFang SC", sans-serif; font-size: 11px; fill: var(--faint); }
+svg .price-label { font-family: "PingFang SC", sans-serif; font-size: 10px; fill: var(--faint); }
+svg .grid-line { stroke: #ece7db; stroke-width: 1; }
+
+svg .candle.up rect { fill: var(--accent); stroke: var(--accent); }
+svg .candle.up line { stroke: var(--accent); }
+svg .candle.down rect { fill: var(--green); stroke: var(--green); }
+svg .candle.down line { stroke: var(--green); }
+svg .candle { transition: opacity .15s ease; }
+svg .candle:hover { opacity: .75; }
+svg .candle.dim { opacity: .25; }
+svg .candle.picked-correct rect,
+svg .candle.picked-correct line { stroke: var(--gold); stroke-width: 2.5; }
+svg .candle.picked-wrong rect,
+svg .candle.picked-wrong line { stroke: #555; stroke-dasharray: 4 3; }
+svg .candle.answered { cursor: default; }
+svg .candle.answered:hover { opacity: 1; }
+
+/* 结构线（笔、线段）：叠加在K线之上 */
+svg .stroke {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+svg .stroke.up { stroke: var(--accent); }
+svg .stroke.down { stroke: var(--green); }
+svg .stroke-label { font-family: "PingFang SC", sans-serif; font-size: 11px; font-weight: 700; fill: var(--ink); }
+svg .dot { fill: #fff; stroke: var(--ink); stroke-width: 2; }
+svg .dot.up { stroke: var(--accent); }
+svg .dot.down { stroke: var(--green); }
+svg .stroke.hl { stroke: var(--gold); stroke-width: 3; }
+svg .point-label { font-family: "PingFang SC", sans-serif; font-size: 11px; fill: var(--muted); }
+svg .seg-label { font-family: "PingFang SC", sans-serif; font-size: 11px; font-weight: 700; fill: var(--muted); }
+
+/* 条形元素图（特征序列、中枢区间） */
+svg .bar { fill: #fff; stroke: var(--ink); stroke-width: 1.6; }
+svg .bar-el { transition: opacity .15s ease; }
+svg .bar-el:hover { opacity: .75; }
+svg .bar-el.picked-correct rect { stroke: var(--gold); stroke-width: 3; }
+svg .bar-el.picked-wrong rect { stroke: #555; stroke-width: 2; stroke-dasharray: 4 3; }
+svg .bar-label { font-family: "PingFang SC", sans-serif; font-size: 11px; fill: var(--muted); }
+
+/* 区间矩形（中枢） */
+svg .zone { fill: rgba(154, 123, 28, .14); stroke: var(--gold); stroke-width: 1.6; stroke-dasharray: 5 4; }
+svg .zone-label { font-family: "PingFang SC", sans-serif; font-size: 11px; font-weight: 700; fill: var(--gold); }
+/* 震荡范围（中枢升级判定卡）：更轻的外框 */
+svg .zone.env { fill: none; stroke: var(--faint); stroke-width: 1.2; stroke-dasharray: 2 3; }
+
+.exercise {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  padding: 1.2rem 1.3rem 1.4rem;
+  margin: 1.8rem 0;
+}
+.exercise .ex-title {
+  font-family: "PingFang SC", sans-serif;
+  font-weight: 700;
+  font-size: .95rem;
+  margin: 0 0 .2rem;
+}
+.exercise .ex-prompt { margin: .3rem 0 1rem; }
+.exercise .ex-chart { margin: 0 0 1rem; }
+.exercise .ex-chart svg { width: 100%; }
+
+.feedback {
+  border-radius: 6px;
+  padding: .7rem 1rem;
+  margin: .8rem 0 0;
+  font-size: .95rem;
+  display: none;
+}
+.feedback.show { display: block; }
+.feedback.correct { background: var(--ok-bg); border: 1px solid #bfd4bf; }
+.feedback.wrong { background: var(--err-bg); border: 1px solid #e3c4bb; }
+.feedback .verdict {
+  font-family: "PingFang SC", sans-serif;
+  font-weight: 700;
+  margin-right: .4em;
+}
+.feedback.correct .verdict { color: var(--green); }
+.feedback.wrong .verdict { color: var(--accent); }
+
+.btn {
+  font-family: "PingFang SC", sans-serif;
+  font-size: .92rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 5px;
+  padding: .45em 1.3em;
+  cursor: pointer;
+  letter-spacing: .05em;
+}
+.btn:hover { background: var(--ink); color: var(--paper); }
+.btn.ghost { border-color: var(--rule); color: var(--muted); }
+.btn.ghost:hover { background: var(--rule); color: var(--ink); }
+.btn[disabled] { opacity: .35; cursor: default; }
+.btn[disabled]:hover { background: #fff; color: var(--ink); }
+
+.ex-actions { margin-top: .8rem; display: flex; gap: .6rem; flex-wrap: wrap; }
+
+.scoreboard {
+  display: none;
+  text-align: center;
+  padding: 1.4rem 1rem;
+  margin: 1.8rem 0;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: #fff;
+}
+.scoreboard.show { display: block; }
+.scoreboard .score-num { font-size: 2rem; font-weight: 700; }
+
+/* ---------- 术语表 ---------- */
+
+table.glossary {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.4rem 0;
+  font-size: .97rem;
+}
+table.glossary th, table.glossary td {
+  text-align: left;
+  vertical-align: top;
+  padding: .55em .8em;
+  border-bottom: 1px solid var(--rule);
+}
+table.glossary th {
+  font-family: "PingFang SC", sans-serif;
+  font-size: .85rem;
+  letter-spacing: .1em;
+  color: var(--muted);
+  border-bottom: 2px solid var(--ink);
+}
+table.glossary td.term {
+  white-space: nowrap;
+  font-weight: 700;
+  color: var(--accent);
+}
+.tag-preview {
+  font-family: "PingFang SC", sans-serif;
+  font-size: .72rem;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  padding: 0 .4em;
+  margin-left: .5em;
+  vertical-align: 1px;
+}
+
+/* ---------- 页脚 ---------- */
+
+.foot {
+  margin-top: 3.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: .86rem;
+  color: var(--muted);
+  font-family: "PingFang SC", sans-serif;
+}
+.foot a { margin-right: 1.2em; }
+
+.ask-teacher {
+  margin: 2.2rem 0 0;
+  padding: 1rem 1.3rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 8px;
+  font-size: .95rem;
+}
+.ask-teacher a { color: #f0c46a; border-bottom-color: rgba(240, 196, 106, .5); }
+.ask-teacher .box-title { color: #f0c46a; font-family: "PingFang SC", sans-serif; font-weight: 700; font-size: .9rem; letter-spacing: .12em; margin: 0 0 .3rem; }
+
+/* ---------- 打印 ---------- */
+
+@media print {
+  body { max-width: none; padding: 0; background: #fff; font-size: 11pt; }
+  .btn, .ex-actions, .ask-teacher { display: none !important; }
+  .feedback { display: block !important; }
+  figure svg, .exercise { break-inside: avoid; }
+  a { color: var(--ink); border-bottom: none; }
+}

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第3课 · 线段 —— 比笔高一级的结构</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<p class="kicker">LESSON 0003 · 缠论实战 · 预计 18 分钟</p>
+<h1>线段</h1>
+<p class="subtitle">比笔高一级的结构 · 以及"线段到底在哪里结束"</p>
+
+<div class="box why">
+  <p class="box-title">这课与你的目标有什么关系</p>
+  <p>中枢＝<b>三段次级别走势的重叠</b>，而"次级别走势"在本级别图上就是<b>线段</b>。所以：<b>没有线段，就没有中枢；没有中枢，就没有买卖点</b>。</p>
+  <p style="margin:.4em 0 0">这一课要解决两个问题：三笔什么时候能升级成线段？线段到底在哪个价位结束？（第二个问题直接决定你判断背驰时"拿哪一段去比"。）</p>
+  <div class="roadmap">
+    <span class="node">K线 ✓</span><span class="arrow">→</span>
+    <span class="node">分型 ✓</span><span class="arrow">→</span>
+    <span class="node">笔 ✓</span><span class="arrow">→</span>
+    <span class="node here">线段</span><span class="arrow">→</span>
+    <span class="node">中枢</span><span class="arrow">→</span>
+    <span class="node">走势类型</span><span class="arrow">→</span>
+    <span class="node">背驰</span><span class="arrow">→</span>
+    <span class="node">三类买卖点</span>
+  </div>
+</div>
+
+<h2><span class="secno">00</span>热身：先回忆上一课</h2>
+<div class="exercise" id="warmup">
+  <p class="ex-title">热身题</p>
+  <p class="ex-prompt">一个顶分型与一个底分型<b>共用同一根K线</b>，这一笔成立吗？</p>
+  <div class="ex-actions">
+    <button class="btn" data-ans="yes">成立</button>
+    <button class="btn ghost" data-ans="no">不成立</button>
+  </div>
+  <div class="feedback" id="warmup-fb"></div>
+</div>
+
+<h2><span class="secno">01</span>线段：至少三笔，且必须有重叠</h2>
+
+<blockquote>"线段有一个最基本的前提，就是线段的前三笔，必须有重叠的部分……线段至少有三笔，但并不是连续的三笔就一定构成线段，这三笔必须有重叠的部分。"——<a href="../108/0593-486e105c01000bpo-065.md">第65课</a></blockquote>
+
+<p>关键在于最后半句：<b>"有重叠"是道门槛</b>。三笔各有自己的价格区间，如果三个区间有公共部分，线段成立；如果第三个笔（与第一笔同向）没能回到第一笔的区间里，三个区间就"错开"了，线段不成立。</p>
+
+<figure>
+  <svg id="fig-a1" width="300" height="230"></svg>
+  <svg id="fig-a2" width="300" height="230"></svg>
+  <figcaption>左：三笔有重叠 → <b>构成线段</b>　右：第三笔没能回到第一笔的区间（三笔区间无公共部分）→ <b>不构成线段</b></figcaption>
+</figure>
+
+<p class="muted small">线段有两种：从向上笔开始的<b>向上线段</b>，从向下笔开始的<b>向下线段</b>。第62课还给了另一个结论：<b>线段至少三笔</b>（图8是线段的最基本形态）。</p>
+
+<h2><span class="secno">02</span>练习A：这三笔能构成线段吗？（4 题）</h2>
+<p>看图判断。第一次答对计 1 分。</p>
+<div id="qa-host"></div>
+<div id="qa-board" class="scoreboard">
+  <p class="box-title" style="font-family:'PingFang SC',sans-serif;letter-spacing:.15em;color:var(--muted)">练习A 结果</p>
+  <p class="score-num"><span id="qa-num">0</span> / 4</p>
+  <p id="qa-msg" style="margin:.4rem 0 1rem"></p>
+  <div class="ex-actions" style="justify-content:center"><button class="btn" id="qa-retry">再练一轮</button></div>
+</div>
+
+<h2><span class="secno">03</span>特征序列：线段结束的判官</h2>
+
+<p>笔画完了，怎么知道线段在哪里断？第67课给了一个极其巧妙的办法：<b>把与线段方向相反的笔单独抽出来排成一队</b>。</p>
+
+<div class="box def">
+  <p class="box-title">定义 · 特征序列（第67课）</p>
+  <p><b>向上线段</b>：把所有<b>向下笔</b>抽出来，排成序列 X1X2…Xn，这就是它的特征序列。（整条走势的笔序列记作 S1X1S2X2S3X3…：<b>S 表示方向向上的笔</b>，<b>X 表示方向向下的笔</b>。所以 X1 是这条线段里的<b>第 1 个向下笔</b>，它在整条走势里排在 S1 之后——字母定方向，编号只数"同类笔里的第几个"。）</p>
+  <p style="margin:.4em 0 0"><b>向下线段</b>：把所有<b>向上笔</b>抽出来，排成序列 S1S2…Sn。</p>
+  <p style="margin:.4em 0 0">两相邻元素之间没有重合区间，称为一个<b>缺口</b>。元素之间也可以像K线一样做包含处理，处理后的序列叫<b>标准特征序列</b>。</p>
+</div>
+
+<p>为什么这招管用？因为缠师紧接着说了一句关键的话——<b>"把每一元素看成是一K线"</b>。于是你学会的分型手艺立刻复用：</p>
+
+<ul>
+  <li>每个特征序列元素，都有自己的高点和低点（那一笔的起止价格）；</li>
+  <li>三个相邻元素也能构成顶分型或底分型；</li>
+  <li><b>向上线段，只看特征序列的顶分型</b>；<b>向下线段，只看特征序列的底分型</b>。</li>
+</ul>
+
+<figure>
+  <svg id="fig-seq" width="640" height="240"></svg>
+</figure>
+<figure>
+  <svg id="fig-bars" width="380" height="210"></svg>
+  <figcaption>上图：一个向上线段 S1X1S2X2S3X3（金色＝三条向下笔：X1 是 顶1→底2，X2 是 顶3→底4，X3 是 顶5→底6），它们就是特征序列。下图：把这三个元素当成K线，中间那根高点低点都最高 → <b>顶分型</b>。</figcaption>
+</figure>
+
+<h2><span class="secno">04</span>线段在哪里结束：第一种情况</h2>
+
+<blockquote>"特征序列的顶分型中，第一和第二元素间不存在特征序列的缺口，那么该线段在该顶分型的高点处结束，该高点是该线段的终点。"——<a href="../108/0614-486e105c01000c16-067.md">第67课</a></blockquote>
+
+<p>翻译成人话：向上线段的特征序列里出现顶分型，且第一、第二个元素之间有重叠（无缺口）——那么<b>线段就在这个顶分型的最高点处结束</b>。上图的例子里，X1 与 X2 有重叠（无缺口），顶分型的高点是 X2 的最高价，<b>线段终点就在那里</b>。</p>
+
+<p>这也给第65课那句"线段被破坏的充要条件就是被另一个线段破坏"一个可操作的落地方法：<b>出现特征序列的分型，是线段结束的前提条件</b>。</p>
+
+<div class="box warn">
+  <p class="box-title">老师批注 · 先学第一种，再有第二种</p>
+  <p style="margin:0" class="small">第67课还讲了"第二种情况"：如果第一、二元素之间<b>有缺口</b>，就必须再看缺口之后的走势是否形成反向分型，判定更绕。它还牵涉第71课讨论的"分型右侧元素属于谁"的问题（缠师自己都说"估计看了上面的话，很多人更晕了"）。本课只要求你掌握<b>第一种情况（无缺口）</b>；第二种情况留到下一课，用图慢慢磨。</p>
+</div>
+
+<h2><span class="secno">05</span>练习B：给线段找出终点</h2>
+<p>这是上面那个向上线段。三步走：先认特征序列，再找分型，最后定终点。</p>
+
+<div class="exercise">
+  <p class="ex-title">练习B · 三步定位线段终点</p>
+  <p class="ex-prompt" id="qb-prompt"><b>第 1 步：</b>这个向上线段的特征序列，由哪些笔组成？</p>
+  <div class="ex-actions" id="qb-options">
+    <button class="btn" data-opt="X">向下的笔：X1、X2、X3</button>
+    <button class="btn ghost" data-opt="S">向上的笔：S1、S2、S3</button>
+    <button class="btn ghost" data-opt="A">全部六笔：S1X1S2X2S3X3</button>
+  </div>
+  <div class="ex-chart" id="qb-chart-host" style="display:none"><svg id="qb-zigzag"></svg></div>
+  <div class="ex-chart" id="qb-bars-host" style="display:none"><svg id="qb-bars" width="380" height="210"></svg></div>
+  <div class="feedback" id="qb-fb"></div>
+</div>
+
+<h2><span class="secno">06</span>新手最常见的四个错误</h2>
+<ul>
+  <li><b>以为三笔就是线段。</b>必须前三笔有重叠；无重叠的三笔什么都不是。</li>
+  <li><b>拿向上的笔当向上线段的特征序列。</b>特征序列的方向永远与线段<b>相反</b>——向上线段取向下笔。</li>
+  <li><b>忘了特征序列也要处理包含关系。</b>和K线一样，元素之间会互相包含，必须合并成标准特征序列再找分型。</li>
+  <li><b>把笔的极值直接当线段终点。</b>线段的终点由特征序列的分型决定，两者不总是同一个点。</li>
+</ul>
+
+<hr>
+
+<h2>延伸阅读</h2>
+<ul>
+  <li><b>主要出处（必读）：</b><a href="../108/0614-486e105c01000c16-067.md">第67课《线段的划分标准》</a> —— 特征序列与两种情况；<a href="../108/0639-486e105c01000c8i-071.md">第71课《线段划分标准的再分辨》</a> —— 把第67课逐句讲透（较难，谨慎读）。</li>
+  <li><b>基础复习：</b><a href="../108/0593-486e105c01000bpo-065.md">第65课</a>（线段的三笔与重叠、线段分解定理）、<a href="../108/0567-486e105c01000bf2-062.md">第62课</a>（线段的最基本形态）。</li>
+  <li><b>上一课：</b><a href="0002-bi-strokes.html">第2课 · 笔</a>；术语表已新增"<a href="../reference/glossary.html">特征序列 / 缺口</a>"条。</li>
+</ul>
+
+<div class="ask-teacher">
+  <p class="box-title">有疑问？</p>
+  <p style="margin:0">特征序列是本课程抽象度最高的一步——如果看图还是晕，把你自己的图（哪怕手画的）发我，我们用定义慢慢过。缠师说这课"一定要把这逻辑关系搞清楚，否则一定晕倒"，晕是正常的，别硬扛。</p>
+</div>
+
+<div class="foot">
+  <a href="0002-bi-strokes.html">← 第2课 · 笔</a>
+  <a href="../reference/glossary.html">缠论术语表</a>
+  <a id="next-lesson" href="0004-zhongshu-pivot.html">下一课 · 中枢 →</a>
+</div>
+
+<script src="../assets/charts.js"></script>
+<script>
+/* ================= 热身 ================= */
+const warmFb = document.getElementById('warmup-fb');
+document.querySelectorAll('#warmup [data-ans]').forEach(b => {
+  b.addEventListener('click', () => {
+    const ok = b.dataset.ans === 'no';
+    warmFb.className = 'feedback show ' + (ok ? 'correct' : 'wrong');
+    warmFb.innerHTML = ok
+      ? '<span class="verdict">✓ 对</span>顶底分型共用K线违反结合律，不算一笔——上一课的条件②。忘了的话回去翻一眼第2课。'
+      : '<span class="verdict">✗ 再想想</span>共用K线时两者违反结合律：原文明确"这不算一笔"。';
+    document.querySelectorAll('#warmup [data-ans]').forEach(x => { x.disabled = true; });
+  });
+});
+
+/* ================= 示例图 ================= */
+const A1 = [{price:100,label:'底0',labelBelow:true},{price:110,label:'顶1',seg:'笔1'},{price:104,label:'底2',labelBelow:true,seg:'笔2'},{price:112,label:'顶3',seg:'笔3'}];
+const A2 = [{price:100,label:'底0',labelBelow:true},{price:110,label:'顶1',seg:'笔1'},{price:95,label:'底2',labelBelow:true,seg:'笔2'},{price:98,label:'顶3',seg:'笔3'}];
+ChanCharts.renderZigzag(document.getElementById('fig-a1'), A1, {width:300,height:230});
+ChanCharts.renderZigzag(document.getElementById('fig-a2'), A2, {width:300,height:230});
+
+// 特征序列示例（向上线段）
+const SEQ = [
+  {price:100,label:'底0',labelBelow:true},
+  {price:108,label:'顶1',seg:'S1'},
+  {price:103,label:'底2',labelBelow:true,hl:true,seg:'X1'},
+  {price:112,label:'顶3',seg:'S2'},
+  {price:105,label:'底4',labelBelow:true,hl:true,seg:'X2'},
+  {price:110,label:'顶5',seg:'S3'},
+  {price:102,label:'底6',labelBelow:true,hl:true,seg:'X3'},
+];
+ChanCharts.renderZigzag(document.getElementById('fig-seq'), SEQ, {width:640,height:240});
+// 说明：hl 标在“该段终点”上，这里让 X1、X2、X3 三段显示为金色
+const XBARS = [{lo:103,hi:108,label:'X1'},{lo:105,hi:112,label:'X2'},{lo:102,hi:110,label:'X3'}];
+ChanCharts.renderBars(document.getElementById('fig-bars'), XBARS, {width:380,height:210});
+
+/* ================= 练习A：三笔能否构成线段 ================= */
+const COMMON_OPTS = [{label:'能构成', val:true}, {label:'不能构成', val:false}];
+const QA = [
+  {
+    points: A1, answer: true,
+    okMsg: '能——三段的价格区间有公共部分（104~110），有重叠的前三笔必然形成线段。',
+    hint: '把三笔各自的价格区间画出来，看它们有没有公共的一段：笔1=100~110，笔2=104~110，笔3=104~112。'
+  },
+  {
+    points: A2, answer: false,
+    okMsg: '不能——笔3只回到98，没能进入笔1的区间（100~110），三个区间没有公共部分。',
+    hint: '重点看第三笔：它有没有回到第一笔的价格范围里？笔1=100~110，笔3=95~98。'
+  },
+  {
+    points: [{price:110,label:'顶0'},{price:100,label:'底1',labelBelow:true,seg:'笔1'},{price:115,label:'顶2',seg:'笔2'},{price:112,label:'底3',labelBelow:true,seg:'笔3'}], answer: false,
+    okMsg: '不能——这是向下开始的走势：笔1=100~110，笔3=112~115，第三笔（向下）没回到第一笔的区间，无重叠。',
+    hint: '向下线段的特征序列是向上笔，但"前三笔有重叠"这条门槛对两个方向都适用：把三个区间求交集。'
+  },
+  {
+    points: [{price:110,label:'顶0'},{price:100,label:'底1',labelBelow:true,seg:'笔1'},{price:108,label:'顶2',seg:'笔2'},{price:98,label:'底3',labelBelow:true,seg:'笔3'}], answer: true,
+    okMsg: '能——三个区间（100~110、100~108、98~108）有公共部分 100~108，从向下笔开始的线段成立。',
+    hint: '同样求三个区间的交集：笔1=100~110，笔2=100~108，笔3=98~108。'
+  }
+];
+
+const qaHost = document.getElementById('qa-host');
+const qaBoard = document.getElementById('qa-board');
+let qai = 0, qaFirst = true, qaScore = 0, qaDone = false;
+
+function renderQA() {
+  qaDone = false; qaFirst = true;
+  const q = QA[qai];
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">练习 A · 第 ${qai + 1} / ${QA.length} 题</p>
+    <p class="ex-prompt">这是连续三笔（笔的编号已标出）。它们能构成线段吗？</p>
+    <div class="ex-chart"><svg id="qa-svg"></svg></div>
+    <div class="ex-actions">
+      ${COMMON_OPTS.map((o, k) => `<button class="btn ${k ? 'ghost' : ''}" data-val="${o.val}">${o.label}</button>`).join('')}
+      <button class="btn" id="qa-next" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="qa-fb"></div>
+  `;
+  qaHost.innerHTML = '';
+  qaHost.appendChild(wrap);
+  qaBoard.classList.remove('show');
+
+  ChanCharts.renderZigzag(wrap.querySelector('#qa-svg'), q.points, {width:640, height:250});
+  const fb = wrap.querySelector('#qa-fb');
+  const nextBtn = wrap.querySelector('#qa-next');
+
+  wrap.querySelectorAll('[data-val]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (qaDone) return;
+      const val = b.dataset.val === 'true';
+      if (val === q.answer) {
+        qaDone = true;
+        if (qaFirst) qaScore++;
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<span class="verdict">✓ 正确</span>${q.okMsg}`;
+        nextBtn.style.display = '';
+      } else {
+        qaFirst = false;
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = `<span class="verdict">✗ 再想想</span>${q.hint}`;
+      }
+    });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    qai++;
+    if (qai < QA.length) renderQA();
+    else {
+      qaHost.innerHTML = '';
+      document.getElementById('qa-num').textContent = qaScore;
+      const msg = document.getElementById('qa-msg');
+      if (qaScore === 4) msg.textContent = '全对——重叠判定过关，可以进入线段终点的判定（第05节）。';
+      else if (qaScore >= 2) msg.textContent = '及格，但重叠判定是线段的门槛，建议再练一轮确保万无一失。';
+      else msg.textContent = '先回去看第01节：把三笔的区间求交集，是空集就不是线段。练熟再来。';
+      qaBoard.classList.add('show');
+      qaBoard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+}
+
+document.getElementById('qa-retry').addEventListener('click', () => {
+  qai = 0; qaScore = 0; renderQA();
+  document.getElementById('qa-host').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* ================= 练习B：三步定位线段终点 ================= */
+const qbFb = document.getElementById('qb-fb');
+const qbPrompt = document.getElementById('qb-prompt');
+const qbOptions = document.getElementById('qb-options');
+let qbStep = 1, qbFirstTry = true;
+
+function qbShow(ok, html) {
+  qbFb.className = 'feedback show ' + (ok ? 'correct' : 'wrong');
+  qbFb.innerHTML = `<span class="verdict">${ok ? '✓' : '✗'}</span>${html}`;
+}
+
+qbOptions.querySelectorAll('[data-opt]').forEach(b => {
+  b.addEventListener('click', () => {
+    if (qbStep !== 1) return;
+    if (b.dataset.opt === 'X') {
+      qbStep = 2;
+      qbPrompt.innerHTML = '<b>第 2 步：</b>把特征序列的三个元素当成K线（下图）。点击构成<b>顶分型</b>的中间那根元素。';
+      qbOptions.style.display = 'none';
+      document.getElementById('qb-chart-host').style.display = '';
+      document.getElementById('qb-bars-host').style.display = '';
+      const zz = ChanCharts.renderZigzag(document.getElementById('qb-zigzag'), SEQ, {width:640, height:240});
+      ChanCharts.renderBars(document.getElementById('qb-bars'), XBARS, {
+        width: 380, height: 210,
+        onClick: (i, g) => {
+          if (qbStep !== 2) return;
+          if (i === 1) {
+            g.classList.add('picked-correct');
+            qbStep = 3;
+            ChanCharts.stroke(zz, [[zz.x(0), zz.y(100)], [zz.x(3), zz.y(112)]], { color: '#9a7b1c' });
+            ChanCharts.dot(zz, zz.x(3), zz.y(112), { cls: 'up' });
+            ChanCharts.tag(zz, zz.x(3), zz.y(112) - 12, '线段终点');
+            qbShow(true, '<b>第 3 步完成：</b>X2 是顶分型的中间元素，它的最高点（112）就是线段的终点。X1 与 X2 有重叠、无缺口 → 属第一种情况，线段在此确认结束。<br>上面的大图里已用金色直线画出这段线段：从底0（100）到顶3（112）。');
+            qbPrompt.innerHTML = '完成 —— 你刚刚用特征序列定位了一条线段的终点。';
+          } else {
+            qbShow(false, '再看定义：分型要求中间那根的高低点都最高。对照三个元素的高点（108 / 112 / 110）和低点（103 / 105 / 102）。');
+            g.classList.add('picked-wrong');
+          }
+        }
+      });
+      qbShow(true, '正确——特征序列由与线段方向相反的笔构成：向上线段取所有向下笔 X1、X2、X3。');
+    } else if (b.dataset.opt === 'S') {
+      qbFirstTry = false;
+      qbShow(false, '反了。特征序列的方向必须与线段<b>相反</b>：向上线段取向下笔。');
+    } else {
+      qbFirstTry = false;
+      qbShow(false, '全部六笔是"笔序列"（S1X1S2X2S3X3），特征序列只抽出其中与线段方向相反的那一半。');
+    }
+  });
+});
+
+renderQA();
+</script>
+
+</body>
+</html>

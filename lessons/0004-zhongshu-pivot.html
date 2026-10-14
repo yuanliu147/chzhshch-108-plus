@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第4课 · 中枢 —— 缠论的心脏</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<p class="kicker">LESSON 0004 · 缠论实战 · 预计 20 分钟</p>
+<h1>中枢</h1>
+<p class="subtitle">缠论的心脏 · 买卖点全部由它定义</p>
+
+<div class="box why">
+  <p class="box-title">这课与你的目标有什么关系</p>
+  <p>你要的买卖点，全都是<b>相对中枢</b>说的。第20课原文：<b>"一个次级别走势类型向上离开中枢，然后以一个次级别走势类型回试，其低点不跌破 ZG，则构成第三类买点。"</b></p>
+  <p style="margin:.4em 0 0">换句话说：<b>认不出中枢，你就永远不知道自己在买什么</b>。中枢区间（ZG 上沿 / ZD 下沿）就是你的判断线和止损参考。</p>
+  <div class="roadmap">
+    <span class="node">K线 ✓</span><span class="arrow">→</span>
+    <span class="node">分型 ✓</span><span class="arrow">→</span>
+    <span class="node">笔 ✓</span><span class="arrow">→</span>
+    <span class="node">线段 ✓</span><span class="arrow">→</span>
+    <span class="node here">中枢</span><span class="arrow">→</span>
+    <span class="node">走势类型</span><span class="arrow">→</span>
+    <span class="node">背驰</span><span class="arrow">→</span>
+    <span class="node">三类买卖点</span>
+  </div>
+</div>
+
+<h2><span class="secno">00</span>前置检索：三题热身</h2>
+<p class="small muted">按约定，这一课前面有门槛。三题分别考分型、笔、线段——答不出来就说明前面该补，别硬闯中枢。</p>
+<div id="gate-host"></div>
+<div id="gate-board" class="scoreboard">
+  <p class="box-title" style="font-family:'PingFang SC',sans-serif;letter-spacing:.15em;color:var(--muted)">门槛结果</p>
+  <p class="score-num"><span id="gate-num">0</span> / 3</p>
+  <p id="gate-msg" style="margin:.4rem 0 1rem"></p>
+  <div class="ex-actions" style="justify-content:center">
+    <button class="btn" id="gate-retry">重做门槛题</button>
+    <button class="btn ghost" id="gate-continue">继续学中枢 →</button>
+  </div>
+</div>
+
+<h2><span class="secno">01</span>中枢是什么</h2>
+
+<blockquote>"缠中说禅走势中枢：某级别走势类型中，被<b>至少三个连续次级别走势类型</b>所重叠的部分。具体的计算以前三个连续次级别的重叠为准……注意，次级别的<b>前三个走势类型都是完成的</b>才构成该级别的缠中说禅走势中枢。"——<a href="../108/0419-486e105c010007t8-018.md">第18课</a>（定义首发于<a href="../108/0412-486e105c010007p1-017.md">第17课</a>）</blockquote>
+
+<p>三个关键词，一个都不能少：</p>
+<ul>
+  <li><b>次级别</b>——先把级别定下来。在日线图上找中枢，用的"次级别走势类型"通常就是日线的线段（或30分钟图上的走势）。</li>
+  <li><b>连续三个</b>——必须挨着，不能挑不相邻的段来凑重叠。</li>
+  <li><b>完成</b>——三段都走完了才算；拿还没走完的段去算，中枢随时会变。</li>
+</ul>
+
+<h2><span class="secno">02</span>中枢区间怎么算</h2>
+
+<div class="box def">
+  <p class="box-title">公式（第18课）</p>
+  <p style="margin:0">设连续三个次级别走势类型 A、B、C 的高、低点分别是 a1/a2、b1/b2、c1/c2，则</p>
+  <p style="margin:.4em 0 0;text-align:center"><b>中枢区间 ＝ [ max(a2, b2, c2) , min(a1, b1, c1) ]</b></p>
+  <p class="small" style="margin:.4em 0 0">下沿 = 三段的<b>最高的那个低点</b>；上沿 = 三段的<b>最矮的那个高点</b>。上沿记作 <b>ZG</b>，下沿记作 <b>ZD</b>。缠师说"实际上用目测就可以"。</p>
+</div>
+
+<p>看一个例子——三段各自的区间是 A：88~98，B：88~102，C：92~102：</p>
+
+<figure>
+  <svg id="fig-zs" width="640" height="250"></svg>
+  <figcaption>三段的公共部分是 92~98：下沿取 88、88、92 中最高的 92；上沿取 98、102、102 中最矮的 98。这个 92~98 就是中枢区间 ZD~ZG。</figcaption>
+</figure>
+
+<p>如果三段的公共部分是<b>空的</b>——比如三段区间分别是 90~100、90~105、103~105（第三段整体跑到了第一段之上）——那么下沿会算得比上沿还高（103 &gt; 100）：<b>不存在重叠，就没有中枢</b>。这种情况在强势单边行情里很常见。</p>
+
+<h2><span class="secno">03</span>练习A：算出中枢区间（3 题）</h2>
+<p>每题给出连续三段的高点/低点。选对计 1 分。</p>
+<div id="ca-host"></div>
+<div id="ca-board" class="scoreboard">
+  <p class="box-title" style="font-family:'PingFang SC',sans-serif;letter-spacing:.15em;color:var(--muted)">练习A 结果</p>
+  <p class="score-num"><span id="ca-num">0</span> / 3</p>
+  <p id="ca-msg" style="margin:.4rem 0 1rem"></p>
+  <div class="ex-actions" style="justify-content:center"><button class="btn" id="ca-retry">再练一轮</button></div>
+</div>
+
+<h2><span class="secno">04</span>练习B：这三段有中枢吗？（2 题）</h2>
+<p>看图判断。答对后系统会把中枢矩形画出来。</p>
+<div id="cb-host"></div>
+
+<h2><span class="secno">05</span>中枢有什么用（回到你的目标）</h2>
+
+<p>第18课用中枢定义了两个最重要的概念：</p>
+<ul>
+  <li><b>盘整</b>：一个完成的走势类型只包含<b>一个</b>中枢。</li>
+  <li><b>趋势</b>：一个完成的走势类型至少包含<b>两个以上依次同向</b>的中枢，且<b>中枢之间绝对不存在重叠</b>。向上的叫上涨，向下的叫下跌。</li>
+</ul>
+<p class="muted small">这两句是"走势类型"的全部内容——下一课展开。</p>
+
+<p>而对操作最直接的，是第20课的三类买卖点定理：</p>
+
+<div class="box def">
+  <p class="box-title">第三类买卖点定理（第20课）</p>
+  <p style="margin:0">"一个次级别走势类型<b>向上离开</b>中枢，然后以一个次级别走势类型<b>回试</b>，其低点<b>不跌破 ZG</b>，则构成<b>第三类买点</b>；一个次级别走势类型向下离开中枢，然后以一个次级别走势类型回抽，其高点<b>不升破 ZD</b>，则构成<b>第三类卖点</b>。"</p>
+</div>
+
+<p>看明白了吗——<b>ZG 和 ZD 是两根开关线</b>。价格离开中枢后回抽，踩住 ZG 不破，就是三买；跌回中枢里，就不是。缠师还特别强调"<b>必须是第一次</b>"回抽。这就是"中枢 → 买卖点"的第一条落地路径，后面的第一、二类买卖点也都建立在中枢之上。</p>
+
+<h2><span class="secno">06</span>新手最常见的四个错误</h2>
+<ul>
+  <li><b>拿几根K线的重叠当中枢。</b>第17课课后回复原话："<b>不是几条K线的重叠，是至少三个连续次级别类型走势重叠部分所构成。</b>"</li>
+  <li><b>用还没走完的段去算中枢。</b>第18课明确要求三个次级别走势类型都是<b>完成</b>的。</li>
+  <li><b>用不相邻的段凑重叠。</b>必须是连续的三个。</li>
+  <li><b>以为中枢永远是横盘的样子。</b>中枢是"重叠区间"，由回调形成或由回升形成都可以，外观不一定是窄幅横盘。</li>
+</ul>
+
+<div class="box warn">
+  <p class="box-title">老师批注 · 这一课只到"认识中枢"</p>
+  <p style="margin:0" class="small">第20课还讲了中枢的<b>延伸、新生、扩张</b>，以及"走势级别延续定理"（在更大级别中枢出现前，本级别走势不会结束）。那套东西决定你"什么时候该等、什么时候该走"，是下一课的内容。本课只要你能做到：<b>给出连续三段，算出中枢区间；算不出重叠，就承认没有中枢。</b></p>
+</div>
+
+<hr>
+
+<h2>延伸阅读</h2>
+<ul>
+  <li><b>主要出处（必读）：</b><a href="../108/0412-486e105c010007p1-017.md">第17课《走势终完美》</a>（中枢定义首发）、<a href="../108/0419-486e105c010007t8-018.md">第18课</a>（公式＋盘整/趋势定义＋两大基本原理）、<a href="../108/0424-486e105c010007zw-020.md">第20课《中枢级别扩张及第三类买卖点》</a>（ZG/ZD、三买定理、级别延续）。</li>
+  <li><b>进阶：</b><a href="../108/0428-486e105c0100082x-021.md">第21课《买卖点分析的完备性》</a>、第92课《中枢震荡的监视器》。</li>
+  <li><b>上一课：</b><a href="0003-duanxian-segments.html">第3课 · 线段</a>；术语表"<a href="../reference/glossary.html">中枢</a>"与"<a href="../reference/glossary.html">中枢区间 / ZG / ZD</a>"条已更新。</li>
+</ul>
+
+<div class="ask-teacher">
+  <p class="box-title">有疑问？</p>
+  <p style="margin:0">"级别"和"次级别"是这一课最容易含糊的地方——如果你不确定某张图该用什么级别，把图发我，我们一起定；也可以直接问"日线上找中枢，次级别到底看什么"。</p>
+</div>
+
+<div class="foot">
+  <a href="0003-duanxian-segments.html">← 第3课 · 线段</a>
+  <a href="../reference/glossary.html">缠论术语表</a>
+  <a href="0005-trend-types.html">第5课 · 走势类型 →</a>
+</div>
+
+<script src="../assets/charts.js"></script>
+<script>
+/* ================= 示例图：中枢 ================= */
+const ZS_EX = [98, 88, 102, 92];
+const zsChart = ChanCharts.renderZigzag(document.getElementById('fig-zs'),
+  ZS_EX.map((p, i) => ({ price: p, label: ['顶0','底1','顶2','底3'][i], labelBelow: i % 2 === 1, seg: i ? ['A','B','C'][i - 1] : undefined })),
+  { width: 640, height: 250 });
+ChanCharts.zone(zsChart, zsChart.x(0), zsChart.x(3), 92, 98, { label: '中枢 [92, 98]　ZG=98　ZD=92' });
+
+/* ================= 前置检索题 ================= */
+const GATE = [
+  {
+    prompt: '顶分型与底分型共用同一根K线，这一笔成立吗？',
+    opts: ['不成立', '成立'], correct: 0,
+    okMsg: '对——共用K线违反结合律，原文明确"这不算一笔"（第2课）。',
+    hint: '回到第62课的话："顶和底之间必须共用一个K线，这就违反结合律了，所以这不算一笔。"'
+  },
+  {
+    prompt: '三笔的区间完全没有公共部分（第三笔没有回到第一笔的范围里），这三笔能构成线段吗？',
+    opts: ['能构成', '不能构成'], correct: 1,
+    points: [100, 110, 95, 98],
+    okMsg: '对——"前三笔必须有重叠部分"，无重叠就什么都不是（第3课）。',
+    hint: '把三笔各自的价格区间写出来求交集：100~110、95~110、95~98。'
+  },
+  {
+    prompt: '一条向上线段的特征序列，由哪些笔组成？',
+    opts: ['向上的笔 S1S2…', '向下的笔 X1X2…'], correct: 1,
+    okMsg: '对——特征序列的方向永远与线段相反，向上线段取全部向下笔（第3课）。',
+    hint: '"X"表示向下的笔；向上线段的特征序列＝所有向下笔。'
+  }
+];
+
+const gateHost = document.getElementById('gate-host');
+const gateBoard = document.getElementById('gate-board');
+let gi = 0, gScore = 0, gFirst = true, gDone = false;
+
+function renderGate() {
+  gDone = false; gFirst = true;
+  const q = GATE[gi];
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">前置检索 · 第 ${gi + 1} / ${GATE.length} 题</p>
+    <p class="ex-prompt">${q.prompt}</p>
+    ${q.points ? '<div class="ex-chart"><svg id="gate-svg"></svg></div>' : ''}
+    <div class="ex-actions">
+      ${q.opts.map((t, k) => `<button class="btn ${k ? 'ghost' : ''}" data-k="${k}">${t}</button>`).join('')}
+      <button class="btn" id="gate-next" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="gate-fb"></div>
+  `;
+  gateHost.innerHTML = '';
+  gateHost.appendChild(wrap);
+  gateBoard.classList.remove('show');
+
+  if (q.points) {
+    ChanCharts.renderZigzag(wrap.querySelector('#gate-svg'),
+      q.points.map((p, i) => ({ price: p, labelBelow: i % 2 === 1, seg: i ? '笔' + i : undefined })),
+      { width: 560, height: 200 });
+  }
+
+  const fb = wrap.querySelector('#gate-fb');
+  const nextBtn = wrap.querySelector('#gate-next');
+  wrap.querySelectorAll('[data-k]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (gDone) return;
+      if (Number(b.dataset.k) === q.correct) {
+        gDone = true;
+        if (gFirst) gScore++;
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<span class="verdict">✓ 正确</span>${q.okMsg}`;
+        nextBtn.style.display = '';
+      } else {
+        gFirst = false;
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = `<span class="verdict">✗ 再想想</span>${q.hint}`;
+      }
+    });
+  });
+  nextBtn.addEventListener('click', () => {
+    gi++;
+    if (gi < GATE.length) renderGate();
+    else {
+      gateHost.innerHTML = '';
+      document.getElementById('gate-num').textContent = gScore;
+      const msg = document.getElementById('gate-msg');
+      const lens = document.getElementById('gate-lens') || null;
+      const body = document.getElementById('learn-body');
+      if (gScore === 3) {
+        msg.textContent = '绿灯——分型、笔、线段的判定都稳。直接往下学中枢。';
+        if (body) body.style.filter = 'none';
+      } else {
+        msg.innerHTML = '黄灯——有 ' + (3 - gScore) + ' 题没过。<b>中枢建立在前面的结构之上，画错笔和线段，中枢一定错。</b>建议先回 <a href="0001-fenxing-first-step.html">第1课</a> / <a href="0002-bi-strokes.html">第2课</a> / <a href="0003-duanxian-segments.html">第3课</a> 复练，也可以直接继续——但要知道自己踩在薄冰上。';
+      }
+      gateBoard.classList.add('show');
+      gateBoard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+}
+document.getElementById('gate-retry').addEventListener('click', () => { gi = 0; gScore = 0; renderGate(); });
+document.getElementById('gate-continue').addEventListener('click', () => {
+  document.querySelector('h2 .secno').parentElement.nextElementSibling.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* ================= 练习A：算中枢区间 ================= */
+const CA = [
+  { points: [100, 90, 96, 92], opts: ['中枢区间 90~96', '中枢区间 92~100', '中枢区间 92~96'], correct: 2, expect: [92, 96] },
+  { points: [105, 95, 110, 100], opts: ['中枢区间 100~105', '中枢区间 98~108', '中枢区间 95~110'], correct: 0, expect: [100, 105] },
+  { points: [90, 80, 95, 92], opts: ['中枢区间 85~95', '三段无重叠，不构成中枢', '中枢区间 90~92'], correct: 1, expect: null }
+];
+
+const caHost = document.getElementById('ca-host');
+const caBoard = document.getElementById('ca-board');
+let ci = 0, cScore = 0, cFirst = true, cDone = false;
+
+function segRanges(ps) {
+  const r = [];
+  for (let i = 0; i < ps.length - 1; i++) r.push([Math.min(ps[i], ps[i + 1]), Math.max(ps[i], ps[i + 1])]);
+  return r;
+}
+function zhongshu(ps) {
+  const r = segRanges(ps);
+  const lo = Math.max(...r.map(x => x[0])), hi = Math.min(...r.map(x => x[1]));
+  return lo <= hi ? [lo, hi] : null;
+}
+
+function renderCA() {
+  cDone = false; cFirst = true;
+  const q = CA[ci];
+  const segs = segRanges(q.points);
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">练习 A · 第 ${ci + 1} / ${CA.length} 题</p>
+    <p class="ex-prompt">连续三段 A、B、C 的高点/低点如下。中枢区间是多少？</p>
+    <div class="ex-chart"><svg id="ca-svg"></svg></div>
+    <table class="glossary" style="margin-top:0">
+      <thead><tr><th>段</th><th>高点</th><th>低点</th></tr></thead>
+      <tbody>
+        <tr><td class="term">A</td><td>${segs[0][1]}</td><td>${segs[0][0]}</td></tr>
+        <tr><td class="term">B</td><td>${segs[1][1]}</td><td>${segs[1][0]}</td></tr>
+        <tr><td class="term">C</td><td>${segs[2][1]}</td><td>${segs[2][0]}</td></tr>
+      </tbody>
+    </table>
+    <div class="ex-actions">
+      ${q.opts.map((t, k) => `<button class="btn ${k ? 'ghost' : ''}" data-k="${k}">${t}</button>`).join('')}
+      <button class="btn" id="ca-next" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="ca-fb"></div>
+  `;
+  caHost.innerHTML = '';
+  caHost.appendChild(wrap);
+  caBoard.classList.remove('show');
+
+  const chart = ChanCharts.renderZigzag(wrap.querySelector('#ca-svg'),
+    q.points.map((p, i) => ({ price: p, labelBelow: i % 2 === 1, seg: i ? ['A','B','C'][i - 1] : undefined })),
+    { width: 560, height: 210 });
+
+  const fb = wrap.querySelector('#ca-fb');
+  const nextBtn = wrap.querySelector('#ca-next');
+  wrap.querySelectorAll('[data-k]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (cDone) return;
+      if (Number(b.dataset.k) === q.correct) {
+        cDone = true;
+        if (cFirst) cScore++;
+        const zs = zhongshu(q.points);
+        if (zs) ChanCharts.zone(chart, chart.x(0), chart.x(3), zs[0], zs[1], { label: `中枢 [${zs[0]}, ${zs[1]}]` });
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<span class="verdict">✓ 正确</span>` + (zs
+          ? `下沿取三段的最高低点 → ${zs[0]}；上沿取三段的最矮高点 → ${zs[1]}；中枢区间 <b>[${zs[0]}, ${zs[1]}]</b>。`
+          : '三段的公共部分为空（下沿算得 92，比上沿 90 还高）——<b>不存在重叠，就没有中枢</b>。');
+        nextBtn.style.display = '';
+      } else {
+        cFirst = false;
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = `<span class="verdict">✗ 再想想</span>下沿 ＝ max(三个低点)，上沿 ＝ min(三个高点)。算完比较一下下沿是否高于上沿。`;
+      }
+    });
+  });
+  nextBtn.addEventListener('click', () => {
+    ci++;
+    if (ci < CA.length) renderCA();
+    else {
+      caHost.innerHTML = '';
+      document.getElementById('ca-num').textContent = cScore;
+      const msg = document.getElementById('ca-msg');
+      if (cScore === 3) msg.textContent = '全对——中枢区间的算法已经拿下，这是后面判断买卖点的基准。';
+      else if (cScore === 2) msg.textContent = '只差一点。特别注意第三题的"无重叠"情形：下沿高于上沿时，就是没有中枢。';
+      else msg.textContent = '公式要背到不用想：下沿＝三段的最高低点，上沿＝三段的最矮高点。再练一轮。';
+      caBoard.classList.add('show');
+      caBoard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+}
+document.getElementById('ca-retry').addEventListener('click', () => { ci = 0; cScore = 0; renderCA(); });
+
+/* ================= 练习B：有中枢吗 ================= */
+const CB = [
+  { points: [96, 88, 100, 90], answer: true },
+  { points: [100, 90, 105, 103], answer: false }
+];
+
+const cbHost = document.getElementById('cb-host');
+let bi = 0, bDone = false;
+
+function renderCB() {
+  bDone = false;
+  const q = CB[bi];
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">练习 B · 第 ${bi + 1} / ${CB.length} 题</p>
+    <p class="ex-prompt">图中是连续三段次级别走势（已标注 A、B、C）。它们构成中枢了吗？</p>
+    <div class="ex-chart"><svg id="cb-svg"></svg></div>
+    <div class="ex-actions">
+      <button class="btn" data-v="yes">有中枢</button>
+      <button class="btn ghost" data-v="no">没有中枢</button>
+      <button class="btn" id="cb-next" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="cb-fb"></div>
+  `;
+  cbHost.innerHTML = '';
+  cbHost.appendChild(wrap);
+
+  const chart = ChanCharts.renderZigzag(wrap.querySelector('#cb-svg'),
+    q.points.map((p, i) => ({ price: p, labelBelow: i % 2 === 1, seg: i ? ['A','B','C'][i - 1] : undefined })),
+    { width: 560, height: 210 });
+
+  const fb = wrap.querySelector('#cb-fb');
+  const nextBtn = wrap.querySelector('#cb-next');
+  const segs = segRanges(q.points);
+  wrap.querySelectorAll('[data-v]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (bDone) return;
+      const saysYes = b.dataset.v === 'yes';
+      const zs = zhongshu(q.points);
+      if (saysYes === q.answer) {
+        bDone = true;
+        if (zs) ChanCharts.zone(chart, chart.x(0), chart.x(3), zs[0], zs[1], { label: `中枢 [${zs[0]}, ${zs[1]}]　ZG=${zs[1]}　ZD=${zs[0]}` });
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<span class="verdict">✓ 正确</span>` + (zs
+          ? `三段区间是 ${segs.map(s => s[0] + '~' + s[1]).join('、')}，公共部分 <b>[${zs[0]}, ${zs[1]}]</b>——中枢成立，图上已画出矩形。`
+          : `三段区间是 ${segs.map(s => s[0] + '~' + s[1]).join('、')}：第三段整体跑到了第一段之上，无公共部分（下沿 103 &gt; 上沿 100）——<b>没有中枢</b>。这种强势拉升，本级别还没形成中枢，也就还谈不上本级别的买卖点。`);
+        nextBtn.style.display = bi < CB.length - 1 ? '' : 'none';
+      } else {
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = `<span class="verdict">✗ 再想想</span>把三段各自的区间写成 低~高，求公共部分：下沿＝max(低点)，上沿＝min(高点)，若下沿 &gt; 上沿就没有中枢。`;
+      }
+    });
+  });
+  nextBtn.addEventListener('click', () => { bi++; renderCB(); });
+}
+
+renderGate();
+renderCA();
+renderCB();
+</script>
+
+</body>
+</html>

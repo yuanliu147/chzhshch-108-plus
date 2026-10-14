@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第5课 · 走势类型 —— 盘整、趋势与延伸</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<p class="kicker">LESSON 0005 · 缠论实战 · 预计 20 分钟</p>
+<h1>走势类型</h1>
+<p class="subtitle">盘整、趋势与"延伸" · 为什么你总在第一个中枢被震下马</p>
+
+<div class="box why">
+  <p class="box-title">这课与你的目标有什么关系</p>
+  <p>你的持仓，任何时刻都处在三种走势类型之一：<b>上涨、下跌、盘整</b>。分不清是哪种，就没法决定"该拿住还是该走"。第18课原话：<b>"很多人抓不住牛股，经常在第一个中枢时就被震下马，最主要就是对此没有明确的认识。"</b></p>
+  <p style="margin:.4em 0 0">这课就解决一件事：<b>给任何一段走势，贴上"盘整 / 上涨 / 下跌"的标签</b>，并知道它什么时候才叫"走完"。</p>
+  <div class="roadmap">
+    <span class="node">K线 ✓</span><span class="arrow">→</span>
+    <span class="node">分型 ✓</span><span class="arrow">→</span>
+    <span class="node">笔 ✓</span><span class="arrow">→</span>
+    <span class="node">线段 ✓</span><span class="arrow">→</span>
+    <span class="node">中枢 ✓</span><span class="arrow">→</span>
+    <span class="node here">走势类型</span><span class="arrow">→</span>
+    <span class="node">背驰</span><span class="arrow">→</span>
+    <span class="node">三类买卖点</span>
+  </div>
+</div>
+
+<h2><span class="secno">00</span>前置检索：三题热身</h2>
+<p class="small muted">上一课是"中枢"。三题考：算区间、判有无、找三买。答不出来先回第4课补，别硬闯走势类型。</p>
+<div id="gate-host"></div>
+<div id="gate-board" class="scoreboard">
+  <p class="box-title" style="font-family:'PingFang SC',sans-serif;letter-spacing:.15em;color:var(--muted)">门槛结果</p>
+  <p class="score-num"><span id="gate-num">0</span> / 3</p>
+  <p id="gate-msg" style="margin:.4rem 0 1rem"></p>
+  <div class="ex-actions" style="justify-content:center">
+    <button class="btn" id="gate-retry">重做门槛题</button>
+    <button class="btn ghost" id="gate-continue">继续学走势类型 →</button>
+  </div>
+</div>
+
+<h2 id="sec01"><span class="secno">01</span>三种走势类型，一条分界线</h2>
+
+<blockquote>"……某完成的走势类型<b>只包含一个</b>缠中说禅走势中枢，就称为该级别的缠中说禅<b>盘整</b>。……某完成的走势类型<b>至少包含两个以上依次同向</b>的缠中说禅走势中枢，就称为该级别的缠中说禅<b>趋势</b>。该方向向上就称为<b>上涨</b>，向下就称为<b>下跌</b>。注意，趋势中的缠中说禅走势中枢之间<b>必须绝对不存在重叠</b>。"——<a href="../108/0419-486e105c010007t8-018.md">第18课</a></blockquote>
+
+<p>翻成大白话：给走势贴标签，只需数一件事——<b>这段走势里出现了几个同级别中枢</b>：</p>
+<ul>
+  <li><b>一个 → 盘整</b>。价格围绕这个中枢上上下下，没有走出第二个。</li>
+  <li><b>两个以上、依次同向、区间绝不重叠 → 趋势</b>。中枢一个比一个高＝上涨；一个比一个低＝下跌。</li>
+</ul>
+<p class="small muted">"区间绝不重叠"＝两个中枢的 [ZD, ZG] 之间连一个价格都不共享。重叠了怎么办？先记着"那就不是干净的趋势"，第03节揭晓。</p>
+
+<figure>
+  <svg id="fig-trend" width="640" height="260"></svg>
+  <figcaption>趋势（上涨）：中枢1 [70, 80]，中枢2 [92, 100]——第二个整体在上方，区间不重叠，这就是"依次同向"。注意：中枢是由三段重叠长出来的，不是先画好的框；这里只是把算出来的区间标出来（第4课的手艺）。</figcaption>
+</figure>
+
+<h2><span class="secno">02</span>走势的延伸：为什么牛股能一涨再涨</h2>
+
+<blockquote>"这里最大的也是唯一的难点在于<b>'走势类型的延伸'</b>。……只要三个重叠的连续次级别走势类型走出来后，盘整<b>随时结束都是完美的</b>，但这可以不结束，可以<b>不断延伸下去</b>，不断围绕这中枢上上下下地延伸下去直到无穷都是可以的。"——<a href="../108/0419-486e105c010007t8-018.md">第18课</a></blockquote>
+
+<p>三段重叠之后，走势类型"随时可以完成"——但也<b>可以一直不完成</b>。延伸只有两种长相：</p>
+<ul>
+  <li><b>盘整的延伸</b>：不产生第二个中枢，价格一直围绕同一个中枢震荡，没完没了。</li>
+  <li><b>趋势的延伸</b>：不断产生<b>新的同向</b>中枢——一轮上涨里走出第三个、第四个中枢。</li>
+</ul>
+
+<figure>
+  <svg id="fig-pan" width="640" height="240"></svg>
+  <figcaption>盘整的延伸：每一段都还在和中枢 [70, 80] 重叠，新中枢始终没出现——所以盘整继续，且"随时"可能结束，但没人知道是下一秒还是很久以后。</figcaption>
+</figure>
+
+<p>判断"延伸"是否结束，第18课给了一句话的标准：</p>
+
+<div class="box def">
+  <p class="box-title">关键判据（第18课）</p>
+  <p style="margin:0">"<b>'走势类型延伸'是否结束的判断关键就在于是否产生新的'缠中说禅走势中枢'。</b>"——趋势的延伸＝新中枢不断出现；盘整的延伸＝新中枢一直没出现。</p>
+</div>
+
+<p>就这一条，决定了新手最常见的两种亏法：</p>
+<ul>
+  <li><b>上涨的延伸拿不住</b>：第18课——"很多人抓不住牛股，经常在<b>第一个中枢时就被震下马</b>，最主要就是对此没有明确的认识。"（一看回调就卖飞，后面一大段全错过。）</li>
+  <li><b>下跌的延伸抢反弹</b>：第18课——"对于下跌的延伸，是<b>所有抄底者的噩梦</b>。逃顶、抄底为何难？归根结底就是这'走势类型的延伸'闹的。"（跌势里每一次"够便宜了"，都可能只是下一个中枢的起点。）</li>
+</ul>
+
+<h2><span class="secno">03</span>什么时候才该"结束"：级别延续定理一</h2>
+
+<p>"延伸"不能永远靠感觉猜。第20课给了一个定理，专治"涨这么多是不是该跌了"的心病：</p>
+
+<div class="box def">
+  <p class="box-title">缠中说禅走势级别延续定理一（第20课）</p>
+  <p style="margin:0">"在<b>更大级别</b>缠中说禅走势中枢产生前，该级别走势类型将<b>延续</b>。也就是说，只能是只具有该级别缠中说禅走势中枢的盘整或趋势的延续。"</p>
+</div>
+
+<p>白话：<b>本级别的走势要结束，先得蹦出一个"更大级别的中枢"来接管。</b>在那之前，"涨太多、跌太久"都不是结束的理由。第20课的原例：</p>
+
+<blockquote>"很多人总是说，怎么都涨那么多了还涨，明白这个定理，就知道，要这个市场跌，现在这种最多只出现过日线走势中枢的走势，在<b>周线走势中枢出现前，不可能结束</b>。……明白这个定理，就不会整天自己吓自己。"——<a href="../108/0424-486e105c010007zw-020.md">第20课</a></blockquote>
+
+<p>那"更大级别的中枢"怎么产生？同在第20课，一句话说透：</p>
+
+<blockquote>"要形成一个更大级别的走势中枢，必然要采取第三种的方式，就是<b>围绕新的同级别走势中枢产生后的波动，与围绕前中枢的某个波动区间产生重叠</b>。"</blockquote>
+
+<p>——新的震荡区间和<b>旧中枢的波动范围咬上了</b>，级别就"升级"：这段走势不再构成干净的本级别趋势，而是变成一个更大级别的中枢（第20课标题里的"级别扩张"）。所以实操上：<b>三买买入后如果没走出趋势、反而开始这种重叠，就按盘整对待——弹到盘整高点走人，不恋战</b>（练习B会考这一条）。</p>
+
+<div class="box warn">
+  <p class="box-title">老师批注 · 本课用的是第18课的标准</p>
+  <p class="small" style="margin:0">第20课还有更严格的定义：不光两个中枢的<b>区间</b>不能重叠，连<b>围绕中枢的所有瞬间波动</b>都不能互相触及（原文为此定义了 GG/DD 和"中枢中心定理二"）。本课先用第18课的判别（中枢区间是否重叠）站稳；那套精细工具等学"背驰、走势分解"时再上。现在的目标只有一个：<b>能分清盘整和趋势，知道"延伸"是什么意思，不被"涨太多"吓下车，也不在下跌延伸里抄底。</b></p>
+  <p class="small" style="margin:.5em 0 0">→ 想提前看那套工具（判定卡＋新区间算法，带图）：<a href="../reference/zhongshu-expansion.html">速查 · 中枢升级判定卡</a>。</p>
+</div>
+
+<h2><span class="secno">04</span>练习A：这段走势是什么类型？（3 题）</h2>
+<p>看图分类：盘整 / 上涨 / 下跌。答对后系统把中枢区间画出来。</p>
+<div id="ta-host"></div>
+<div id="ta-board" class="scoreboard">
+  <p class="box-title" style="font-family:'PingFang SC',sans-serif;letter-spacing:.15em;color:var(--muted)">练习A 结果</p>
+  <p class="score-num"><span id="ta-num">0</span> / 3</p>
+  <p id="ta-msg" style="margin:.4rem 0 1rem"></p>
+  <div class="ex-actions" style="justify-content:center"><button class="btn" id="ta-retry">再练一轮</button></div>
+</div>
+
+<h2><span class="secno">05</span>练习B：两个操作判断（2 题）</h2>
+<div id="tb-host"></div>
+
+<h2><span class="secno">06</span>回扣买卖点：三种走势，三种姿势</h2>
+<ul>
+  <li><b>上涨（趋势延伸中）</b>：中枢依次抬高。没走完之前，"涨太多"不是卖出理由——结束的信号（背驰）下一课才学，先改掉"被第一个中枢震下马"的毛病。</li>
+  <li><b>盘整（延伸中）</b>：一个中枢来回磨。别在区间中间追进追出，上下沿是第一参考线。</li>
+  <li><b>下跌（延伸中）</b>：中枢依次降低。"所有抄底者的噩梦"——在学会"下跌背驰＋更大级别中枢"的判断之前，抄底＝赌。</li>
+</ul>
+<p>下一课开始学<b>背驰</b>——判断"延伸即将结束"的第一把结构尺子，也是第一类买卖点的依据。今天先做到一件事：<b>看任何一张图，先问自己"现在是盘整还是趋势"。</b></p>
+
+<hr>
+
+<h2>延伸阅读</h2>
+<ul>
+  <li><b>主要出处（必读）：</b><a href="../108/0419-486e105c010007t8-018.md">第18课</a>（盘整/趋势定义＋走势延伸，第01、02节的原文出处）、<a href="../108/0424-486e105c010007zw-020.md">第20课《中枢级别扩张及第三类买卖点》</a>（级别延续定理一＋恒星比喻＋中枢扩张）。</li>
+  <li><b>进阶：</b><a href="../108/0428-486e105c0100082x-021.md">第21课《买卖点分析的完备性》</a>。</li>
+  <li><b>上一课：</b><a href="0004-zhongshu-pivot.html">第4课 · 中枢</a>；术语表已更新"<a href="../reference/glossary.html">走势类型</a>""走势的延伸""级别延续定理一""级别扩张"四条。</li>
+</ul>
+
+<div class="ask-teacher">
+  <p class="box-title">有疑问？</p>
+  <p style="margin:0">对"同向""不重叠""延伸"里任何一处模糊，就把你的图发我——拿你自己看的票做分类，是让定义变成直觉的唯一办法。门槛题如果错了，告诉我错在哪题，我下节课按错题调整。</p>
+</div>
+
+<div class="foot">
+  <a href="0004-zhongshu-pivot.html">← 第4课 · 中枢</a>
+  <a href="../reference/glossary.html">缠论术语表</a>
+  <a href="0006-beichi-macd.html">第6课 · 背驰 →</a>
+</div>
+
+<script src="../assets/charts.js"></script>
+<script>
+/* ================= 教学图1：趋势（两个同向中枢，不重叠） ================= */
+const FIG_TREND = [60, 80, 70, 80, 70, 100, 92, 100, 92, 100];
+const trChart = ChanCharts.renderZigzag(document.getElementById('fig-trend'),
+  FIG_TREND.map(price => ({ price })),
+  { width: 640, height: 260 });
+ChanCharts.zone(trChart, trChart.x(0), trChart.x(4), 70, 80, { label: '中枢1 [70, 80]' });
+ChanCharts.zone(trChart, trChart.x(5), trChart.x(9), 92, 100, { label: '中枢2 [92, 100]' });
+
+/* ================= 教学图2：盘整（围绕一个中枢的延伸） ================= */
+const FIG_PAN = [60, 80, 70, 80, 70, 80, 70];
+const panChart = ChanCharts.renderZigzag(document.getElementById('fig-pan'),
+  FIG_PAN.map(price => ({ price })),
+  { width: 640, height: 240 });
+ChanCharts.zone(panChart, panChart.x(0), panChart.x(6), 70, 80, { label: '中枢 [70, 80]' });
+
+/* ================= 前置检索题 ================= */
+const GATE = [
+  {
+    prompt: '连续三段：A 92~98，B 88~99，C 90~98。中枢区间是多少？',
+    opts: ['中枢区间 92~98', '中枢区间 90~98', '中枢区间 92~99'], correct: 0,
+    expect: [92, 98], ranges: [[92, 98], [88, 99], [90, 98]],
+    okMsg: '对——下沿＝max(92, 88, 90)＝92；上沿＝min(98, 99, 98)＝98（第4课公式）。',
+    hint: '回到第4课的公式：下沿＝三段的最高低点，上沿＝三段的最矮高点。'
+  },
+  {
+    prompt: '图中三段（A、B、C）构成中枢了吗？',
+    opts: ['有中枢（有重叠）', '无中枢（无重叠）'], correct: 1,
+    points: [98, 88, 106, 103],
+    okMsg: '对——三段区间是 88~98、88~106、103~106：下沿 103 比上沿 98 还高，公共部分为空，没有中枢。',
+    hint: '把三段写成 低~高 求公共部分：第三段整体跑到了第一段的上方。'
+  },
+  {
+    prompt: '价格向上离开中枢后回试，回试的低点不跌破哪条线，才构成第三类买点？',
+    opts: ['中枢上沿 ZG', '中枢下沿 ZD'], correct: 0,
+    okMsg: '对——"低点不跌破 ZG（上沿）"才构成三买；跌回中枢里就不算（第20课）。',
+    hint: 'ZG 是中枢上沿。回试踩在 ZG 之上＝离开有效；跌破 ZG，就回到中枢震荡里了。'
+  }
+];
+
+const gateHost = document.getElementById('gate-host');
+const gateBoard = document.getElementById('gate-board');
+let gi = 0, gScore = 0, gFirst = true, gDone = false;
+
+function renderGate() {
+  gDone = false; gFirst = true;
+  const q = GATE[gi];
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">前置检索 · 第 ${gi + 1} / ${GATE.length} 题</p>
+    <p class="ex-prompt">${q.prompt}</p>
+    ${q.points ? '<div class="ex-chart"><svg id="gate-svg"></svg></div>' : ''}
+    <div class="ex-actions">
+      ${q.opts.map((t, k) => `<button class="btn ${k ? 'ghost' : ''}" data-k="${k}">${t}</button>`).join('')}
+      <button class="btn" id="gate-next" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="gate-fb"></div>
+  `;
+  gateHost.innerHTML = '';
+  gateHost.appendChild(wrap);
+  gateBoard.classList.remove('show');
+
+  if (q.points) {
+    ChanCharts.renderZigzag(wrap.querySelector('#gate-svg'),
+      q.points.map((p, i) => ({ price: p, labelBelow: i % 2 === 1, seg: i ? ['A', 'B', 'C'][i - 1] : undefined })),
+      { width: 560, height: 200 });
+  }
+
+  const fb = wrap.querySelector('#gate-fb');
+  const nextBtn = wrap.querySelector('#gate-next');
+  wrap.querySelectorAll('[data-k]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (gDone) return;
+      if (Number(b.dataset.k) === q.correct) {
+        gDone = true;
+        if (gFirst) gScore++;
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<span class="verdict">✓ 正确</span>${q.okMsg}`;
+        nextBtn.style.display = '';
+      } else {
+        gFirst = false;
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = `<span class="verdict">✗ 再想想</span>${q.hint}`;
+      }
+    });
+  });
+  nextBtn.addEventListener('click', () => {
+    gi++;
+    if (gi < GATE.length) renderGate();
+    else {
+      gateHost.innerHTML = '';
+      document.getElementById('gate-num').textContent = gScore;
+      const msg = document.getElementById('gate-msg');
+      if (gScore === 3) {
+        msg.textContent = '绿灯——区间、重叠、三买三个考点都稳。直接往下学走势类型。';
+      } else {
+        msg.innerHTML = '黄灯——有 ' + (3 - gScore) + ' 题没过。<b>走势类型建立在中枢之上，中枢建立在笔和线段之上。</b>建议先回 <a href="0004-zhongshu-pivot.html">第4课</a> 复练，也可以直接继续——但要知道自己踩在薄冰上。';
+      }
+      gateBoard.classList.add('show');
+      gateBoard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+}
+document.getElementById('gate-retry').addEventListener('click', () => { gi = 0; gScore = 0; renderGate(); });
+document.getElementById('gate-continue').addEventListener('click', () => {
+  document.getElementById('sec01').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* ================= 练习A：走势类型分类 ================= */
+const TA = [
+  {
+    points: [40, 55, 45, 55, 45, 55, 45],
+    opts: ['盘整走势', '上涨走势', '下跌走势'], correct: 0,
+    answer: '盘整走势',
+    zones: [{ lo: 45, hi: 55, x1: 0, x2: 6 }],
+    okMsg: '全图只有一个中枢 [45, 55]（连续三段的重叠都聚在它身上），走势始终围绕它震荡——只含一个中枢，就是盘整。',
+    hint: '先数中枢：一个＝盘整；两个以上同向且区间不重叠＝趋势。'
+  },
+  {
+    points: [50, 65, 58, 65, 58, 78, 72, 78, 72, 78],
+    opts: ['盘整走势', '上涨走势', '下跌走势'], correct: 1,
+    answer: '上涨走势',
+    zones: [{ lo: 58, hi: 65, x1: 0, x2: 4 }, { lo: 72, hi: 78, x1: 5, x2: 9 }],
+    okMsg: '两个中枢 [58, 65] 和 [72, 78]：第二个整体在第一个之上、区间不重叠（65 &lt; 72）——依次同向的中枢，就是上涨。',
+    hint: '看中枢的排列：一个比一个高＝上涨；一个比一个低＝下跌。'
+  },
+  {
+    points: [130, 110, 120, 110, 120, 100, 108, 100, 108, 100],
+    opts: ['盘整走势', '上涨走势', '下跌走势'], correct: 2,
+    answer: '下跌走势',
+    zones: [{ lo: 110, hi: 120, x1: 0, x2: 4 }, { lo: 100, hi: 108, x1: 5, x2: 9 }],
+    okMsg: '两个中枢 [110, 120] 和 [100, 108]：一个比一个低、区间不重叠（108 &lt; 110）——这是下跌，它的每一次反弹都还在"延伸"里，别急着抢。',
+    hint: '判方向：中枢依次抬高＝上涨；依次降低＝下跌。'
+  }
+];
+
+const taHost = document.getElementById('ta-host');
+const taBoard = document.getElementById('ta-board');
+let ti = 0, taScore = 0, taFirst = true, taDone = false;
+
+function renderTA() {
+  taDone = false; taFirst = true;
+  const q = TA[ti];
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">练习 A · 第 ${ti + 1} / ${TA.length} 题</p>
+    <p class="ex-prompt">这段走势属于哪种类型？</p>
+    <div class="ex-chart"><svg id="ta-svg"></svg></div>
+    <div class="ex-actions">
+      ${q.opts.map((t, k) => `<button class="btn ${k ? 'ghost' : ''}" data-k="${k}">${t}</button>`).join('')}
+      <button class="btn" id="ta-next" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="ta-fb"></div>
+  `;
+  taHost.innerHTML = '';
+  taHost.appendChild(wrap);
+  taBoard.classList.remove('show');
+
+  const chart = ChanCharts.renderZigzag(wrap.querySelector('#ta-svg'),
+    q.points.map(price => ({ price })), { width: 560, height: 200 });
+
+  const fb = wrap.querySelector('#ta-fb');
+  const nextBtn = wrap.querySelector('#ta-next');
+  wrap.querySelectorAll('[data-k]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (taDone) return;
+      if (Number(b.dataset.k) === q.correct) {
+        taDone = true;
+        if (taFirst) taScore++;
+        q.zones.forEach((z, zi) => {
+          const name = q.zones.length > 1 ? '中枢' + (zi + 1) : '中枢';
+          ChanCharts.zone(chart, chart.x(z.x1), chart.x(z.x2), z.lo, z.hi, { label: `${name} [${z.lo}, ${z.hi}]` });
+        });
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<span class="verdict">✓ 正确</span>${q.okMsg}`;
+        nextBtn.style.display = '';
+      } else {
+        taFirst = false;
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = `<span class="verdict">✗ 再想想</span>${q.hint}`;
+      }
+    });
+  });
+  nextBtn.addEventListener('click', () => {
+    ti++;
+    if (ti < TA.length) renderTA();
+    else {
+      taHost.innerHTML = '';
+      document.getElementById('ta-num').textContent = taScore;
+      const msg = document.getElementById('ta-msg');
+      if (taScore === 3) msg.textContent = '全对——盘整、上涨、下跌三种类型都认得出。看任何走势先分类，这个习惯就此立住。';
+      else if (taScore === 2) msg.textContent = '只差一点。分类的万能第一问：几个中枢？依次抬高、依次降低，还是原地绕？';
+      else msg.textContent = '回到定义重来：一个中枢＝盘整；两个以上同向且区间不重叠＝趋势。再练一轮。';
+      taBoard.classList.add('show');
+      taBoard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+}
+document.getElementById('ta-retry').addEventListener('click', () => { ti = 0; taScore = 0; renderTA(); });
+
+/* ================= 练习B：两个操作判断 ================= */
+const TB = [
+  {
+    prompt: '图中两个同级别中枢的区间在 86~90 发生了重叠。这段走势算"上涨趋势"吗？',
+    opts: ['算趋势：两个中枢依次抬高就够了', '不算：中枢重叠构成更大级别中枢', '算：出现过两个同向中枢就是趋势'],
+    correct: 1,
+    points: [70, 90, 80, 90, 80, 96, 86, 96, 86, 96],
+    zones: [
+      { lo: 80, hi: 90, x1: 1, x2: 4, label: '中枢1 [80, 90]' },
+      { lo: 86, hi: 96, x1: 5, x2: 9, label: '中枢2 [86, 96]' }
+    ],
+    okMsg: '对——第18课要求"中枢之间必须绝对不存在重叠"。这里区间已经咬上（86~90），按第20课，要把它看作"产生一个更大级别的走势中枢"（级别扩张）：不是干净的本级别趋势，别当成趋势去追。',
+    hint: '趋势的硬条件是"绝对不存在重叠"。区间已经咬上了——回第03节看"更大级别中枢"是怎么产生的。'
+  },
+  {
+    prompt: '你按"第三类买点"买入了。缠师提醒过：三买之后必然走出趋势吗？',
+    opts: ['不必然：也可能转为更大级别盘整', '必然：三买之后必然走出上涨趋势', '必然：三买之后一定立刻见顶下跌'],
+    correct: 0,
+    okMsg: '对——第20课原话："第三类买卖点后，并不必然是趋势，也有进入更大级别盘整的可能"；而且"一旦不能出现趋势，一定要在盘整的高点出掉"。三买给你的不是"必然大涨"，而是"即使盘整也必然有高点可处理"的赢面。',
+    hint: '第20课专门提醒过这一点，去原文找"并不必然"四个字。'
+  }
+];
+
+const tbHost = document.getElementById('tb-host');
+let tbi = 0;
+
+function renderTB() {
+  const q = TB[tbi];
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">练习 B · 第 ${tbi + 1} / ${TB.length} 题</p>
+    <p class="ex-prompt">${q.prompt}</p>
+    ${q.points ? '<div class="ex-chart"><svg id="tb-svg"></svg></div>' : ''}
+    <div class="ex-actions">
+      ${q.opts.map((t, k) => `<button class="btn ${k ? 'ghost' : ''}" data-k="${k}">${t}</button>`).join('')}
+      <button class="btn" id="tb-next" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="tb-fb"></div>
+  `;
+  tbHost.innerHTML = '';
+  tbHost.appendChild(wrap);
+
+  if (q.points) {
+    const chart = ChanCharts.renderZigzag(wrap.querySelector('#tb-svg'),
+      q.points.map(price => ({ price })), { width: 560, height: 210 });
+    (q.zones || []).forEach(z => {
+      ChanCharts.zone(chart, chart.x(z.x1), chart.x(z.x2), z.lo, z.hi, { label: z.label });
+    });
+  }
+
+  const fb = wrap.querySelector('#tb-fb');
+  const nextBtn = wrap.querySelector('#tb-next');
+  let done = false;
+  wrap.querySelectorAll('[data-k]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (done) return;
+      if (Number(b.dataset.k) === q.correct) {
+        done = true;
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<span class="verdict">✓ 正确</span>${q.okMsg}`;
+        if (tbi === TB.length - 1) {
+          const extra = document.createElement('p');
+          extra.className = 'small muted';
+          extra.style.margin = '.6em 0 0';
+          extra.textContent = '练习B完成。下一课学"背驰"——判断延伸即将结束的第一把尺子。';
+          fb.appendChild(extra);
+        } else {
+          nextBtn.style.display = '';
+        }
+      } else {
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = `<span class="verdict">✗ 再想想</span>${q.hint}`;
+      }
+    });
+  });
+  nextBtn.addEventListener('click', () => { tbi++; renderTB(); });
+}
+
+/* ================= 初始化 ================= */
+renderGate();
+renderTA();
+renderTB();
+</script>
+
+</body>
+</html>

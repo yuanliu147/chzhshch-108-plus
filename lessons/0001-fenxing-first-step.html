@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1课 · K线与分型 —— 买卖点的第一块基石</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<p class="kicker">LESSON 0001 · 缠论实战 · 预计 15 分钟</p>
+<h1>K线与分型</h1>
+<p class="subtitle">买卖点的第一块基石 · 通往"三类买卖点"的第一步</p>
+
+<div class="box why">
+  <p class="box-title">这课与你的目标有什么关系</p>
+  <p style="margin:0">你要的是<b>买卖点操作</b>。缠论里，三类买卖点不是感觉、不是消息，而是一串严格定义的结构。整条链如下——本课解决最前面的两块，它们错了，后面全错：</p>
+  <div class="roadmap">
+    <span class="node here">K线</span><span class="arrow">→</span>
+    <span class="node here">分型</span><span class="arrow">→</span>
+    <span class="node">笔</span><span class="arrow">→</span>
+    <span class="node">线段</span><span class="arrow">→</span>
+    <span class="node">中枢</span><span class="arrow">→</span>
+    <span class="node">走势类型</span><span class="arrow">→</span>
+    <span class="node">背驰</span><span class="arrow">→</span>
+    <span class="node">三类买卖点</span>
+  </div>
+  <p class="small" style="margin:.4rem 0 0">先剧透终点，让你知道每一步为谁而学：<b>第一类买点 = 下跌趋势的背驰点</b>；而"背驰"是否成立，取决于你对中枢、线段、笔、分型的划分是否准确。<span class="muted">（详见术语表"<a href="../reference/glossary.html">三类买卖点</a>"条）</span></p>
+</div>
+
+<h2><span class="secno">01</span>一根K线的四个价格</h2>
+
+<p>你有一点点K线基础，这里只花一分钟统一口径。缠论对K线只有四个数字感兴趣：</p>
+
+<figure>
+<svg viewBox="0 0 340 240" style="max-width:340px" role="img" aria-label="K线结构图">
+  <line x1="150" y1="28" x2="150" y2="205" stroke="#8c2f1b" stroke-width="2"/>
+  <rect x="128" y="88" width="44" height="72" fill="#8c2f1b" rx="1"/>
+  <line x1="150" y1="28" x2="196" y2="28" stroke="#a39a8c" stroke-dasharray="3 3"/>
+  <line x1="172" y1="88" x2="196" y2="88" stroke="#a39a8c" stroke-dasharray="3 3"/>
+  <line x1="172" y1="160" x2="196" y2="160" stroke="#a39a8c" stroke-dasharray="3 3"/>
+  <line x1="150" y1="205" x2="196" y2="205" stroke="#a39a8c" stroke-dasharray="3 3"/>
+  <text x="204" y="32" class="axis-label" style="fill:#6b655c">最高价</text>
+  <text x="204" y="92" class="axis-label" style="fill:#6b655c">收盘价</text>
+  <text x="204" y="164" class="axis-label" style="fill:#6b655c">开盘价</text>
+  <text x="204" y="209" class="axis-label" style="fill:#6b655c">最低价</text>
+  <text x="116" y="66" text-anchor="end" class="axis-label" style="fill:#6b655c">上影线</text>
+  <text x="116" y="128" text-anchor="end" class="axis-label" style="fill:#6b655c">实体</text>
+  <text x="116" y="196" text-anchor="end" class="axis-label" style="fill:#6b655c">下影线</text>
+</svg>
+<figcaption>阳线示例（收盘 &gt; 开盘）。A股配色：红涨绿跌。</figcaption>
+</figure>
+
+<p class="muted small">缠师眼中K线没有"形态学玄学"，只有高低点的比较。下面两个概念，全部建立在"谁比谁高、谁比谁低"上。</p>
+
+<h2><span class="secno">02</span>包含关系：先合并，再判断</h2>
+
+<div class="box def">
+  <p class="box-title">定义 · 包含关系</p>
+  <p style="margin:0">相邻两根K线，若一根的高低点范围<b>完全包住</b>另一根，称为有包含关系。此时必须先把两根合并成一根，再参与后续判断。</p>
+</div>
+
+<p>合并规则只有两条：</p>
+<ul>
+  <li><b>向上时</b>：取两根K线的<b>高点中较高的</b>、<b>低点中较高的</b>，合成新K线。</li>
+  <li><b>向下时</b>：取两根K线的<b>低点中较低的</b>、<b>高点中较低的</b>，合成新K线。</li>
+</ul>
+
+<figure>
+  <svg id="chart-include-a" width="300" height="180"></svg>
+  <svg id="chart-include-b" width="300" height="180"></svg>
+  <figcaption>左：K线1与K线2存在包含（1包住2）；右：按向上处理合并为一根（高点取高、低点取高）</figcaption>
+</figure>
+
+<h2><span class="secno">03</span>分型：三根K线的"回头"</h2>
+
+<div class="box def">
+  <p class="box-title">定义 · 顶分型与底分型</p>
+  <p>经包含处理后，连续三根K线，若<b>中间那根的高点最高、且低点也最高</b>，为<span style="color:var(--accent)"><b>顶分型</b></span>（Λ 形，向上的回头）。</p>
+  <p style="margin:.4em 0 0">若<b>中间那根的低点最低、且高点也最低</b>，为<span style="color:var(--green)"><b>底分型</b></span>（V 形，向下的回头）。</p>
+</div>
+
+<figure>
+  <svg id="chart-top" width="300" height="200"></svg>
+  <svg id="chart-bottom" width="300" height="200"></svg>
+  <figcaption>左：顶分型（第2根高低点均最高）　右：底分型（第2根高低点均最低）</figcaption>
+</figure>
+
+<p>注意一个容易忽略的要点：判断分型必须<b>同时看高点和低点</b>。只有"局部最高点"而低点不是最高，不算顶分型——那通常只是走势中的普通停顿。</p>
+
+<h2><span class="secno">04</span>动手练：找出分型（4 题）</h2>
+
+<p>规则：点击你认为的<b>分型中间那根K线</b>，立即给出反馈。每题第一次点中就计 1 分。</p>
+
+<div id="exercise-host"></div>
+
+<div id="scoreboard" class="scoreboard">
+  <p class="box-title" style="font-family:'PingFang SC',sans-serif;letter-spacing:.15em;color:var(--muted)">练习结果</p>
+  <p class="score-num"><span id="score-num">0</span> / 4</p>
+  <p id="score-msg" style="margin:.4rem 0 1rem"></p>
+  <div class="ex-actions" style="justify-content:center">
+    <button class="btn" id="retry-btn">再练一轮</button>
+  </div>
+</div>
+
+<h2><span class="secno">05</span>新手最常见的三个错误</h2>
+
+<ul>
+  <li><b>只看一个价格。</b>看到"中间K线最高"就喊顶分型——还要确认它的低点也比两边高。高低必须同时满足。</li>
+  <li><b>跳过包含处理。</b>含包含关系的K线不先合并，分型判断必然走样。这是实盘画图的第一个坑。</li>
+  <li><b>在强烈的单边走势里硬找分型。</b>连续大涨/大跌中可能一个分型都没有——"没有分型"本身就是信息，说明趋势在延续。</li>
+</ul>
+
+<hr>
+
+<h2>延伸阅读</h2>
+<ul>
+  <li><b>主要出处（必读）：</b><a href="../108/0567-486e105c01000bf2-062.md">第62课《分型、笔与线段》</a> —— 分型、笔、线段的正式定义；<a href="../108/0593-486e105c01000bpo-065.md">第65课《再说说分型、笔、线段》</a> —— 针对常见疑问的再讲解。</li>
+  <li><b>预习下一课：</b>两个相邻分型连成一笔——术语表"<a href="../reference/glossary.html">笔</a>"条。</li>
+</ul>
+
+<div class="ask-teacher">
+  <p class="box-title">有疑问？</p>
+  <p style="margin:0">我是你的老师。对本课任何内容不清楚——概念没吃透、练习题想不明白、甚至想让我用你持仓关注的真实股票举例——直接在对话里提问即可。</p>
+</div>
+
+<div class="foot">
+  <a href="../reference/glossary.html">缠论术语表</a>
+  <a href="../MISSION.md">学习使命</a>
+  <a id="next-lesson" href="0002-bi-strokes.html">下一课 · 笔 →</a>
+</div>
+
+<script src="../assets/charts.js"></script>
+<script>
+/* ---------- 示例图 ---------- */
+ChanCharts.renderCandles(document.getElementById('chart-include-a'),
+  [{o:100,h:105,l:95,c:102},{o:101,h:104,l:96,c:103}], {width:300,height:180,labels:true});
+ChanCharts.renderCandles(document.getElementById('chart-include-b'),
+  [{o:100,h:105,l:96,c:103}], {width:300,height:180,labels:true});
+ChanCharts.renderCandles(document.getElementById('chart-top'),
+  [{o:48,h:55,l:46,c:52},{o:53,h:63,l:50,c:60},{o:61,h:68,l:58,c:59},{o:60,h:64,l:57,c:58}],
+  {width:300,height:200});
+ChanCharts.renderCandles(document.getElementById('chart-bottom'),
+  [{o:100,h:103,l:95,c:96},{o:94,h:95,l:80,c:86},{o:86,h:96,l:84,c:93},{o:94,h:104,l:92,c:103}],
+  {width:300,height:200});
+
+/* ---------- 练习题 ---------- */
+const EXERCISES = [
+  {
+    title: '练习 1 / 4 · 基础',
+    prompt: '这是一段下跌后企稳的K线。点击<b>底分型的中间那根K线</b>。',
+    candles: [
+      {o:100,h:103,l:95,c:96},{o:94,h:95,l:80,c:86},{o:86,h:96,l:84,c:93},
+      {o:94,h:104,l:92,c:103},{o:102,h:106,l:99,c:100}
+    ],
+    answer: 1, noneBtn: false,
+    okMsg: '第2根K线的高点和低点都是三根中最低的——这是底分型。它意味着这段下跌的动能暂时衰竭了一次。',
+    hint: '底分型要找"中间那根最低"：中间K线的高点和低点都要低于左右两根邻居。再试一次。'
+  },
+  {
+    title: '练习 2 / 4 · 在横盘里找',
+    prompt: '这段K线反复拉锯。点击<b>顶分型的中间那根K线</b>。',
+    candles: [
+      {o:48,h:55,l:46,c:52},{o:53,h:63,l:50,c:60},{o:61,h:68,l:58,c:59},
+      {o:60,h:64,l:57,c:58},{o:57,h:61,l:53,c:55},{o:54,h:60,l:52,c:58}
+    ],
+    answer: 2, noneBtn: false,
+    okMsg: '第3根K线的高点和低点均为三根中最高——顶分型。上涨动能在这里衰竭了一次，价格随后回落。',
+    hint: '顶分型要"中间那根最高"：高点和低点都要高于两侧邻居。只有一个价格满足不算数。'
+  },
+  {
+    title: '练习 3 / 4 · 含包含关系',
+    prompt: '注意：图中存在<b>包含关系</b>（左侧两根）。先心算合并，再点击<b>底分型的中间那根K线</b>。',
+    candles: [
+      {o:100,h:110,l:90,c:105},{o:98,h:104,l:96,c:102},{o:100,h:101,l:84,c:90},
+      {o:88,h:90,l:70,c:76},{o:78,h:96,l:72,c:93}
+    ],
+    answer: 3, noneBtn: false,
+    okMsg: '第1、2根存在包含（合并后不影响右侧），第4根高低点均为最低——底分型。先处理包含，判断才不会走样。',
+    hint: '先在左侧找哪两根互相包含、合并成一根；然后在剩下的"干净"K线里找低点最低的中间那根。'
+  },
+  {
+    title: '练习 4 / 4 · 陷阱题',
+    prompt: '找出本图中的顶分型或底分型。如果实在没有，点击下方按钮。',
+    candles: [
+      {o:50,h:55,l:48,c:53},{o:53,h:60,l:51,c:58},{o:57,h:66,l:56,c:64},
+      {o:63,h:72,l:61,c:70},{o:69,h:76,l:67,c:74}
+    ],
+    answer: null, noneBtn: true,
+    okMsg: '正确——没有分型。价格逐波抬升，没有任何一根K线的高低点同时高于或低于两侧。"没有分型"本身就是信息：趋势在延续。',
+    hint: '逐根检查：中间那根要同时满足两个"最"。这张图里没有一个位置满足——再想想这意味着什么。'
+  }
+];
+
+const host = document.getElementById('exercise-host');
+const scoreboard = document.getElementById('scoreboard');
+let exIndex = 0;
+let firstTry = true;
+let score = 0;
+let answered = false;
+
+function renderExercise() {
+  answered = false;
+  firstTry = true;
+  const ex = EXERCISES[exIndex];
+
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">${ex.title}</p>
+    <p class="ex-prompt">${ex.prompt}</p>
+    <div class="ex-chart"><svg id="ex-chart-svg"></svg></div>
+    <div class="ex-actions">
+      ${ex.noneBtn ? '<button class="btn ghost" id="none-btn">本图没有分型</button>' : ''}
+      <button class="btn" id="next-btn" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="ex-feedback"></div>
+  `;
+  host.innerHTML = '';
+  host.appendChild(wrap);
+  scoreboard.classList.remove('show');
+
+  const fb = wrap.querySelector('#ex-feedback');
+  const nextBtn = wrap.querySelector('#next-btn');
+
+  function showFb(ok, msg) {
+    fb.className = 'feedback show ' + (ok ? 'correct' : 'wrong');
+    fb.innerHTML = `<span class="verdict">${ok ? '✓ 正确' : '✗ 再想想'}</span>${msg}`;
+  }
+
+  function onPick(i, g) {
+    if (answered) return;
+    if (i === ex.answer) {
+      answered = true;
+      g.classList.add('picked-correct');
+      svg.querySelectorAll('.candle').forEach(c => { if (c !== g) c.classList.add('dim'); });
+      if (firstTry) score++;
+      showFb(true, ex.okMsg);
+      nextBtn.style.display = '';
+    } else {
+      firstTry = false;
+      g.classList.add('picked-wrong');
+      showFb(false, ex.hint);
+    }
+  }
+
+  const svg = wrap.querySelector('#ex-chart-svg');
+  ChanCharts.renderCandles(svg, ex.candles, { onClick: onPick });
+
+  if (ex.noneBtn) {
+    wrap.querySelector('#none-btn').addEventListener('click', () => {
+      if (answered) return;
+      if (ex.answer === null) {
+        answered = true;
+        if (firstTry) score++;
+        showFb(true, ex.okMsg);
+        nextBtn.style.display = '';
+      } else {
+        firstTry = false;
+        showFb(false, ex.hint);
+      }
+    });
+  }
+
+  nextBtn.addEventListener('click', () => {
+    exIndex++;
+    if (exIndex < EXERCISES.length) renderExercise();
+    else showScore();
+  });
+}
+
+function showScore() {
+  host.innerHTML = '';
+  document.getElementById('score-num').textContent = score;
+  const msg = document.getElementById('score-msg');
+  if (score === 4) msg.textContent = '满分！分型的眼睛已经练就，可以放心进入"笔"了。';
+  else if (score >= 2) msg.textContent = '基本过关，但还不够稳——分型是全局的根基，建议再练一轮冲满分。';
+  else msg.textContent = '别急着往下走：分型不牢，笔和中枢全是沙上建塔。再练一轮，练完随时问我。';
+  scoreboard.classList.add('show');
+  scoreboard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+document.getElementById('retry-btn').addEventListener('click', () => {
+  exIndex = 0; score = 0; renderExercise();
+  document.getElementById('exercise-host').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+renderExercise();
+</script>
+
+</body>
+</html>

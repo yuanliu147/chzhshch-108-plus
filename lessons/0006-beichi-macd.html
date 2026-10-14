@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第6课 · 背驰 —— 力度衰竭与 MACD 面积法</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<p class="kicker">LESSON 0006 · 缠论实战 · 预计 20 分钟</p>
+<h1>背驰</h1>
+<p class="subtitle">力度衰竭 · 买卖点的源头</p>
+
+<div class="box why">
+  <p class="box-title">这课与你的目标有什么关系</p>
+  <p>你要的买卖点，最终都指向同一个词。第24课的定理原话：<b>"任一背驰都必然制造某级别的买卖点，任一级别的买卖点都必然源自某级别走势的背驰。"</b></p>
+  <p style="margin:.4em 0 0">翻译：<b>看到背驰，就等于看到一次必然的逆转。</b>本课学最实用的一招——用 MACD 柱子面积比较两段同向走势的"力气"（第24课的辅助判断法）。</p>
+  <div class="roadmap">
+    <span class="node">K线 ✓</span><span class="arrow">→</span>
+    <span class="node">分型 ✓</span><span class="arrow">→</span>
+    <span class="node">笔 ✓</span><span class="arrow">→</span>
+    <span class="node">线段 ✓</span><span class="arrow">→</span>
+    <span class="node">中枢 ✓</span><span class="arrow">→</span>
+    <span class="node">走势类型 ✓</span><span class="arrow">→</span>
+    <span class="node here">背驰</span><span class="arrow">→</span>
+    <span class="node">三类买卖点</span>
+  </div>
+</div>
+
+<h2><span class="secno">00</span>前置检索：三题热身</h2>
+<p class="small muted">考第5课：分类、延伸的判据、以及"中枢升级"的判定。答不出先回第5课（和它的速查页）。</p>
+<div id="gate-host"></div>
+<div id="gate-board" class="scoreboard">
+  <p class="box-title" style="font-family:'PingFang SC',sans-serif;letter-spacing:.15em;color:var(--muted)">门槛结果</p>
+  <p class="score-num"><span id="gate-num">0</span> / 3</p>
+  <p id="gate-msg" style="margin:.4rem 0 1rem"></p>
+  <div class="ex-actions" style="justify-content:center">
+    <button class="btn" id="gate-retry">重做门槛题</button>
+    <button class="btn ghost" id="gate-continue">继续学背驰 →</button>
+  </div>
+</div>
+
+<h2 id="sec01"><span class="secno">01</span>背驰是什么：走得更远，力气更小</h2>
+
+<p>大白话：<b>同一方向的两段走势，后一段价格走得更远（或差不多），但"力气"明显更小——这就叫背驰。</b>它是趋势的"喘不上气"。</p>
+
+<p>第27课把背驰分成两种，这一步最关键：</p>
+
+<blockquote>"如果在<b>第一个中枢</b>就出现背驰，那不会是真正意义上的背驰，只能算是<b>盘整背驰</b>，其真正的技术含义，其实就是一个企图脱离中枢的运动，<b>由于力度有限，被阻止而出现回到中枢里</b>。"——<a href="../108/0449-486e105c010008h4-027.md">第27课</a></blockquote>
+
+<ul>
+  <li><b>真正的背驰（趋势背驰）</b>：至少发生在<b>第二个中枢之后</b>（第27课："肯定不会发生在第一个中枢之后"）。</li>
+  <li><b>盘整背驰</b>：只发生在第一个中枢之后——想离开中枢但力气不够，被拽回去。</li>
+  <li>用处不同（第27课原话）：<b>"多数的第二、三类买点，其实都是由盘整背驰构成的，而第一类买点，多数由趋势的背驰构成。"</b></li>
+</ul>
+
+<p class="small muted">第27课还给构成背驰的那段走势起了名字：<b>背驰段</b>——"在某级别的某类型走势，如果构成背驰或盘整背驰，就把这段走势类型称为某级别的背驰段。"</p>
+
+<div class="box warn">
+  <p class="box-title">级别，还是级别（第24课）</p>
+  <p class="small" style="margin:0">"背驰同样有级别的问题，一个1分钟级别的背驰，在绝大多数的情况下，不会制造一个周线级别的大顶。"——所以先明确你操作哪个级别，再看那个级别上的背驰。低级别背驰只制造低级别的买卖点。</p>
+</div>
+
+<h2><span class="secno">02</span>三段的结构：A、B、C</h2>
+
+<p>第24课教的方法，要在一个"标准三段"上看。原文把它拆成 A、B、C 段：</p>
+
+<blockquote>"用MACD判断背驰，首先要有<b>两段同向的趋势</b>。同向趋势之间一定有一个盘整或反向趋势连接，把这三段分别称为<b>A、B、C段</b>。……A之前已经有一个中枢，而B是这个大趋势的<b>另一个中枢</b>，这个中枢一般会把MACD的黄白线（也就是DIFF和DEA）<b>回拉到0轴附近</b>。而C段的走势类型完成时对应的<b>MACD柱子面积</b>（向上的看红柱子，向下看绿柱子）比A段对应的面积要小，这时候就构成<b>标准的背驰</b>。"——<a href="../108/0424-486e105c010007zw-020.md">第24课</a></blockquote>
+
+<figure>
+  <svg id="fig-abc" width="600" height="230"></svg>
+  <figcaption>A 段上涨 → B 段是一个中枢（价格横着走，把 MACD 黄白线拉回 0 轴附近）→ C 段再次上涨，而且创了新高。注意：A 段之前还有一个中枢（这里从简没画），所以"两个中枢、两段同向上涨"，才够资格谈<b>趋势背驰</b>。</figcaption>
+</figure>
+
+<figure>
+  <svg id="fig-macd" width="600" height="170"></svg>
+  <figcaption>同一张图下方的 MACD 红柱（示意）：A 段两根柱子面积大，C 段三根柱子虽然数量多，<b>面积反而小</b>——上涨的力气衰竭了。这就是标准背驰。</figcaption>
+</figure>
+
+<h2><span class="secno">03</span>怎么量"力气"：MACD 柱面积</h2>
+
+<p>MACD 三件套（一句话扫盲）：<b>黄白线</b>（两条摆动的线，DIFF/DEA）、<b>红绿柱</b>（柱子，"一组向上、一组向下"）、<b>0轴</b>（红绿柱交界的那条直线）。上涨看红柱、下跌看绿柱。</p>
+
+<div class="box def">
+  <p class="box-title">两条判据（第27课给的示例）</p>
+  <p style="margin:0">"回抽0轴的黄白线再次下跌不创新低，而且柱子的面积是明显小于第1段的，一般来说，<b>只要其中一个符合就可以是一个背驰的信号，两个都满足就更标准了</b>。"</p>
+</div>
+
+<p>最实用的一个细节，来自第24课：</p>
+
+<blockquote>"看MACD柱子的面积<b>不需要全出来</b>，一般柱子伸长的力度变慢时，把已经出现的面积<b>乘2</b>，就可以当成是该段的面积。所以，实际操作中根本不用回跌后才发现背驰，在上涨或下跌的最后阶段，判断就出来了。"——<a href="../108/0419-486e105c010007t8-018.md">第24课</a></blockquote>
+
+<div class="box warn">
+  <p class="box-title">老师批注 · 这是"粗糙但能用"的方法</p>
+  <p class="small" style="margin:0">第24课自己说得很清楚：MACD 面积法是"一种<b>不绝对精确，但比较方便</b>"的方法，"要完全解决背驰问题，必须对中枢进行更进一步的分析，这是以后章节的事情了"。所以：本课先用它站住脚；精确的背驰判断（含区间套逐级定位）是后面的内容。配套速查：<a href="../reference/zhongshu-expansion.html">中枢升级判定卡</a>（背驰还有第二条升级路线，写在那页第04节）。</p>
+</div>
+
+<h2><span class="secno">04</span>练习A：背驰判断器（3 题）</h2>
+<p>看图：上方是 A、B、C 三段的走势，下方是这两段的 MACD 柱（示意）。两段的柱子面积谁大？</p>
+<div id="ba-host"></div>
+<div id="ba-board" class="scoreboard">
+  <p class="box-title" style="font-family:'PingFang SC',sans-serif;letter-spacing:.15em;color:var(--muted)">练习A 结果</p>
+  <p class="score-num"><span id="ba-num">0</span> / 3</p>
+  <p id="ba-msg" style="margin:.4rem 0 1rem"></p>
+  <div class="ex-actions" style="justify-content:center"><button class="btn" id="ba-retry">再练一轮</button></div>
+</div>
+
+<h2><span class="secno">05</span>练习B：两个判断（2 题）</h2>
+<div id="bb-host"></div>
+
+<h2><span class="secno">06</span>回扣买卖点</h2>
+<ul>
+  <li><b>背驰是"必然"的</b>：任何级别的买卖点都源自某个级别的背驰（第24课定理）。这是缠论里少数敢用"必然"二字的地方。</li>
+  <li><b>趋势背驰 → 第一类买卖点</b>（下跌背驰买、上涨背驰卖）；<b>盘整背驰 → 第二、三类买卖点那一族</b>（第27课）。</li>
+  <li><b>盘整背驰出现时先走</b>：回跌不重回中枢，就在次级别一买回补——"刚好这反而构成该级别的第三类买点"；回跌重回中枢，就继续盘整（第24课）。</li>
+</ul>
+<p>下一课把三类买卖点系统收拢——<b>第一类（背驰点）、第二类（一买后的回抽低点）、第三类（离开中枢后的回抽）</b>，配上各自的买卖位置图，形成你自己的操作清单。</p>
+
+<hr>
+
+<h2>延伸阅读</h2>
+<ul>
+  <li><b>主要出处（必读）：</b><a href="../108/0436-486e105c0100087y-024.md">第24课《MACD对背弛的辅助判断》</a>（A/B/C段、面积比较、乘2技巧、盘整背驰的操作原则）、<a href="../108/0449-486e105c010008h4-027.md">第27课《盘整背驰与历史性底部》</a>（趋势背驰 vs 盘整背驰、背驰段、大级别底部）。</li>
+  <li><b>相关：</b><a href="../108/0456-486e105c010008la-029.md">第29课《转折的力度与级别》</a>（背驰-转折定理：背驰后只有三种去向）——见速查页 <a href="../reference/zhongshu-expansion.html">中枢升级判定卡</a> 第04节；<a href="../108/0499-486e105c010009mm-043.md">第43课《有关背驰的补习课》</a>（两种转折方式的区分）。</li>
+  <li><b>上一课：</b><a href="0005-trend-types.html">第5课 · 走势类型</a>；术语表已更新"背驰""趋势背驰 / 盘整背驰"两条。</li>
+</ul>
+
+<div class="ask-teacher">
+  <p class="box-title">有疑问？</p>
+  <p style="margin:0">MACD 是这课唯一的新工具——如果你用的软件里黄白线和红绿柱对不上号，或者想让我看看你手上某只票的"两段力度"，直接发图过来。练习A 做完告诉我分数，我按错题调整下一课。</p>
+</div>
+
+<div class="foot">
+  <a href="0005-trend-types.html">← 第5课 · 走势类型</a>
+  <a href="../reference/glossary.html">缠论术语表</a>
+  <span class="muted">下一课 · 三类买卖点（准备中）</span>
+</div>
+
+<script src="../assets/charts.js"></script>
+<script>
+/* ================= 教学图：A、B、C 三段 ================= */
+const FIG_ABC = [100, 130, 118, 130, 122, 140];
+const abcChart = ChanCharts.renderZigzag(document.getElementById('fig-abc'),
+  FIG_ABC.map((p, i) => ({ price: p, seg: i ? ['A', 'B', 'B', 'B', 'C'][i - 1] : undefined })),
+  { width: 600, height: 230 });
+ChanCharts.zone(abcChart, abcChart.x(1), abcChart.x(4), 122, 130, { label: 'B：第二个中枢 [122, 130]' });
+
+/* ================= 教学图：MACD 柱面积比较 ================= */
+const FIG_MACD = [
+  { seg: 'A', v: 1.2, label: 'A①' }, { seg: 'A', v: 1.0, label: 'A②' },
+  { seg: 'C', v: 0.5, label: 'C①' }, { seg: 'C', v: 0.6, label: 'C②' }, { seg: 'C', v: 0.4, label: 'C③' }
+];
+ChanCharts.renderBars(document.getElementById('fig-macd'),
+  FIG_MACD.map(b => ({ lo: 0, hi: b.v, label: b.label })), { width: 600, height: 170 });
+
+/* ================= 前置检索题 ================= */
+const GATE = [
+  {
+    prompt: '这段走势属于哪种类型？',
+    opts: ['盘整走势', '上涨走势', '下跌走势'], correct: 1,
+    points: [40, 60, 52, 60, 52, 76, 68, 76, 68, 76], expectKind: '上涨',
+    okMsg: '对——两个中枢 [52, 60] 和 [68, 76] 依次抬高、区间不重叠（60 &lt; 68），是上涨。两个中枢都是由连续三段的<b>重叠</b>长出来的：第一中枢＝前三段（40→60、60→52、52→60）的重叠；第二中枢＝68~76 那三段（76→68、68→76、76→68）的重叠。',
+    hint: '数中枢：一个＝盘整；两个以上同向、区间不重叠＝趋势。'
+  },
+  {
+    prompt: '判断"走势类型延伸"是否结束，关键看什么？',
+    opts: ['是否产生新的同级别中枢', '成交量是否出现明显放大', '涨幅是否已经足够大了呢'], correct: 0,
+    okMsg: '对——第18课原话："\'走势类型延伸\'是否结束的判断关键就在于是否产生新的\'缠中说禅走势中枢\'。"',
+    hint: '回到第5课：延伸结束的判据只有一个——新中枢出现了没有。'
+  },
+  {
+    prompt: '两个同级别中枢的中枢区间已经分开，但震荡范围仍然重叠。这算什么？',
+    opts: ['上涨趋势', '中枢延伸', '级别升级'], correct: 2,
+    okMsg: '对——第20课定理二：区间分开还不够，连围绕中枢的震荡都不能挨着，否则不构成趋势，而是"产生一个更大级别的走势中枢"。',
+    hint: '见速查页"中枢升级判定卡"情形 B：区间分开、震荡咬着 → 升级。'
+  }
+];
+
+const gateHost = document.getElementById('gate-host');
+const gateBoard = document.getElementById('gate-board');
+let gi = 0, gScore = 0, gFirst = true, gDone = false;
+
+function renderGate() {
+  gDone = false; gFirst = true;
+  const q = GATE[gi];
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">前置检索 · 第 ${gi + 1} / ${GATE.length} 题</p>
+    <p class="ex-prompt">${q.prompt}</p>
+    ${q.points ? '<div class="ex-chart"><svg id="gate-svg"></svg></div>' : ''}
+    <div class="ex-actions">
+      ${q.opts.map((t, k) => `<button class="btn ${k ? 'ghost' : ''}" data-k="${k}">${t}</button>`).join('')}
+      <button class="btn" id="gate-next" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="gate-fb"></div>
+  `;
+  gateHost.innerHTML = '';
+  gateHost.appendChild(wrap);
+  gateBoard.classList.remove('show');
+
+  if (q.points) {
+    ChanCharts.renderZigzag(wrap.querySelector('#gate-svg'),
+      q.points.map(price => ({ price })), { width: 560, height: 190 });
+  }
+
+  const fb = wrap.querySelector('#gate-fb');
+  const nextBtn = wrap.querySelector('#gate-next');
+  wrap.querySelectorAll('[data-k]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (gDone) return;
+      if (Number(b.dataset.k) === q.correct) {
+        gDone = true;
+        if (gFirst) gScore++;
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<span class="verdict">✓ 正确</span>${q.okMsg}`;
+        nextBtn.style.display = '';
+      } else {
+        gFirst = false;
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = `<span class="verdict">✗ 再想想</span>${q.hint}`;
+      }
+    });
+  });
+  nextBtn.addEventListener('click', () => {
+    gi++;
+    if (gi < GATE.length) renderGate();
+    else {
+      gateHost.innerHTML = '';
+      document.getElementById('gate-num').textContent = gScore;
+      const msg = document.getElementById('gate-msg');
+      if (gScore === 3) {
+        msg.textContent = '绿灯——分类、延伸、升级三个考点都稳。直接往下学背驰。';
+      } else {
+        msg.innerHTML = '黄灯——有 ' + (3 - gScore) + ' 题没过。<b>背驰建立在中枢和走势类型之上；这两块不稳，背驰就是玄学。</b>建议先回 <a href="0005-trend-types.html">第5课</a> 与 <a href="../reference/zhongshu-expansion.html">速查页</a>，也可以直接继续。';
+      }
+      gateBoard.classList.add('show');
+      gateBoard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+}
+document.getElementById('gate-retry').addEventListener('click', () => { gi = 0; gScore = 0; renderGate(); });
+document.getElementById('gate-continue').addEventListener('click', () => {
+  document.getElementById('sec01').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* ================= 练习A：背驰判断器 ================= */
+const BA = [
+  {
+    points: [100, 132, 120, 132, 124, 138], bZone: [124, 132],
+    bars: [
+      { seg: 'A', v: 1.3, label: 'A①' }, { seg: 'A', v: 1.1, label: 'A②' },
+      { seg: 'C', v: 0.6, label: 'C①' }, { seg: 'C', v: 0.5, label: 'C②' }, { seg: 'C', v: 0.4, label: 'C③' }
+    ],
+    opts: ['有背驰', '没背驰'], correct: 0, answer: '有背驰',
+    okMsg: 'C 段创了新高（138 &gt; 132），但面积明显更小——走得更远、力气更小：<b>有背驰</b>。',
+    hint: '把 A 段与 C 段各自的柱子面积加总再比较：上涨看红柱。'
+  },
+  {
+    points: [100, 125, 118, 128, 120, 150], bZone: [120, 125],
+    bars: [
+      { seg: 'A', v: 0.9, label: 'A①' }, { seg: 'A', v: 0.8, label: 'A②' },
+      { seg: 'C', v: 1.2, label: 'C①' }, { seg: 'C', v: 1.1, label: 'C②' }
+    ],
+    opts: ['有背驰', '没背驰'], correct: 1, answer: '没背驰',
+    okMsg: 'C 段的柱子面积比 A 段还大——力度在增强，<b>没有背驰</b>。这种走势不要急着找卖点。',
+    hint: '面积是"谁大谁力气大"：C 段面积更大时，谈不上衰竭。'
+  },
+  {
+    points: [100, 128, 115, 128, 118, 136], bZone: [118, 128],
+    bars: [
+      { seg: 'A', v: 1.2, label: 'A①' }, { seg: 'A', v: 1.4, label: 'A②' },
+      { seg: 'C', v: 0.4, label: 'C①' }, { seg: 'C', v: 0.35, label: 'C②' }, { seg: 'C', v: 0.3, label: 'C③' },
+      { seg: 'C', v: 0.35, label: 'C④' }, { seg: 'C', v: 0.3, label: 'C⑤' }, { seg: 'C', v: 0.3, label: 'C⑥' }
+    ],
+    opts: ['有背驰', '没背驰'], correct: 0, answer: '有背驰',
+    okMsg: 'C 段柱子有 6 根，看着"热闹"，但面积加起来更小——<b>有背驰</b>。数柱子个数没用，看的是面积加总。',
+    hint: '别数柱子数量。把两段的面积分别加总：谁小谁力气弱。'
+  }
+];
+
+const baHost = document.getElementById('ba-host');
+const baBoard = document.getElementById('ba-board');
+let bi = 0, baScore = 0, baFirst = true, baDone = false;
+
+function areaOf(bars, seg) {
+  return bars.filter(b => b.seg === seg).reduce((s, b) => s + Math.abs(b.v), 0);
+}
+
+function renderBA() {
+  baDone = false; baFirst = true;
+  const q = BA[bi];
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">练习 A · 第 ${bi + 1} / ${BA.length} 题</p>
+    <p class="ex-prompt">图中 A 段与 C 段的 MACD 柱子面积比较，结果是？</p>
+    <div class="ex-chart"><svg id="ba-price"></svg></div>
+    <div class="ex-chart"><svg id="ba-macd"></svg></div>
+    <div class="ex-actions">
+      ${q.opts.map((t, k) => `<button class="btn ${k ? 'ghost' : ''}" data-k="${k}">${t}</button>`).join('')}
+      <button class="btn" id="ba-next" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="ba-fb"></div>
+  `;
+  baHost.innerHTML = '';
+  baHost.appendChild(wrap);
+  baBoard.classList.remove('show');
+
+  const chart = ChanCharts.renderZigzag(wrap.querySelector('#ba-price'),
+    q.points.map((p, i) => ({ price: p, seg: i ? ['A', 'B', 'B', 'B', 'C'][i - 1] : undefined })),
+    { width: 560, height: 200 });
+  ChanCharts.zone(chart, chart.x(1), chart.x(4), q.bZone[0], q.bZone[1],
+    { label: `B 中枢 [${q.bZone[0]}, ${q.bZone[1]}]` });
+  ChanCharts.renderBars(wrap.querySelector('#ba-macd'),
+    q.bars.map(b => ({ lo: 0, hi: b.v, label: b.label })), { width: 560, height: 150 });
+
+  const fb = wrap.querySelector('#ba-fb');
+  const nextBtn = wrap.querySelector('#ba-next');
+  const aA = areaOf(q.bars, 'A'), aC = areaOf(q.bars, 'C');
+  wrap.querySelectorAll('[data-k]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (baDone) return;
+      if (Number(b.dataset.k) === q.correct) {
+        baDone = true;
+        if (baFirst) baScore++;
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<span class="verdict">✓ 正确</span>A 段面积 ${aA.toFixed(2)}，C 段面积 ${aC.toFixed(2)}。${q.okMsg}`;
+        nextBtn.style.display = '';
+      } else {
+        baFirst = false;
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = `<span class="verdict">✗ 再想想</span>${q.hint}`;
+      }
+    });
+  });
+  nextBtn.addEventListener('click', () => {
+    bi++;
+    if (bi < BA.length) renderBA();
+    else {
+      baHost.innerHTML = '';
+      document.getElementById('ba-num').textContent = baScore;
+      const msg = document.getElementById('ba-msg');
+      if (baScore === 3) msg.textContent = '全对——面积比较法已经拿下。下一步：把它用在你自己看的票上。';
+      else if (baScore === 2) msg.textContent = '只差一点。记住：面积加总，不看柱子数量；C 段面积更小才是背驰。';
+      else msg.textContent = '回第03节再读一遍：上涨看红柱、两段面积加总、谁小谁力气弱。再练一轮。';
+      baBoard.classList.add('show');
+      baBoard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+}
+document.getElementById('ba-retry').addEventListener('click', () => { bi = 0; baScore = 0; renderBA(); });
+
+/* ================= 练习B：两个判断 ================= */
+const BB = [
+  {
+    prompt: '一段上涨在第一个中枢之后就出现 MACD 柱面积衰竭。按第27课，这属于哪一类？',
+    opts: ['趋势背驰', '盘整背驰', '三买信号'], correct: 1,
+    okMsg: '对——第27课原话："如果在第一个中枢就出现背驰，那不会是真正意义上的背驰，只能算是盘整背驰……就是一个企图脱离中枢的运动，由于力度有限，被阻止而出现回到中枢里。"它属于第二、三类买点那一族，不是第一类。',
+    hint: '第27课说得很明确：真正的（趋势）背驰"肯定不会发生在第一个中枢之后，肯定是至少是第二个中枢之后"。'
+  },
+  {
+    prompt: '盘整背驰出现了（C 段上破中枢，但 MACD 面积小于 A 段）。第24课给的原则是？',
+    opts: ['先出来，回跌不回中枢就一买回补', '继续持有，等背驰自己消失就没事', '马上反手做空，趋势马上就要反转'], correct: 0,
+    okMsg: '对——第24课原话："这时候的原则是先出来，其后有两种情况，如果回跌不重新跌回，就在次级别的第一类买点回补，刚好这反而构成该级别的第三类买点，反之就继续该盘整。"',
+    hint: '回第24课：盘整背驰的原则是"先出来"，然后看回跌到底跌不跌回中枢。'
+  }
+];
+
+const bbHost = document.getElementById('bb-host');
+let bbi = 0;
+
+function renderBB() {
+  const q = BB[bbi];
+  const wrap = document.createElement('div');
+  wrap.className = 'exercise';
+  wrap.innerHTML = `
+    <p class="ex-title">练习 B · 第 ${bbi + 1} / ${BB.length} 题</p>
+    <p class="ex-prompt">${q.prompt}</p>
+    <div class="ex-actions">
+      ${q.opts.map((t, k) => `<button class="btn ${k ? 'ghost' : ''}" data-k="${k}">${t}</button>`).join('')}
+      <button class="btn" id="bb-next" style="display:none">下一题 →</button>
+    </div>
+    <div class="feedback" id="bb-fb"></div>
+  `;
+  bbHost.innerHTML = '';
+  bbHost.appendChild(wrap);
+
+  const fb = wrap.querySelector('#bb-fb');
+  const nextBtn = wrap.querySelector('#bb-next');
+  let done = false;
+  wrap.querySelectorAll('[data-k]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (done) return;
+      if (Number(b.dataset.k) === q.correct) {
+        done = true;
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<span class="verdict">✓ 正确</span>${q.okMsg}`;
+        if (bbi === BB.length - 1) {
+          const extra = document.createElement('p');
+          extra.className = 'small muted';
+          extra.style.margin = '.6em 0 0';
+          extra.textContent = '练习B完成。下一课把三类买卖点收拢成一张操作清单。';
+          fb.appendChild(extra);
+        } else {
+          nextBtn.style.display = '';
+        }
+      } else {
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = `<span class="verdict">✗ 再想想</span>${q.hint}`;
+      }
+    });
+  });
+  nextBtn.addEventListener('click', () => { bbi++; renderBB(); });
+}
+
+/* ================= 初始化 ================= */
+renderGate();
+renderBA();
+renderBB();
+</script>
+
+</body>
+</html>
