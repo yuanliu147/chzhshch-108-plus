@@ -67,5 +67,12 @@ def main() -> None:
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     print(f"\ntrades.csv: {OUT / 'trades.csv'}")
 
+    try:
+        from czsc.utils.plotting.lightweight import plot_czsc_trader
+        plot_czsc_trader(ct, output="html", path=str(OUT / "trader.html"))
+        print(f"trader.html: {OUT / 'trader.html'}")
+    except Exception as e:  # 绘图是展示层，失败不阻断回测结果
+        print(f"[warn] plot_czsc_trader 失败（不影响回测数据）: {e}")
+
 if __name__ == "__main__":
     main()
