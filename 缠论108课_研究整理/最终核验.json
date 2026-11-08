@@ -1,0 +1,44 @@
+{
+  "资料与章节数": 113,
+  "编号课程数": 108,
+  "附文数": 5,
+  "配图数": 43,
+  "中文索引行数": 113,
+  "中文表头检查": true,
+  "原文更改清单": [],
+  "外部脚本或样式依赖": 0,
+  "未完成标记": [],
+  "笔记引用核验": 2811,
+  "主报告引用核验": 19,
+  "已进行收益回测": false,
+  "独立语义复核": "已完成；两处必要修订已据原文修复",
+  "桌面与手机检查": [
+    {
+      "设备": "桌面",
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "courseCount": 113,
+      "imageCount": 43,
+      "missingAnchors": 0,
+      "keywordMatches": 5,
+      "appendixCount": 5,
+      "commentJumpValid": true,
+      "noteCharacters": 8322
+    },
+    {
+      "设备": "手机",
+      "viewport": 390,
+      "documentWidth": 390,
+      "courseCount": 113,
+      "imageCount": 43,
+      "missingAnchors": 0,
+      "keywordMatches": 5,
+      "appendixCount": 5,
+      "commentJumpValid": true,
+      "noteCharacters": 8322
+    }
+  ],
+  "配图解码检查": "浏览器解码43张，无失败",
+  "视觉检查方式": "内置浏览器无可见视口，使用独立临时Chrome生成1280与390像素截图并人工查看",
+  "限制": "未核验原博客在线版本和署名身份，未独立证明理论完备性与盈利优势"
+}

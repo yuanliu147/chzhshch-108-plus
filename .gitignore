@@ -106,3 +106,10 @@ dist
 # temp release files
 **/108-*.md
 **/*.pdf
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store

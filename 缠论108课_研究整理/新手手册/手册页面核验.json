@@ -1,0 +1,35 @@
+{
+ "checks": [
+  {
+   "设备": "桌面",
+   "viewport": 1280,
+   "docWidth": 1280,
+   "sections": 13,
+   "navs": 13,
+   "missingAnchors": 0,
+   "figures": 24,
+   "gates": 8,
+   "progressOn": "已练完 1 / 8 关",
+   "progressOff": "已练完 0 / 8 关",
+   "stored": "{\"gate1\":true}",
+   "scrollableFigs": 0,
+   "quotes": 25
+  },
+  {
+   "设备": "手机",
+   "viewport": 390,
+   "docWidth": 390,
+   "sections": 13,
+   "navs": 13,
+   "missingAnchors": 0,
+   "figures": 24,
+   "gates": 8,
+   "progressOn": "已练完 1 / 8 关",
+   "progressOff": "已练完 0 / 8 关",
+   "stored": "{\"gate1\":true}",
+   "scrollableFigs": 24,
+   "quotes": 25
+  }
+ ],
+ "consoleErrors": []
+}

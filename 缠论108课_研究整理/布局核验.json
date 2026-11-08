@@ -1,0 +1,16 @@
+[
+  {
+    "设备": "桌面",
+    "viewport": 1280,
+    "documentWidth": 1280,
+    "headerWidth": 1280,
+    "mainWidth": 1134
+  },
+  {
+    "设备": "手机",
+    "viewport": 390,
+    "documentWidth": 390,
+    "headerWidth": 390,
+    "mainWidth": 390
+  }
+]

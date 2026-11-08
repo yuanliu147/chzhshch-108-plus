@@ -1,0 +1,26 @@
+[
+  {
+    "设备": "桌面",
+    "viewport": 1280,
+    "documentWidth": 1280,
+    "courseCount": 113,
+    "imageCount": 43,
+    "missingAnchors": 0,
+    "keywordMatches": 5,
+    "appendixCount": 5,
+    "commentJumpValid": true,
+    "noteCharacters": 8322
+  },
+  {
+    "设备": "手机",
+    "viewport": 390,
+    "documentWidth": 390,
+    "courseCount": 113,
+    "imageCount": 43,
+    "missingAnchors": 0,
+    "keywordMatches": 5,
+    "appendixCount": 5,
+    "commentJumpValid": true,
+    "noteCharacters": 8322
+  }
+]

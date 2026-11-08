@@ -1,0 +1,198 @@
+{
+ "docWidth": 1100,
+ "viewport": 1100,
+ "figs": [
+  {
+   "id": "fig-baohan",
+   "texts": 21,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-shunxu",
+   "texts": 16,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-fenxing",
+   "texts": 32,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-fenxing-trap",
+   "texts": 21,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-shidian",
+   "texts": 23,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-bi",
+   "texts": 34,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-bi-jiage",
+   "texts": 24,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-bi-tichu",
+   "texts": 29,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-seg-overlap",
+   "texts": 26,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-seg-feature",
+   "texts": 25,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-seg-case1",
+   "texts": 24,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-seg-case2",
+   "texts": 43,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-center-calc",
+   "texts": 25,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-center-bounds",
+   "texts": 28,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-center-three",
+   "texts": 18,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-center-break",
+   "texts": 26,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-level",
+   "texts": 23,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-zoushi-type",
+   "texts": 20,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-divergence",
+   "texts": 22,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-panzheng-beichi",
+   "texts": 23,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-qujiantao",
+   "texts": 14,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-buy-panorama",
+   "texts": 27,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-buy2-cases",
+   "texts": 30,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-points-map",
+   "texts": 19,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  }
+ ]
+}
