@@ -41,18 +41,26 @@ const timer=setTimeout(()=>{console.error('超时');chrome.kill();process.exitCo
       const after0=document.getElementById('ptext').textContent;
       const scrollable=[...document.querySelectorAll('.figscroll')].filter(d=>d.scrollWidth>d.clientWidth+1).length;
       return JSON.stringify({viewport:innerWidth,docWidth:document.documentElement.scrollWidth,
+        clientWidth:document.documentElement.clientWidth,
         sections:secs.length,navs:navs.length,missingAnchors:missing.length,figures:figs.length,
         gates:boxes.length,progressOn:after1,progressOff:after0,stored:stored,scrollableFigs:scrollable,
         quotes:document.querySelectorAll('q[data-src]').length});
     })()`,returnByValue:true},sessionId);
     const m={设备:label,...JSON.parse(res.result.value)};
-    if(m.docWidth!==width||m.missingAnchors||m.sections!==13||m.navs!==13||m.figures!==24||m.gates!==8
+    // 横向溢出判定：经典滚动条会占掉约15px，docWidth==clientWidth 即无横向溢出；
+    // 只有 docWidth 超出 clientWidth、或 clientWidth 超出视口才算布局越界。
+    if(m.docWidth>m.clientWidth+1||m.clientWidth>width||m.missingAnchors||m.sections!==13||m.navs!==13||m.figures!==25||m.gates!==8
        ||!m.progressOn.includes('1 / 8')||!m.progressOff.includes('0 / 8')||!m.stored){
       throw new Error('手册页面核验失败：'+JSON.stringify(m));
     }
     if(label==='手机'&&m.scrollableFigs<20)throw new Error('手机端配图应可横向滑动：'+m.scrollableFigs);
     const shot=await call('Page.captureScreenshot',{format:'png',clip:{x:0,y:0,width,height:950,scale:1}},sessionId);
     fs.writeFileSync(path.join(root,'手册首页核验_'+label+'.png'),Buffer.from(shot.data,'base64'));
+    const g1=await call('Runtime.evaluate',{expression:'(() => {const el=document.getElementById("gate1");window.scrollTo({top:0,behavior:"instant"});const r=el.getBoundingClientRect();return JSON.stringify({y:Math.max(0,r.top+scrollY-4),h:Math.min(r.height+12,6000)});})()',returnByValue:true},sessionId);
+    const clip1=JSON.parse(g1.result.value);
+    const s1=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,
+      clip:{x:0,y:clip1.y,width,height:clip1.h,scale:1}},sessionId);
+    fs.writeFileSync(path.join(root,'手册第1关核验_'+label+'.png'),Buffer.from(s1.data,'base64'));
     if(label==='手机'){
       const pos=await call('Runtime.evaluate',{expression:'(() => {const el=document.getElementById("gate4");window.scrollTo({top:el.getBoundingClientRect().top+scrollY-56,behavior:"instant"});return scrollY;})()',returnByValue:true},sessionId);
       if(pos.result.value<1000)throw new Error('未滚动到第4关');

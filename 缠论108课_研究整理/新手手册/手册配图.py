@@ -13,7 +13,7 @@ import 配图_买点 as f
 OUT = Path(__file__).resolve().parent
 
 BUILDERS = [
-    a.fig_baohan, a.fig_shunxu, a.fig_fenxing, a.fig_fenxing_trap, a.fig_shidian,
+    a.fig_baohan, a.fig_fangxiang, a.fig_shunxu, a.fig_fenxing, a.fig_fenxing_trap, a.fig_shidian,
     b.fig_bi, b.fig_bi_jiage, b.fig_bi_tichu,
     c.fig_seg_overlap, c.fig_seg_feature, c.fig_seg_case1, c.fig_seg_case2,
     d.fig_center_calc, d.fig_center_bounds, d.fig_center_three, d.fig_center_break,

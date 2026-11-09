@@ -1,10 +1,18 @@
 {
- "docWidth": 1100,
+ "docWidth": 1085,
  "viewport": 1100,
  "figs": [
   {
    "id": "fig-baohan",
    "texts": 21,
+   "overlaps": [],
+   "outside": [],
+   "shapesOutside": 0,
+   "scrollOverflow": false
+  },
+  {
+   "id": "fig-fangxiang",
+   "texts": 32,
    "overlaps": [],
    "outside": [],
    "shapesOutside": 0,
@@ -60,7 +68,7 @@
   },
   {
    "id": "fig-bi-tichu",
-   "texts": 29,
+   "texts": 30,
    "overlaps": [],
    "outside": [],
    "shapesOutside": 0,

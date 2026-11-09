@@ -17,7 +17,7 @@ function call(method,params={},sessionId){return new Promise((res,rej)=>{const i
   pending.set(id,{resolve:res,reject:rej});
   chrome.stdio[3].write(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})})+'\0');});}
 const timer=setTimeout(()=>{console.error('超时');chrome.kill();process.exitCode=1;},180000);
-const SHOT=['fig-baohan','fig-fenxing','fig-bi','fig-bi-tichu','fig-seg-case1','fig-seg-case2',
+const SHOT=['fig-baohan','fig-fangxiang','fig-fenxing','fig-bi','fig-bi-jiage','fig-bi-tichu','fig-seg-case1','fig-seg-case2',
   'fig-center-break','fig-center-three','fig-divergence','fig-buy-panorama','fig-buy2-cases','fig-level'];
 (async()=>{
   const {targetId}=await call('Target.createTarget',{url:'about:blank'});
