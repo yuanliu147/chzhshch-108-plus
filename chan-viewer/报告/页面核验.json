@@ -1,0 +1,58 @@
+{
+ "checks": [
+  {
+   "设备": "桌面",
+   "学习": {
+    "canvasCount": 1,
+    "canvasW": 940,
+    "configSelects": 4,
+    "events": 661,
+    "pos": "第 500 / 500 根 · 2026-11-04",
+    "docWidth": 1280,
+    "clientWidth": 1280
+   },
+   "回放": {
+    "before": "第 500 / 500 根 · 2026-11-04",
+    "after": "第 499 / 500 根 · 2026-11-03"
+   },
+   "对比": {
+    "canvases": 2,
+    "diffs": 5
+   },
+   "练习": {
+    "marked": true,
+    "markCount": 24,
+    "judgments": 50,
+    "score": "命中 5 · 漏 26 · 多 19 · 命中率 13%",
+    "persisted": true
+   },
+   "无横向溢出": true
+  },
+  {
+   "设备": "手机",
+   "学习": {
+    "canvasCount": 1,
+    "canvasW": 390,
+    "configSelects": 4,
+    "events": 661,
+    "pos": "第 500 / 500 根 · 2026-11-04",
+    "docWidth": 390,
+    "clientWidth": 390
+   },
+   "回放": {
+    "before": "第 500 / 500 根 · 2026-11-04",
+    "after": "第 499 / 500 根 · 2026-11-03"
+   },
+   "对比": {
+    "canvases": 2,
+    "diffs": 5
+   },
+   "练习": {
+    "marked": false
+   },
+   "无横向溢出": true
+  }
+ ],
+ "consoleErrors": [],
+ "全部通过": true
+}

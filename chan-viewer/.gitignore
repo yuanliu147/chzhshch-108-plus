@@ -1,0 +1,9 @@
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.vite/
+报告/浏览器核验_*/
+报告/dbg_*/
+报告/交叉核验_输入.json
+报告/交叉核验_TS输出.json

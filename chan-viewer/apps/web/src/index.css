@@ -1,0 +1,133 @@
+:root {
+  --bg: #0f1420;
+  --panel: #171e2e;
+  --panel2: #1f2840;
+  --border: #2a3550;
+  --text: #d7deef;
+  --muted: #8b96b3;
+  --accent: #4c8dff;
+  --up: #ff6b6b;
+  --down: #51cf66;
+  --gold: #ffd43b;
+}
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px;
+}
+.app { display: flex; flex-direction: column; height: 100%; }
+
+/* 顶栏 */
+.topbar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 8px 14px; background: var(--panel); border-bottom: 1px solid var(--border);
+}
+.brand { font-weight: 700; font-size: 15px; color: var(--gold); white-space: nowrap; }
+.brand small { color: var(--muted); font-weight: 400; font-size: 11px; margin-left: 6px; }
+.field { display: flex; align-items: center; gap: 6px; }
+.field-label { color: var(--muted); white-space: nowrap; font-size: 12px; }
+.meta { color: var(--muted); font-size: 12px; margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+/* 主体 */
+.main { flex: 1; display: flex; min-height: 0; }
+.chart-col { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.chart-wrap { flex: 1; min-height: 320px; position: relative; }
+.side {
+  width: 340px; border-left: 1px solid var(--border); background: var(--panel);
+  overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 14px;
+}
+.side h3 { margin: 0 0 8px; font-size: 13px; color: var(--gold); }
+.hint { color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+/* 口径面板 */
+.cfg-dim { margin-bottom: 10px; }
+.cfg-dim .dim-head { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.cfg-dim .dim-name { color: var(--muted); }
+.quote { font-size: 11px; color: var(--muted); line-height: 1.5; margin-top: 4px; border-left: 2px solid var(--border); padding-left: 8px; }
+.quote .lesson { color: var(--accent); }
+
+/* 图层开关 */
+.layers { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+
+/* 回放条 */
+.replaybar {
+  display: flex; align-items: center; gap: 10px; padding: 8px 14px; flex-wrap: wrap;
+  background: var(--panel); border-top: 1px solid var(--border);
+}
+.replaybar .pos { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.replaybar .speed-field { flex: 0 0 auto; }
+.replay-slider { flex: 1 1 160px; min-width: 120px; margin: 0 6px; }
+
+/* 事件日志 */
+.events { display: flex; flex-direction: column; gap: 4px; }
+.event {
+  padding: 5px 8px; border-radius: 5px; background: var(--panel2); cursor: pointer;
+  border-left: 3px solid var(--border); font-size: 12px; line-height: 1.45;
+}
+.event:hover { background: #243052; }
+.event .e-head { display: flex; gap: 6px; align-items: center; }
+.event .e-kind { font-weight: 600; }
+.event .e-at { color: var(--muted); font-variant-numeric: tabular-nums; }
+.event .e-reason { color: var(--muted); }
+.event.k-合并 { border-color: var(--accent); }
+.event.k-分型确认, .event.k-笔确认 { border-color: var(--down); }
+.event.k-分型候选, .event.k-笔候选 { border-color: var(--gold); }
+.event.k-分型撤销, .event.k-剔除, .event.k-改端点 { border-color: var(--up); }
+.event .e-cite { color: var(--accent); font-size: 10px; }
+
+/* 对比模式 */
+.compare-grid { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.compare-charts { flex: 1; display: flex; min-height: 0; }
+.compare-charts > div { flex: 1; min-width: 0; position: relative; }
+.legend-title { color: var(--gold); font-weight: 600; font-size: 11px; margin-right: 2px; }
+.compare-head { display: flex; gap: 12px; padding: 6px 14px; align-items: center; flex-wrap: wrap; }
+.diff-list { max-height: 180px; overflow-y: auto; padding: 8px 14px; border-top: 1px solid var(--border); }
+.diff-item { font-size: 12px; padding: 3px 0; color: var(--text); border-bottom: 1px dashed var(--border); }
+.diff-item .tag { color: var(--gold); }
+
+/* 练习模式 */
+.practice-panel .score { font-size: 20px; font-weight: 700; color: var(--gold); }
+.practice-row { display: flex; gap: 8px; align-items: center; margin: 6px 0; flex-wrap: wrap; }
+.mark-list { font-size: 12px; }
+.mark { padding: 3px 6px; border-radius: 4px; margin: 2px 0; }
+.mark.命中 { background: rgba(81,207,102,0.15); color: var(--down); }
+.mark.漏 { background: rgba(255,107,107,0.15); color: var(--up); }
+.mark.多 { background: rgba(255,212,59,0.15); color: var(--gold); }
+
+/* 图表图例与画布 */
+.chart-legend {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 6px 12px 2px; font-size: 11px; color: var(--muted);
+}
+.legend-chip { display: inline-flex; align-items: center; gap: 5px; }
+.legend-chip i { width: 10px; height: 10px; border-radius: 2px; border: 1px solid transparent; display: inline-block; }
+.legend-unit { margin-left: auto; color: var(--muted); font-size: 10px; letter-spacing: 0.4px; }
+.legend-tools { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; }
+.legend-tools + .legend-hint { margin-left: 8px; }
+.legend-hint { color: var(--muted); font-size: 10px; opacity: 0.8; }
+.legend-hint + .legend-unit { margin-left: 8px; }
+@media (max-width: 900px) { .legend-hint { display: none; } }
+.legend-tools .seg-wrap { display: inline-flex; align-items: center; gap: 5px; }
+.legend-tools .seg-cap { color: var(--muted); font-size: 10px; }
+.chart-canvas {
+  flex: 1; min-height: 0; position: relative;
+  background: linear-gradient(180deg, rgba(76, 141, 255, 0.05), rgba(15, 20, 32, 0) 42%);
+}
+
+/* 滚动条：沿用主题视觉语言 */
+* { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+*::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+.empty { color: var(--muted); padding: 40px; text-align: center; }
+
+@media (max-width: 900px) {
+  .main { flex-direction: column; }
+  .side { width: 100%; border-left: none; border-top: 1px solid var(--border); max-height: 40vh; }
+  .compare-charts { flex-direction: column; }
+}

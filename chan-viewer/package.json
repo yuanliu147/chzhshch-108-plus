@@ -1,0 +1,22 @@
+{
+  "name": "chan-viewer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "node tools/dev.js",
+    "test": "npm run test -w @chan/engine",
+    "build": "npm run build -w @chan/web && npm run build -w @chan/server",
+    "start": "node apps/server/dist/index.js",
+    "crosscheck": "python3 tools/cross_check.py",
+    "pagecheck": "node tools/page_check.js"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
