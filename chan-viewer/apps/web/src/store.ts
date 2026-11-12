@@ -3,12 +3,16 @@ import { create } from 'zustand';
 import { 预设, type ChanConfig } from '@chan/engine';
 import { fetchKline, fetchSymbols, type KlineMeta, type RawBar, type SymbolItem } from './api.ts';
 
-export type Mode = 'learn' | 'compare' | 'practice';
+export type Mode = 'learn' | 'compare' | 'practice' | 'multi';
 export interface Layers {
   merged: boolean;
   fractal: boolean;
   bi: boolean;
   candidate: boolean;
+  segment: boolean;
+  center: boolean;
+  divergence: boolean;
+  point: boolean;
 }
 
 /** 口径对比预设对（千人千缠素材，均带出处）。 */
@@ -36,6 +40,36 @@ export const 对比预设对: { name: string; a: ChanConfig; b: ChanConfig; note
     a: { ...预设.原文默认 },
     b: { ...预设.原文默认, mergeDir: '直接用前一根' },
     note: '错误示范：包含时方向无定义，直接用被合并两根会抹掉新极值。',
+  },
+  {
+    name: '特征序列 做包含 vs 不做',
+    a: { ...预设.原文默认 },
+    b: { ...预设.原文默认, segMerge: '不做包含处理' },
+    note: '67课：特征序列先做非包含处理（标准化）再找分型 vs 直接用原始笔区间。影响线段端点与数量。',
+  },
+  {
+    name: '端点相接 算重叠 vs 须严格',
+    a: { ...预设.原文默认 },
+    b: { ...预设.原文默认, touchOverlap: '须严格重叠' },
+    note: '54课单价位可计重叠（闭区间）vs 严格重叠（开区间）。影响缺口判定，进而影响第一/二种情况分流。',
+  },
+  {
+    name: '笔中枢 vs 线段中枢',
+    a: { ...预设.原文默认, centerUnit: '笔中枢' },
+    b: { ...预设.原文默认, centerUnit: '线段中枢' },
+    note: '83课：笔中枢稳定性极差但灵敏，线段中枢更稳更粗。同一数据，中枢数量与位置差异巨大。',
+  },
+  {
+    name: '背驰 MACD面积 vs 几何',
+    a: { ...预设.原文默认, centerUnit: '笔中枢', divMetric: 'MACD面积' },
+    b: { ...预设.原文默认, centerUnit: '笔中枢', divMetric: '中枢视角几何' },
+    note: '24/25课 MACD柱面积 vs 33课 c段净位移。力度度量不同，背驰点不同。（笔中枢下结构更丰富，便于观察）',
+  },
+  {
+    name: '三买 不跌破ZG vs 不触及ZG',
+    a: { ...预设.原文默认, bsp3Touch: '不跌破ZG' },
+    b: { ...预设.原文默认, bsp3Touch: '不触及ZG' },
+    note: '20课"不跌破"(>=) vs 21课"不触及"(>)。回试低点恰好等于 ZG 时分歧。',
   },
 ];
 
@@ -87,7 +121,7 @@ export const useStore = create<Store>((set, get) => ({
   cursor: 0,
   playing: false,
   playMs: 600,
-  layers: { merged: true, fractal: true, bi: true, candidate: true },
+  layers: { merged: true, fractal: true, bi: true, candidate: true, segment: true, center: true, divergence: true, point: true },
   mergeStyle: 'outline',
   highlight: null,
 

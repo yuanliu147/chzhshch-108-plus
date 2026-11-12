@@ -108,7 +108,7 @@ const timer = setTimeout(() => { console.error('总超时'); chrome.kill(); serv
         pos:document.querySelector('.replaybar .pos')?.textContent??'',
         docWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth});
     })()`, sessionId));
-    if (learn.canvasW <= 0 || learn.configSelects !== 4 || learn.events <= 0) throw new Error('学习模式渲染失败：' + JSON.stringify(learn));
+    if (learn.canvasW <= 0 || learn.configSelects < 6 || learn.events <= 0) throw new Error('学习模式渲染失败：' + JSON.stringify(learn));
     // 回放步进
     const before = learn.pos;
     await evalJs(`[...document.querySelectorAll('.replaybar button')].find(b=>b.textContent==='−1')?.click()`, sessionId);
@@ -156,9 +156,17 @@ const timer = setTimeout(() => { console.error('总超时'); chrome.kill(); serv
     }
     await shot(sessionId, `P7_分型练习_${label}.png`, width);
 
+    // 多周期区间套模式（日线/30分/5分 三图联立）。
+    await evalJs(`[...document.querySelectorAll('.ant-segmented-item')].find(t=>t.textContent==='多周期区间套')?.click()`, sessionId);
+    await waitFor(`document.querySelectorAll('.multi-chart canvas').length===3`, sessionId, 22000);
+    await sleep(800);
+    const multi = JSON.parse(await evalJs(`(() => JSON.stringify({canvases:document.querySelectorAll('.multi-chart canvas').length}))()`, sessionId));
+    if (multi.canvases !== 3) throw new Error('多周期区间套模式失败：' + JSON.stringify(multi));
+    await shot(sessionId, `P7_多周期区间套_${label}.png`, width);
+
     const overflow = learn.docWidth > learn.clientWidth + 1 || learn.clientWidth > width;
     if (overflow) throw new Error(`${label}横向溢出：` + JSON.stringify(learn));
-    checks.push({ 设备: label, 学习: learn, 回放: { before, after }, 对比: compare, 练习: practice, 无横向溢出: !overflow });
+    checks.push({ 设备: label, 学习: learn, 回放: { before, after }, 对比: compare, 练习: practice, 多周期: multi, 无横向溢出: !overflow });
     console.log(JSON.stringify({ 设备: label, canvasW: learn.canvasW, events: learn.events, diffs: compare.diffs, 练习标记: practice.markCount ?? '—' }));
   }
 

@@ -5,8 +5,8 @@
    "学习": {
     "canvasCount": 1,
     "canvasW": 940,
-    "configSelects": 4,
-    "events": 661,
+    "configSelects": 12,
+    "events": 663,
     "pos": "第 500 / 500 根 · 2026-11-04",
     "docWidth": 1280,
     "clientWidth": 1280
@@ -17,7 +17,7 @@
    },
    "对比": {
     "canvases": 2,
-    "diffs": 5
+    "diffs": 7
    },
    "练习": {
     "marked": true,
@@ -26,6 +26,9 @@
     "score": "命中 5 · 漏 26 · 多 19 · 命中率 13%",
     "persisted": true
    },
+   "多周期": {
+    "canvases": 3
+   },
    "无横向溢出": true
   },
   {
@@ -33,8 +36,8 @@
    "学习": {
     "canvasCount": 1,
     "canvasW": 390,
-    "configSelects": 4,
-    "events": 661,
+    "configSelects": 12,
+    "events": 663,
     "pos": "第 500 / 500 根 · 2026-11-04",
     "docWidth": 390,
     "clientWidth": 390
@@ -45,10 +48,13 @@
    },
    "对比": {
     "canvases": 2,
-    "diffs": 5
+    "diffs": 7
    },
    "练习": {
     "marked": false
+   },
+   "多周期": {
+    "canvases": 3
    },
    "无横向溢出": true
   }

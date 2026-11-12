@@ -7,6 +7,7 @@ import { TopBar } from './components/TopBar.tsx';
 import { LearnMode } from './modes/LearnMode.tsx';
 import { CompareMode } from './modes/CompareMode.tsx';
 import { PracticeMode } from './modes/PracticeMode.tsx';
+import { MultiMode } from './modes/MultiMode.tsx';
 
 export function App() {
   const mode = useStore((s) => s.mode);
@@ -26,6 +27,7 @@ export function App() {
         {mode === 'learn' && <LearnMode />}
         {mode === 'compare' && <CompareMode />}
         {mode === 'practice' && <PracticeMode />}
+        {mode === 'multi' && <MultiMode />}
       </div>
     </ConfigProvider>
   );

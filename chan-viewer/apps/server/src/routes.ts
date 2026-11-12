@@ -1,6 +1,6 @@
-// API 路由：/api/symbols 与 /api/kline。只读供数，不做缠论计算（引擎在 web 端）。
+// API 路由：/api/symbols、/api/kline、/api/minkline、/api/mincap。只读供数，不做缠论计算（引擎在 web 端）。
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { lookupSymbol, queryKline, searchSymbols } from './db.js';
+import { lookupSymbol, minCapability, queryKline, queryMinKline, searchSymbols } from './db.js';
 
 const ADJUST_LABEL: Record<string, string> = { '1': '后复权', '2': '前复权', '3': '不复权' };
 
@@ -63,6 +63,43 @@ export function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): 
         dataAsOf: data.lastDate,
         count: data.bars.length,
         warnings,
+      },
+    });
+    return true;
+  }
+  if (p === '/api/mincap') {
+    const code = url.searchParams.get('code');
+    if (!code) return json(res, 400, { error: '缺少 code 参数' }), true;
+    json(res, 200, minCapability(code));
+    return true;
+  }
+  if (p === '/api/minkline') {
+    const code = url.searchParams.get('code');
+    if (!code) return json(res, 400, { error: '缺少 code 参数' }), true;
+    const sym = lookupSymbol(code);
+    if (!sym) return json(res, 404, { error: `未知标的：${code}` }), true;
+    if (sym.kind === 'index') return json(res, 400, { error: '指数无分钟线（分钟数据仅覆盖部分股票）' }), true;
+
+    let freq = Number(url.searchParams.get('freq') ?? 30);
+    if (![5, 15, 30, 60].includes(freq)) freq = 30;
+    let limit = Number(url.searchParams.get('limit') ?? 400);
+    if (!Number.isFinite(limit) || limit <= 0) limit = 400;
+    limit = Math.min(limit, 2000);
+    const start = url.searchParams.get('start') ?? undefined;
+    const end = url.searchParams.get('end') ?? undefined;
+
+    const cap = minCapability(code);
+    const warnings: string[] = [];
+    if (!cap.hasMin) warnings.push('该标的无分钟线数据（分钟线仅覆盖部分股票，2020年起）。');
+    const bars = cap.hasMin ? queryMinKline({ code, freq, start, end, limit }) : [];
+    if (cap.hasMin && bars.length === 0) warnings.push('该区间无分钟数据。');
+    json(res, 200, {
+      // date 字段承载完整时间戳（YYYY-MM-DD HH:MM:SS），供引擎/图表使用。
+      bars: bars.map((b) => ({ date: b.time, open: b.open, high: b.high, low: b.low, close: b.close, volume: b.volume, amount: b.amount, pct_chg: null, is_st: null })),
+      meta: {
+        source: 'baostock_min', code, freq, adjust: '3', adjustLabel: '不复权',
+        hasMin: cap.hasMin, firstTime: cap.firstTime, lastTime: cap.lastTime,
+        dataAsOf: cap.lastTime, count: bars.length, warnings,
       },
     });
     return true;

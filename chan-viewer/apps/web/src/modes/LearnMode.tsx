@@ -1,6 +1,6 @@
 // 学习回放模式：原始K线 + 可开关图层 + 逐根回放 + 事件日志。
 import { useMemo } from 'react';
-import { Checkbox } from 'antd';
+import { Checkbox, Tag } from 'antd';
 import { compute } from '@chan/engine';
 import { useStore, type Layers } from '../store.ts';
 import { Chart } from '../components/Chart.tsx';
@@ -12,6 +12,10 @@ const LAYER_LABELS: { key: keyof Layers; label: string }[] = [
   { key: 'merged', label: '合并K线' },
   { key: 'fractal', label: '分型' },
   { key: 'bi', label: '笔' },
+  { key: 'segment', label: '线段' },
+  { key: 'center', label: '中枢' },
+  { key: 'divergence', label: '背驰/MACD' },
+  { key: 'point', label: '买卖点' },
   { key: 'candidate', label: '候选' },
 ];
 
@@ -44,6 +48,19 @@ export function LearnMode() {
             ))}
           </div>
         </div>
+        {result.trends.length > 0 && (
+          <div>
+            <h3>走势类型</h3>
+            <div className="trend-list">
+              {result.trends.map((t) => (
+                <span key={t.id} className="trend-item">
+                  <Tag color={t.kind === '上涨' ? 'error' : t.kind === '下跌' ? 'success' : 'default'}>{t.kind}</Tag>
+                  <span className="trend-sub">{t.centerIds.length}中枢{t.status === 'candidate' ? '·候选' : ''}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
         <EventLog result={result} />
       </div>
     </div>

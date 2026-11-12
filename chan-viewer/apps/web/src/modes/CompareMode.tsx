@@ -45,6 +45,22 @@ function buildDiff(bars: RawBar[], ra: ComputeResult, rb: ComputeResult): string
   for (const f of onlyA.slice(0, 6)) items.push(`仅A有分型：${desc(f, ra)}`);
   for (const f of onlyB.slice(0, 6)) items.push(`仅B有分型：${desc(f, rb)}`);
   if (onlyA.length === 0 && onlyB.length === 0) items.push('确认分型集合一致');
+
+  // 高层结构（线段/中枢/走势/背驰/买卖点）：数量 + 按原始区间对齐的增删（id 各口径不同，按 startRaw 对齐）。
+  const segA = ra.segments.filter((s) => s.status === 'confirmed');
+  const segB = rb.segments.filter((s) => s.status === 'confirmed');
+  const cenA = ra.centers.filter((c) => c.status === 'confirmed');
+  const cenB = rb.centers.filter((c) => c.status === 'confirmed');
+  items.push(`线段：A ${segA.length} ／ B ${segB.length}；走势段：A ${ra.trends.length} ／ B ${rb.trends.length}`);
+  items.push(`中枢：A ${cenA.length} ／ B ${cenB.length}；背驰：A ${ra.divergences.length} ／ B ${rb.divergences.length}；买卖点：A ${ra.points.length} ／ B ${rb.points.length}`);
+  const ckA = new Map(cenA.map((c) => [c.startRaw.toFixed(1), c]));
+  const ckB = new Map(cenB.map((c) => [c.startRaw.toFixed(1), c]));
+  const cenOnlyA = cenA.filter((c) => !ckB.has(c.startRaw.toFixed(1)));
+  const cenOnlyB = cenB.filter((c) => !ckA.has(c.startRaw.toFixed(1)));
+  const cdesc = (c: (typeof cenA)[number]) => `${bars[Math.round(c.startRaw)]?.date ?? '?'} 核心[${c.ZD.toFixed(2)},${c.ZG.toFixed(2)}]`;
+  for (const c of cenOnlyA.slice(0, 4)) items.push(`仅A有中枢：${cdesc(c)}`);
+  for (const c of cenOnlyB.slice(0, 4)) items.push(`仅B有中枢：${cdesc(c)}`);
+  if (cenA.length + cenB.length > 0 && cenOnlyA.length === 0 && cenOnlyB.length === 0 && cenA.length === cenB.length) items.push('确认中枢集合一致');
   return items;
 }
 

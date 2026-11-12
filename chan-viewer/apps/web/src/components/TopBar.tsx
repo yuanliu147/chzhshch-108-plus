@@ -7,6 +7,7 @@ const MODES: { key: Mode; label: string }[] = [
   { key: 'learn', label: '学习回放' },
   { key: 'compare', label: '口径对比' },
   { key: 'practice', label: '分型练习' },
+  { key: 'multi', label: '多周期区间套' },
 ];
 
 const ADJUSTS = [
@@ -31,7 +32,7 @@ export function TopBar() {
   return (
     <div className="topbar">
       <div className="brand">
-        缠论视图<small>包含 · 分型 · 笔</small>
+        缠论视图<small>包含 · 分型 · 笔 · 线段</small>
       </div>
       <Segmented
         value={mode}

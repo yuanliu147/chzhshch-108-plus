@@ -126,6 +126,14 @@ body {
 
 .empty { color: var(--muted); padding: 40px; text-align: center; }
 
+.trend-list { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+.trend-item { display: inline-flex; align-items: center; gap: 4px; }
+.trend-sub { color: var(--muted); font-size: 11px; }
+
+/* 多周期区间套：三图竖排等高 */
+.multi-col { display: flex; flex-direction: column; gap: 6px; }
+.multi-chart { position: relative; flex: 1; min-height: 0; border: 1px solid var(--border); border-radius: 6px; }
+
 @media (max-width: 900px) {
   .main { flex-direction: column; }
   .side { width: 100%; border-left: none; border-top: 1px solid var(--border); max-height: 40vh; }

@@ -17,13 +17,27 @@ REPORT = ROOT / '报告'
 sys.path.insert(0, str(ROOT / 'tools'))
 from reference_pipeline import compute as py_compute  # noqa: E402
 
+BASE = {'startDir': 'up', 'precision': {'digits': 'raw'}, 'biRule': '77课', 'mergeDir': '回找非包含',
+        'touchOverlap': '相接算重叠', 'segMerge': '做包含处理',
+        'centerUnit': '线段中枢', 'centerUpgrade': '9段升级', 'trendOverlap': '核心不重叠', 'divMetric': 'MACD面积',
+        'bsp3Touch': '不跌破ZG', 'bsp2Filter': '允许二买低于一买'}
 CONFIGS = [
-    {'startDir': 'up', 'precision': {'digits': 'raw'}, 'biRule': '77课', 'mergeDir': '回找非包含'},
-    {'startDir': 'down', 'precision': {'digits': 'raw'}, 'biRule': '77课', 'mergeDir': '回找非包含'},
-    {'startDir': 'up', 'precision': {'digits': 0}, 'biRule': '77课', 'mergeDir': '回找非包含'},
-    {'startDir': 'up', 'precision': {'digits': 2}, 'biRule': '社区老笔', 'mergeDir': '回找非包含'},
-    {'startDir': 'up', 'precision': {'digits': 'raw'}, 'biRule': '社区新笔', 'mergeDir': '回找非包含'},
-    {'startDir': 'up', 'precision': {'digits': 'raw'}, 'biRule': '77课', 'mergeDir': '直接用前一根'},
+    dict(BASE),
+    {**BASE, 'startDir': 'down'},
+    {**BASE, 'precision': {'digits': 0}},
+    {**BASE, 'precision': {'digits': 2}, 'biRule': '社区老笔'},
+    {**BASE, 'biRule': '社区新笔'},
+    {**BASE, 'mergeDir': '直接用前一根'},
+    {**BASE, 'touchOverlap': '须严格重叠'},
+    {**BASE, 'segMerge': '不做包含处理'},
+    {**BASE, 'centerUnit': '笔中枢'},
+    {**BASE, 'centerUpgrade': '不自动升级'},
+    {**BASE, 'trendOverlap': '外围也不重叠'},
+    {**BASE, 'divMetric': '中枢视角几何'},
+    {**BASE, 'centerUnit': '笔中枢', 'divMetric': '中枢视角几何'},
+    {**BASE, 'centerUnit': '笔中枢', 'divMetric': 'MACD面积'},
+    {**BASE, 'bsp3Touch': '不触及ZG'},
+    {**BASE, 'bsp2Filter': '过滤二买须高于一买'},
 ]
 
 
@@ -36,13 +50,13 @@ def load_samples():
     for code in active + delisted:
         for adj in (1, 2, 3):
             rows = con.execute(
-                "SELECT date, high, low FROM stock_kline_d WHERE code=? AND adjustflag=? AND trade_status=1 ORDER BY date DESC LIMIT 500",
+                "SELECT date, high, low, close FROM stock_kline_d WHERE code=? AND adjustflag=? AND trade_status=1 ORDER BY date DESC LIMIT 500",
                 (code, adj)).fetchall()
-            bars = [{'date': r['date'], 'high': r['high'], 'low': r['low']} for r in reversed(rows)]
+            bars = [{'date': r['date'], 'high': r['high'], 'low': r['low'], 'close': r['close']} for r in reversed(rows)]
             samples.append({'code': code, 'adjust': str(adj), 'bars': bars})
     for code in ('sh.000001', 'sz.399006'):
-        rows = con.execute("SELECT date, high, low FROM index_kline_d WHERE code=? ORDER BY date DESC LIMIT 500", (code,)).fetchall()
-        bars = [{'date': r['date'], 'high': r['high'], 'low': r['low']} for r in reversed(rows)]
+        rows = con.execute("SELECT date, high, low, close FROM index_kline_d WHERE code=? ORDER BY date DESC LIMIT 500", (code,)).fetchall()
+        bars = [{'date': r['date'], 'high': r['high'], 'low': r['low'], 'close': r['close']} for r in reversed(rows)]
         samples.append({'code': code, 'adjust': 'index', 'bars': bars})
     con.close()
     return samples
@@ -107,7 +121,7 @@ def main():
                 details.append({'样本': key, '问题': 'TS 结果缺失'})
                 continue
             diffs = []
-            for field in ('validBars', 'fractals', 'bis', 'events'):
+            for field in ('validBars', 'fractals', 'bis', 'segments', 'centers', 'trends', 'divergences', 'points', 'events'):
                 diffs += deep_diff(py[field], ts[field], field)
             if py['configId'] != ts['configId']:
                 diffs.append(f'configId: Python={py["configId"]} TS={ts["configId"]}')

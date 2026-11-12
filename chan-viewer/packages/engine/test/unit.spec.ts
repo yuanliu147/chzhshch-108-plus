@@ -1,21 +1,46 @@
 // 单元测试：移植 配图自检.py 第1–3关断言 + 管线级确定性用例 + 边界。
 import { describe, expect, it } from 'vitest';
 import {
+  areaBetween,
   bot3,
+  centerBounds,
   checkBi,
   compute,
   contains,
+  detectPoints,
+  detectTrends,
   either,
+  macd,
   merge,
   moreExtreme,
   noInclusion,
+  overlap,
+  overlapAll,
+  segBot3,
+  segTop3,
+  standardizeSeq,
   top3,
+  type Center,
   type ChanConfig,
+  type Divergence,
   type Fractal,
   type KInput,
 } from '../src/index.ts';
 
-const 原文: ChanConfig = { startDir: 'up', precision: { digits: 'raw' }, biRule: '77课', mergeDir: '回找非包含' };
+const 原文: ChanConfig = {
+  startDir: 'up',
+  precision: { digits: 'raw' },
+  biRule: '77课',
+  mergeDir: '回找非包含',
+  touchOverlap: '相接算重叠',
+  segMerge: '做包含处理',
+  centerUnit: '线段中枢',
+  centerUpgrade: '9段升级',
+  trendOverlap: '核心不重叠',
+  divMetric: 'MACD面积',
+  bsp3Touch: '不跌破ZG',
+  bsp2Filter: '允许二买低于一买',
+};
 
 /** 区间 [low, high] → KInput。 */
 function bars(ivs: [number, number][]): KInput[] {
@@ -147,10 +172,40 @@ describe('管线确定性用例：顶→底→顶 成笔与确认时机', () => 
   });
 });
 
+describe('线段内核（移植 配图自检.py L118–140）', () => {
+  it('前三笔有重叠 / 三笔无重叠则不构成', () => {
+    expect(overlapAll([iv(10, 15), iv(12, 15), iv(12, 18)], true)).toEqual({ low: 12, high: 15 });
+    expect(overlapAll([iv(11, 15), iv(11, 18), iv(16, 18)], true)).toBeNull();
+  });
+  it('特征序列无包含即标准', () => {
+    const X = [iv(12, 15), iv(14, 18), iv(16, 20)];
+    expect(standardizeSeq(X, true)).toEqual(X);
+  });
+  it('第一种情况：标准化 + 顶分型 + 一二元素无缺口', () => {
+    const c1 = [iv(12, 15), iv(14, 19), iv(13, 20), iv(11, 17)];
+    const s1 = standardizeSeq(c1, true);
+    expect(s1).toEqual([iv(12, 15), iv(14, 20), iv(11, 17)]);
+    expect(segTop3(s1)).toBe(true);
+    expect(overlap(s1[0]!, s1[1]!, true)).toBe(true); // 无缺口
+  });
+  it('第二种情况：标准化 + 顶分型 + 一二元素有缺口 + 第二序列底分型', () => {
+    const c2 = [iv(11, 14), iv(16, 20), iv(10, 18), iv(12, 13)];
+    const s2 = standardizeSeq(c2, true);
+    expect(s2).toEqual([iv(11, 14), iv(16, 20), iv(10, 13)]);
+    expect(segTop3(s2)).toBe(true);
+    expect(overlap(s2[0]!, s2[1]!, true)).toBe(false); // 有缺口
+    const second = standardizeSeq([iv(16, 18), iv(10, 13), iv(12, 15)], false);
+    expect(segBot3(second)).toBe(true);
+  });
+  it('端点相接口径：相接算重叠 vs 须严格重叠', () => {
+    expect(overlap(iv(10, 14), iv(14, 18), true)).toBe(true); // 相接 lo==hi 算重叠
+    expect(overlap(iv(10, 14), iv(14, 18), false)).toBe(false); // 严格 lo<hi 不成立
+  });
+});
+
 describe('边界与口径校验', () => {
   it('空输入', () => {
-    const r = compute([], 原文);
-    expect(r.validBars.length).toBe(0);
+    const r = compute([], 原文);    expect(r.validBars.length).toBe(0);
     expect(r.fractals.length).toBe(0);
     expect(r.bis.length).toBe(0);
   });
@@ -182,5 +237,120 @@ describe('边界与口径校验', () => {
     const c = compute([], { ...原文, startDir: 'down' }).configId;
     expect(a).toBe(b);
     expect(a).not.toBe(c);
+  });
+});
+
+describe('中枢内核（移植 配图自检.py L142–163）', () => {
+  it('三段重叠构成中枢核心（简化式一致）', () => {
+    expect(overlapAll([iv(9, 13), iv(10, 13), iv(10, 14)], true)).toEqual({ low: 10, high: 13 });
+    expect([Math.max(9, 10), Math.min(13, 14)]).toEqual([10, 13]); // [max(a2,c2),min(a1,c1)]
+  });
+  it('中枢边界 ZG/ZD/GG/DD/G/D（20课，同向Z段）', () => {
+    const b = centerBounds([iv(9, 13), iv(10, 14), iv(11, 12.5)]);
+    expect(b.ZG).toBe(13); // min(g1,g2)=min(13,14)
+    expect(b.ZD).toBe(10); // max(d1,d2)=max(9,10)
+    expect(b.GG).toBe(14); // max(gn)
+    expect(b.DD).toBe(9); // min(dn)
+    expect(b.G).toBe(12.5); // min(gn)
+    expect(b.D).toBe(11); // max(dn)
+  });
+  it('延伸：后续构件与核心重叠', () => {
+    expect(overlap(iv(11, 12.5), iv(10, 13), true)).toBe(true);
+  });
+});
+
+describe('走势类型（移植 配图自检.py L159–163）', () => {
+  const centerOf = (id: number, zd: number, zg: number): Center => ({
+    id, unit: 'segment', dir: 'up', startRaw: id * 10, endRaw: id * 10 + 9,
+    ZG: zg, ZD: zd, GG: zg + 1, DD: zd - 1, G: zg, D: zd, segCount: 3,
+    status: 'confirmed', confirmedAt: null,
+  });
+  it('两中枢向上不重叠 → 上涨趋势', () => {
+    const ts = detectTrends([centerOf(1, 10, 13), centerOf(2, 16, 19)], 原文);
+    expect(ts.length).toBe(1);
+    expect(ts[0]!.kind).toBe('上涨');
+    expect(ts[0]!.centerIds).toEqual([1, 2]);
+  });
+  it('两中枢向下不重叠 → 下跌趋势', () => {
+    const ts = detectTrends([centerOf(1, 17, 20), centerOf(2, 11, 14)], 原文);
+    expect(ts[0]!.kind).toBe('下跌');
+  });
+  it('单中枢 → 盘整', () => {
+    const ts = detectTrends([centerOf(1, 10, 13)], 原文);
+    expect(ts[0]!.kind).toBe('盘整');
+    expect(ts[0]!.centerIds).toEqual([1]);
+  });
+  it('两中枢重叠 → 不合并为趋势（各自盘整）', () => {
+    const ts = detectTrends([centerOf(1, 10, 13), centerOf(2, 12, 15)], 原文);
+    expect(ts.length).toBe(2);
+    expect(ts.every((t) => t.kind === '盘整')).toBe(true);
+  });
+});
+
+describe('MACD 与背驰（移植 配图自检.py L166–174）', () => {
+  it('EMA 种子=首值，常数序列 MACD 全 0', () => {
+    const m = macd([10, 10, 10, 10]);
+    expect(m.dif).toEqual([0, 0, 0, 0]);
+    expect(m.hist).toEqual([0, 0, 0, 0]);
+  });
+  it('MACD 对齐长度且 PIT（前缀只影响前缀）', () => {
+    const closes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const m = macd(closes);
+    expect(m.dif.length).toBe(closes.length);
+    const m5 = macd(closes.slice(0, 5));
+    expect(m5.dif).toEqual(m.dif.slice(0, 5));
+    expect(m5.hist).toEqual(m.hist.slice(0, 5));
+  });
+  it('areaBetween：同向柱面积，C段<A段构成背驰', () => {
+    const hist = [0.3, -0.2, 0.4, -0.1, 0.2, -1.2, -2.0, 0.3, -0.4, 0.2, -0.7, -0.9, 0.8, 0.3, 1.0];
+    const areaA = areaBetween(hist, 5, 6, false);
+    const areaC = areaBetween(hist, 10, 11, false);
+    expect(areaA).toBeCloseTo(3.2);
+    expect(areaC).toBeCloseTo(1.6);
+    expect(areaC).toBeLessThan(areaA);
+  });
+});
+
+describe('买卖点（20/21/101课口径分歧）', () => {
+  const kb = (n: number, hl?: (i: number) => [number, number]): KInput[] =>
+    Array.from({ length: n }, (_, i) => {
+      const [low, high] = hl ? hl(i) : [i, i + 1];
+      return { date: String(i), low, high };
+    });
+  const vb = (bs: KInput[]) => bs.map((b, i) => ({ index: i, high: b.high, low: b.low, startRaw: i, endRaw: i }));
+  const fxOf = (id: number, type: 'top' | 'bottom', middle: number, price: number): Fractal => ({
+    id, type, middle, price, midHigh: price, midLow: price, startRaw: middle - 1, endRaw: middle + 1, status: 'confirmed', confirmedAt: middle + 1,
+  });
+  const trendDiv = (dir: 'up' | 'down', cEnd: number): Divergence => ({
+    id: 1, kind: '趋势背驰', metric: 'MACD面积', dir, bStart: 0, bEnd: 5, cStart: 5, cEnd, bForce: 2, cForce: 1, est: false, status: 'confirmed', confirmedAt: null,
+  });
+  const centerOf2 = (zg: number, zd: number, endRaw: number): Center => ({
+    id: 1, unit: 'segment', dir: 'up', startRaw: 0, endRaw, ZG: zg, ZD: zd, GG: zg + 1, DD: zd - 1, G: zg, D: zd, segCount: 3, status: 'confirmed', confirmedAt: null,
+  });
+
+  it('一买=下跌趋势背驰转折点；一卖=上涨趋势背驰', () => {
+    const bars = kb(12);
+    expect(detectPoints([trendDiv('down', 10)], [], [], vb(bars), bars, 原文).some((p) => p.klass === 1 && p.side === 'buy')).toBe(true);
+    expect(detectPoints([trendDiv('up', 10)], [], [], vb(bars), bars, 原文).some((p) => p.klass === 1 && p.side === 'sell')).toBe(true);
+  });
+  it('三买边界：不跌破ZG(>=) vs 不触及ZG(>) 在端点相接时分歧', () => {
+    // 中枢 ZG=13，bars[6].high=14 向上离开，底分型 middle=8 低点=13（==ZG）。
+    const bars = kb(12, (i) => (i === 6 ? [12, 14] : [10, 12]));
+    const center = centerOf2(13, 10, 5);
+    const bot = fxOf(1, 'bottom', 8, 13);
+    const yes = detectPoints([], [center], [bot], vb(bars), bars, { ...原文, bsp3Touch: '不跌破ZG' });
+    const no = detectPoints([], [center], [bot], vb(bars), bars, { ...原文, bsp3Touch: '不触及ZG' });
+    expect(yes.some((p) => p.klass === 3 && p.side === 'buy')).toBe(true); // 13>=13 不跌破→三买
+    expect(no.some((p) => p.klass === 3)).toBe(false); // 13>13 不触及→非三买
+  });
+  it('二买过滤：允许二买低于一买(101课) vs 过滤须高于一买', () => {
+    // 一买@10 价10；顶分型@12（回抽），底分型@14 价9（<一买）。
+    const bars = kb(16);
+    const top = fxOf(2, 'top', 12, 20);
+    const bot2 = fxOf(3, 'bottom', 14, 9);
+    const allow = detectPoints([trendDiv('down', 10)], [], [top, bot2], vb(bars), bars, { ...原文, bsp2Filter: '允许二买低于一买' });
+    const filt = detectPoints([trendDiv('down', 10)], [], [top, bot2], vb(bars), bars, { ...原文, bsp2Filter: '过滤二买须高于一买' });
+    expect(allow.some((p) => p.klass === 2 && p.side === 'buy')).toBe(true);
+    expect(filt.some((p) => p.klass === 2)).toBe(false);
   });
 });
