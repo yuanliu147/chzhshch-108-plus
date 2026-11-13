@@ -4,10 +4,10 @@ import { Segmented, Select, Tag, Tooltip } from 'antd';
 import { useStore, type Mode } from '../store.ts';
 
 const MODES: { key: Mode; label: string }[] = [
+  { key: 'multi', label: '多周期区间套' },
   { key: 'learn', label: '学习回放' },
   { key: 'compare', label: '口径对比' },
   { key: 'practice', label: '分型练习' },
-  { key: 'multi', label: '多周期区间套' },
 ];
 
 const ADJUSTS = [
@@ -54,21 +54,23 @@ export function TopBar() {
       </div>
       <div className="field">
         <span className="field-label">复权</span>
-        <Select
-          value={adjust}
-          style={{ width: 96 }}
-          options={ADJUSTS}
-          onChange={(a) => setAdjust(a)}
-          disabled={meta?.kind === 'index'}
-        />
+        <Tooltip title={mode === 'multi' ? '多周期统一使用不复权，与分钟线价格基准一致' : undefined}>
+          <Select
+            value={mode === 'multi' ? '3' : adjust}
+            style={{ width: 96 }}
+            options={ADJUSTS}
+            onChange={(a) => setAdjust(a)}
+            disabled={mode === 'multi' || meta?.kind === 'index'}
+          />
+        </Tooltip>
       </div>
       <div className="meta">
         {meta && (
           <>
             <span>{meta.codeName ?? meta.code}</span>
-            <span>{meta.adjustLabel}</span>
-            <span>数据截至 {meta.dataAsOf ?? '—'}</span>
-            <span>{meta.count} 根</span>
+            <span>{mode === 'multi' ? '统一不复权' : meta.adjustLabel}</span>
+            <span>{mode === 'multi' ? '日线主分析 · 分钟按真实覆盖下钻' : `数据截至 ${meta.dataAsOf ?? '—'}`}</span>
+            {mode !== 'multi' && <span>{meta.count} 根</span>}
             {meta.warnings.map((w, i) => (
               <Tooltip key={i} title={w}>
                 <Tag color="warning" style={{ cursor: 'help', marginInlineEnd: 0 }}>

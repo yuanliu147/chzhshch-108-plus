@@ -1,0 +1,2119 @@
+{
+  "atLoad": {
+    "phase": "load",
+    "readyState": "complete",
+    "url": "http://localhost:5173/",
+    "button": null,
+    "label": null,
+    "group": null,
+    "styleCount": 28,
+    "buttonStyles": [
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": null,
+        "priority": null,
+        "length": 16301,
+        "hasButton": true,
+        "hasSegmented": true
+      }
+    ],
+    "segmentedStyles": [
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Segmented-Segmented|ant-segmented|anticon",
+        "cssHash": "5mfsvl",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 8619,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1jf8ylo",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 365,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": null,
+        "priority": null,
+        "length": 16301,
+        "hasButton": true,
+        "hasSegmented": true
+      }
+    ],
+    "styles": [
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": "prepend",
+        "priority": null,
+        "length": 897,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1sssysb",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 12760,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Shared|ant",
+        "cssHash": "1mz5o68",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 2977,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-loadingCircle",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 93,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Segmented-Segmented|ant-segmented|anticon",
+        "cssHash": "5mfsvl",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 8619,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1jf8ylo",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 365,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Select-Select|ant-select|anticon",
+        "cssHash": "1f1kr50",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 44184,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideUpIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 179,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideDownIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 189,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideUpOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 180,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideDownOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 190,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveUpIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 198,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveUpOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 199,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveDownIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 199,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveDownOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 200,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1reeujz",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 1234,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tooltip-Tooltip|ant-tooltip|anticon",
+        "cssHash": "1ek6lmh",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 15068,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antFadeIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 88,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antFadeOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 89,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antZoomBigIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 131,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antZoomBigOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 122,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "11cdbrl",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 639,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Skeleton-Skeleton|ant-skeleton|anticon",
+        "cssHash": "tjl73r",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 10997,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-ant-skeleton-loading",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 134,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "zedc94",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 390,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "|ant-design-icons|anticon",
+        "cssHash": "mtsb22",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": null,
+        "length": 583,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-loadingCircle",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": null,
+        "length": 57,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": null,
+        "priority": null,
+        "length": 16301,
+        "hasButton": true,
+        "hasSegmented": true
+      }
+    ],
+    "bodyText": "缠论视图包含 · 分型 · 笔 · 线段\n多周期区间套\n学习回放\n口径对比\n分型练习\n标的\nsh.600000\n复权\n不复权"
+  },
+  "settled": {
+    "phase": "settled",
+    "readyState": "complete",
+    "url": "http://localhost:5173/",
+    "button": {
+      "text": "图层 5/8",
+      "className": "ant-btn css-dev-only-do-not-override-i19pbt css-var-_r_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-sm",
+      "height": "22.5px",
+      "padding": "0px 7px",
+      "border": "1px solid rgb(42, 53, 80)",
+      "display": "flex",
+      "lineHeight": "normal",
+      "background": "rgb(23, 30, 46)"
+    },
+    "label": {
+      "text": "全量总览",
+      "className": "ant-segmented-item-label",
+      "height": "18.5px",
+      "padding": "0px 7px",
+      "border": "0px none rgb(255, 255, 255)",
+      "display": "block",
+      "lineHeight": "18.5px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "group": {
+      "text": "全量总览可读视窗",
+      "className": "ant-segmented-group",
+      "height": "18.5px",
+      "padding": "0px",
+      "border": "0px none rgb(139, 150, 179)",
+      "display": "flex",
+      "lineHeight": "21px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "styleCount": 38,
+    "buttonStyles": [
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Button-Button|ant-btn|anticon",
+        "cssHash": "1uz2um6",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 26966,
+        "hasButton": true,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1jqxijq",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 2609,
+        "hasButton": true,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": null,
+        "priority": null,
+        "length": 16301,
+        "hasButton": true,
+        "hasSegmented": true
+      }
+    ],
+    "segmentedStyles": [
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Segmented-Segmented|ant-segmented|anticon",
+        "cssHash": "5mfsvl",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 8619,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1jf8ylo",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 365,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": null,
+        "priority": null,
+        "length": 16301,
+        "hasButton": true,
+        "hasSegmented": true
+      }
+    ],
+    "styles": [
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": "prepend",
+        "priority": null,
+        "length": 897,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1sssysb",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 12760,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Shared|ant",
+        "cssHash": "1mz5o68",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 2977,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-loadingCircle",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 93,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Segmented-Segmented|ant-segmented|anticon",
+        "cssHash": "5mfsvl",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 8619,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1jf8ylo",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 365,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Select-Select|ant-select|anticon",
+        "cssHash": "1f1kr50",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 44184,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideUpIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 179,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideDownIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 189,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideUpOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 180,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideDownOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 190,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveUpIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 198,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveUpOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 199,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveDownIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 199,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveDownOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 200,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1reeujz",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 1234,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tooltip-Tooltip|ant-tooltip|anticon",
+        "cssHash": "1ek6lmh",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 15068,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antFadeIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 88,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antFadeOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 89,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antZoomBigIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 131,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antZoomBigOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 122,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "11cdbrl",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 639,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Skeleton-Skeleton|ant-skeleton|anticon",
+        "cssHash": "tjl73r",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 10997,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-ant-skeleton-loading",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 134,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tag-Tag|ant-tag|anticon",
+        "cssHash": "17ye87n",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 6420,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "125av0e",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 117,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Wave-Wave|ant-wave|anticon",
+        "cssHash": "1r8lzsf",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 1588,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Button-Button|ant-btn|anticon",
+        "cssHash": "1uz2um6",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 26966,
+        "hasButton": true,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1jqxijq",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 2609,
+        "hasButton": true,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tooltip-Tooltip|ant-popover|anticon",
+        "cssHash": "vhiu3s",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 0,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1cubv5s",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 639,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Popover-Popover|ant-popover|anticon",
+        "cssHash": "d6149x",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 12980,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "t76i8f",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 786,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Drawer-Drawer|ant-drawer|anticon",
+        "cssHash": "1u0lxv6",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 16746,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "tt25p0",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 167,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "|ant-design-icons|anticon",
+        "cssHash": "mtsb22",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": null,
+        "length": 583,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-loadingCircle",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": null,
+        "length": 57,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": null,
+        "priority": null,
+        "length": 16301,
+        "hasButton": true,
+        "hasSegmented": true
+      }
+    ],
+    "bodyText": "缠论视图包含 · 分型 · 笔 · 线段\n多周期区间套\n学习回放\n口径对比\n分型练习\n标的\nsh.600000 浦发银行\n复权\n不复权\n浦发银行\n三周期统一不复权\n各周期全量 · 时间以主图为准\n浦发银行\nsh.600000\n30分钟主图\n全量 352 根 · 09-01 10:00 至 11-09 15:00 · 三周期不复权\n全量总览\n可读视窗\n主图优先\n三窗联立\n图层 5/8\n原始实体\n合并实体\n口径设置\n全局\n点击结构或右侧清单开始下钻\n返回上级\n清除选中\n重新定位\n恢复全局\n已过滤 118 个停牌占位行（trade_status=0）。\n辅助周期\n日线 · 6420根\n5分钟 · 2"
+  },
+  "afterClick": {
+    "phase": "afterClick",
+    "readyState": "complete",
+    "url": "http://localhost:5173/",
+    "button": {
+      "text": "图层 5/8",
+      "className": "ant-btn css-dev-only-do-not-override-i19pbt css-var-_r_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-sm ant-popover-open",
+      "height": "22.5px",
+      "padding": "0px 7px",
+      "border": "1px solid rgb(107, 157, 232)",
+      "display": "flex",
+      "lineHeight": "normal",
+      "background": "rgb(23, 30, 46)"
+    },
+    "label": {
+      "text": "全量总览",
+      "className": "ant-segmented-item-label",
+      "height": "18.5px",
+      "padding": "0px 7px",
+      "border": "0px none rgb(255, 255, 255)",
+      "display": "block",
+      "lineHeight": "18.5px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "group": {
+      "text": "全量总览可读视窗",
+      "className": "ant-segmented-group",
+      "height": "18.5px",
+      "padding": "0px",
+      "border": "0px none rgb(139, 150, 179)",
+      "display": "flex",
+      "lineHeight": "21px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "styleCount": 39,
+    "buttonStyles": [
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Button-Button|ant-btn|anticon",
+        "cssHash": "1uz2um6",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 26966,
+        "hasButton": true,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1jqxijq",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 2609,
+        "hasButton": true,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": null,
+        "priority": null,
+        "length": 16301,
+        "hasButton": true,
+        "hasSegmented": true
+      }
+    ],
+    "segmentedStyles": [
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Segmented-Segmented|ant-segmented|anticon",
+        "cssHash": "5mfsvl",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 8619,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1jf8ylo",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 365,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": null,
+        "priority": null,
+        "length": 16301,
+        "hasButton": true,
+        "hasSegmented": true
+      }
+    ],
+    "styles": [
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": "prepend",
+        "priority": null,
+        "length": 897,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1sssysb",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 12760,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Shared|ant",
+        "cssHash": "1mz5o68",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 2977,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-loadingCircle",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 93,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Segmented-Segmented|ant-segmented|anticon",
+        "cssHash": "5mfsvl",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 8619,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1jf8ylo",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 365,
+        "hasButton": false,
+        "hasSegmented": true
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Select-Select|ant-select|anticon",
+        "cssHash": "1f1kr50",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 44184,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideUpIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 179,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideDownIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 189,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideUpOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 180,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideDownOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 190,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveUpIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 198,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveUpOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 199,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveDownIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 199,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveDownOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 200,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1reeujz",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 1234,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tooltip-Tooltip|ant-tooltip|anticon",
+        "cssHash": "1ek6lmh",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 15068,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antFadeIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 88,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antFadeOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 89,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antZoomBigIn",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 131,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antZoomBigOut",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 122,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "11cdbrl",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 639,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Skeleton-Skeleton|ant-skeleton|anticon",
+        "cssHash": "tjl73r",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 10997,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-ant-skeleton-loading",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 134,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tag-Tag|ant-tag|anticon",
+        "cssHash": "17ye87n",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 6420,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "125av0e",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 117,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Wave-Wave|ant-wave|anticon",
+        "cssHash": "1r8lzsf",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 1588,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Button-Button|ant-btn|anticon",
+        "cssHash": "1uz2um6",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 26966,
+        "hasButton": true,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1jqxijq",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 2609,
+        "hasButton": true,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tooltip-Tooltip|ant-popover|anticon",
+        "cssHash": "vhiu3s",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 0,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "1cubv5s",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 639,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Popover-Popover|ant-popover|anticon",
+        "cssHash": "d6149x",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 12980,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "t76i8f",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 786,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Drawer-Drawer|ant-drawer|anticon",
+        "cssHash": "1u0lxv6",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 16746,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "tt25p0",
+        "tokenHash": "css-var-_r_0_",
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 167,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Checkbox-Checkbox|ant-checkbox|anticon",
+        "cssHash": "zh7zxx",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": "-999",
+        "length": 7006,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": "|ant-design-icons|anticon",
+        "cssHash": "mtsb22",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": null,
+        "length": 583,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": "_effect-loadingCircle",
+        "tokenHash": null,
+        "rcOrder": "prependQueue",
+        "priority": null,
+        "length": 57,
+        "hasButton": false,
+        "hasSegmented": false
+      },
+      {
+        "cachePath": null,
+        "cssHash": null,
+        "tokenHash": null,
+        "rcOrder": null,
+        "priority": null,
+        "length": 16301,
+        "hasButton": true,
+        "hasSegmented": true
+      }
+    ],
+    "bodyText": "缠论视图包含 · 分型 · 笔 · 线段\n多周期区间套\n学习回放\n口径对比\n分型练习\n标的\nsh.600000 浦发银行\n复权\n不复权\n浦发银行\n三周期统一不复权\n各周期全量 · 时间以主图为准\n浦发银行\nsh.600000\n30分钟主图\n全量 352 根 · 09-01 10:00 至 11-09 15:00 · 三周期不复权\n全量总览\n可读视窗\n主图优先\n三窗联立\n图层 5/8\n原始实体\n合并实体\n口径设置\n全局\n点击结构或右侧清单开始下钻\n返回上级\n清除选中\n重新定位\n恢复全局\n已过滤 118 个停牌占位行（trade_status=0）。\n辅助周期\n日线 · 6420根\n5分钟 · 2"
+  },
+  "beforeClickEvents": [
+    {
+      "type": "add",
+      "time": 134.39999985694885,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 16301
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 0
+      }
+    },
+    {
+      "type": "remove",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 0
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "1sssysb",
+        "length": 12760
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "|ant-design-icons|anticon",
+        "cssHash": "mtsb22",
+        "length": 583
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-loadingCircle",
+        "length": 57
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Shared|ant",
+        "cssHash": "1mz5o68",
+        "length": 2977
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-loadingCircle",
+        "length": 93
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Segmented-Segmented|ant-segmented|anticon",
+        "cssHash": "5mfsvl",
+        "length": 8619
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "1jf8ylo",
+        "length": 365
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Select-Select|ant-select|anticon",
+        "cssHash": "1f1kr50",
+        "length": 44184
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideUpIn",
+        "length": 179
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideDownIn",
+        "length": 189
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideUpOut",
+        "length": 180
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideDownOut",
+        "length": 190
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveUpIn",
+        "length": 198
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveUpOut",
+        "length": 199
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveDownIn",
+        "length": 199
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveDownOut",
+        "length": 200
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "1reeujz",
+        "length": 1234
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tooltip-Tooltip|ant-tooltip|anticon",
+        "cssHash": "1ek6lmh",
+        "length": 15068
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antFadeIn",
+        "length": 88
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antFadeOut",
+        "length": 89
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antZoomBigIn",
+        "length": 131
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antZoomBigOut",
+        "length": 122
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "11cdbrl",
+        "length": 639
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Skeleton-Skeleton|ant-skeleton|anticon",
+        "cssHash": "tjl73r",
+        "length": 10997
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-ant-skeleton-loading",
+        "length": 134
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "zedc94",
+        "length": 390
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 0
+      }
+    },
+    {
+      "type": "remove",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 0
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 897
+      }
+    },
+    {
+      "type": "remove",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "zedc94",
+        "length": 390
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tag-Tag|ant-tag|anticon",
+        "cssHash": "17ye87n",
+        "length": 6420
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "125av0e",
+        "length": 117
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Wave-Wave|ant-wave|anticon",
+        "cssHash": "1r8lzsf",
+        "length": 1588
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Button-Button|ant-btn|anticon",
+        "cssHash": "1uz2um6",
+        "length": 26966
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "1jqxijq",
+        "length": 2609
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tooltip-Tooltip|ant-popover|anticon",
+        "cssHash": "vhiu3s",
+        "length": 0
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "1cubv5s",
+        "length": 639
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Popover-Popover|ant-popover|anticon",
+        "cssHash": "d6149x",
+        "length": 12980
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "t76i8f",
+        "length": 786
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Drawer-Drawer|ant-drawer|anticon",
+        "cssHash": "1u0lxv6",
+        "length": 16746
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "tt25p0",
+        "length": 167
+      }
+    }
+  ],
+  "afterClickEvents": [
+    {
+      "type": "add",
+      "time": 134.39999985694885,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 16301
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 0
+      }
+    },
+    {
+      "type": "remove",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 0
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "1sssysb",
+        "length": 12760
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "|ant-design-icons|anticon",
+        "cssHash": "mtsb22",
+        "length": 583
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-loadingCircle",
+        "length": 57
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Shared|ant",
+        "cssHash": "1mz5o68",
+        "length": 2977
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-loadingCircle",
+        "length": 93
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Segmented-Segmented|ant-segmented|anticon",
+        "cssHash": "5mfsvl",
+        "length": 8619
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "1jf8ylo",
+        "length": 365
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Select-Select|ant-select|anticon",
+        "cssHash": "1f1kr50",
+        "length": 44184
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideUpIn",
+        "length": 179
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideDownIn",
+        "length": 189
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideUpOut",
+        "length": 180
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antSlideDownOut",
+        "length": 190
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveUpIn",
+        "length": 198
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveUpOut",
+        "length": 199
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveDownIn",
+        "length": 199
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antMoveDownOut",
+        "length": 200
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "1reeujz",
+        "length": 1234
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tooltip-Tooltip|ant-tooltip|anticon",
+        "cssHash": "1ek6lmh",
+        "length": 15068
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antFadeIn",
+        "length": 88
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antFadeOut",
+        "length": 89
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antZoomBigIn",
+        "length": 131
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-antZoomBigOut",
+        "length": 122
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "11cdbrl",
+        "length": 639
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Skeleton-Skeleton|ant-skeleton|anticon",
+        "cssHash": "tjl73r",
+        "length": 10997
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "_effect-css-dev-only-do-not-override-i19pbt-ant-skeleton-loading",
+        "length": 134
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": "zedc94",
+        "length": 390
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 0
+      }
+    },
+    {
+      "type": "remove",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 0
+      }
+    },
+    {
+      "type": "add",
+      "time": 162.29999995231628,
+      "style": {
+        "cachePath": null,
+        "cssHash": null,
+        "length": 897
+      }
+    },
+    {
+      "type": "remove",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "zedc94",
+        "length": 390
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tag-Tag|ant-tag|anticon",
+        "cssHash": "17ye87n",
+        "length": 6420
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "125av0e",
+        "length": 117
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Wave-Wave|ant-wave|anticon",
+        "cssHash": "1r8lzsf",
+        "length": 1588
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Button-Button|ant-btn|anticon",
+        "cssHash": "1uz2um6",
+        "length": 26966
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "1jqxijq",
+        "length": 2609
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Tooltip-Tooltip|ant-popover|anticon",
+        "cssHash": "vhiu3s",
+        "length": 0
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "1cubv5s",
+        "length": 639
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Popover-Popover|ant-popover|anticon",
+        "cssHash": "d6149x",
+        "length": 12980
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "t76i8f",
+        "length": 786
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Drawer-Drawer|ant-drawer|anticon",
+        "cssHash": "1u0lxv6",
+        "length": 16746
+      }
+    },
+    {
+      "type": "add",
+      "time": 550,
+      "style": {
+        "cachePath": null,
+        "cssHash": "tt25p0",
+        "length": 167
+      }
+    },
+    {
+      "type": "add",
+      "time": 1360.2999999523163,
+      "style": {
+        "cachePath": "css-dev-only-do-not-override-i19pbt|Checkbox-Checkbox|ant-checkbox|anticon",
+        "cssHash": "zh7zxx",
+        "length": 7006
+      }
+    }
+  ]
+}

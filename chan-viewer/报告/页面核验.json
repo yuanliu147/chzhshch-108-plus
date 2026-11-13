@@ -2,6 +2,230 @@
  "checks": [
   {
    "设备": "桌面",
+   "初始日线": {
+    "charts": 1,
+    "depth": "multi-charts layout-stack depth-1",
+    "paths": [
+     "日线"
+    ],
+    "dataWindow": "2026-11-04+0.00%开 10.05高 10.23低 10.05收 10.09量 8241万股额 8.35亿元价格 元 · 时间=柱结束 · 完整 1/1",
+    "loaded": "日线全量 6420 根 · 分钟 352/2112 根 · 统一不复权 · 价格单位 元",
+    "config": "77课线段中枢MACD面积",
+    "rows": 2,
+    "chartHeight": 778.5,
+    "canvasW": 978,
+    "controlStyle": {
+     "buttonHeight": 22.5,
+     "buttonPadding": 7,
+     "buttonBorder": 1,
+     "labelPadding": 7,
+     "groupDisplay": "flex"
+    },
+    "docWidth": 1280,
+    "clientWidth": 1280,
+    "actual": {
+     "start": 6200,
+     "end": 6419,
+     "count": 220,
+     "total": 6420,
+     "low": 8.49,
+     "high": 12.48,
+     "extent": [
+      8.2506,
+      12.7194
+     ],
+     "structures": [
+      {
+       "name": "合并K线",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "中枢",
+       "overlap": 1,
+       "processed": 1
+      },
+      {
+       "name": "笔",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "线段",
+       "overlap": 2,
+       "processed": 2
+      }
+     ]
+    },
+    "idle": {
+     "rebuilds": 0,
+     "total": 0
+    },
+    "reverseLocate": {
+     "start": 0,
+     "end": 306,
+     "count": 307,
+     "total": 6420,
+     "low": 19,
+     "high": 29.8,
+     "extent": [
+      18.352,
+      30.448
+     ],
+     "structures": [
+      {
+       "name": "合并K线",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "中枢",
+       "overlap": 1,
+       "processed": 1
+      },
+      {
+       "name": "笔",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "线段",
+       "overlap": 2,
+       "processed": 2
+      }
+     ],
+     "object": "99-11-24 至 00-11-24"
+    }
+   },
+   "两级下钻": {
+    "charts": 3,
+    "path": "日线›30分钟›5分钟当前层是主图；上级保留上下文。单击选中，按钮下钻。",
+    "className": "multi-charts layout-stack depth-3",
+    "dayH": 76,
+    "m30H": 170.8671875,
+    "m5H": 523.6328125,
+    "range": "10-27 13:15 至 11-02 09:50 · 可见 170/2112 根",
+    "visible": 170,
+    "dataWindows": 1,
+    "actual": {
+     "start": 1658,
+     "end": 1827,
+     "count": 170,
+     "total": 2112,
+     "low": 9.73,
+     "high": 10.15,
+     "extent": [
+      9.7048,
+      10.1752
+     ],
+     "structures": [
+      {
+       "name": "合并K线",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "中枢",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "笔",
+       "overlap": 9,
+       "processed": 9
+      },
+      {
+       "name": "线段",
+       "overlap": 0,
+       "processed": 0
+      }
+     ]
+    },
+    "idle": {
+     "rebuilds": 0,
+     "total": 0
+    },
+    "saved30": {
+     "start": 281,
+     "end": 299,
+     "count": 19,
+     "total": 352,
+     "low": 9.73,
+     "high": 10.02,
+     "extent": [
+      9.71,
+      10.04
+     ],
+     "structures": [
+      {
+       "name": "合并K线",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "中枢",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "笔",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "线段",
+       "overlap": 0,
+       "processed": 0
+      }
+     ]
+    },
+    "singleBarCoverage": {
+     "width": 4.100000000000023,
+     "data": [
+      {
+       "value": [
+        6399,
+        6399,
+        1
+       ]
+      }
+     ]
+    },
+    "returned30": {
+     "start": 281,
+     "end": 299,
+     "count": 19,
+     "total": 352,
+     "low": 9.73,
+     "high": 10.02,
+     "extent": [
+      9.71,
+      10.04
+     ],
+     "structures": [
+      {
+       "name": "合并K线",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "中枢",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "笔",
+       "overlap": 1,
+       "processed": 1
+      },
+      {
+       "name": "线段",
+       "overlap": 0,
+       "processed": 0
+      }
+     ]
+    }
+   },
    "学习": {
     "canvasCount": 1,
     "canvasW": 940,
@@ -21,18 +245,204 @@
    },
    "练习": {
     "marked": true,
-    "markCount": 24,
+    "markCount": 22,
     "judgments": 50,
-    "score": "命中 5 · 漏 26 · 多 19 · 命中率 13%",
+    "score": "命中 7 · 漏 28 · 多 15 · 命中率 18%",
     "persisted": true
-   },
-   "多周期": {
-    "canvases": 3
    },
    "无横向溢出": true
   },
   {
    "设备": "手机",
+   "初始日线": {
+    "charts": 1,
+    "depth": "multi-charts layout-stack depth-1",
+    "paths": [
+     "日线"
+    ],
+    "dataWindow": "2026-11-04+0.00%开 10.05高 10.23低 10.05收 10.09量 8241万股额 8.35亿元价格 元 · 时间=柱结束 · 完整 1/1",
+    "loaded": "日线全量 6420 根 · 分钟 352/2112 根 · 统一不复权 · 价格单位 元",
+    "config": "77课线段中枢MACD面积",
+    "rows": 2,
+    "chartHeight": 360,
+    "canvasW": 380,
+    "controlStyle": {
+     "buttonHeight": 22.5,
+     "buttonPadding": 7,
+     "buttonBorder": 1,
+     "labelPadding": 7,
+     "groupDisplay": "flex"
+    },
+    "docWidth": 390,
+    "clientWidth": 390,
+    "actual": {
+     "start": 6200,
+     "end": 6419,
+     "count": 220,
+     "total": 6420,
+     "low": 8.49,
+     "high": 12.48,
+     "extent": [
+      8.2506,
+      12.7194
+     ],
+     "structures": [
+      {
+       "name": "合并K线",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "中枢",
+       "overlap": 1,
+       "processed": 1
+      },
+      {
+       "name": "笔",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "线段",
+       "overlap": 2,
+       "processed": 2
+      }
+     ]
+    },
+    "idle": {
+     "rebuilds": 0,
+     "total": 0
+    }
+   },
+   "两级下钻": {
+    "charts": 3,
+    "path": "日线›30分钟›5分钟当前层是主图；上级保留上下文。单击选中，按钮下钻。",
+    "className": "multi-charts layout-stack depth-3",
+    "dayH": 72,
+    "m30H": 150,
+    "m5H": 360,
+    "range": "10-27 13:15 至 11-02 09:50 · 可见 170/2112 根",
+    "visible": 170,
+    "dataWindows": 1,
+    "actual": {
+     "start": 1658,
+     "end": 1827,
+     "count": 170,
+     "total": 2112,
+     "low": 9.73,
+     "high": 10.15,
+     "extent": [
+      9.7048,
+      10.1752
+     ],
+     "structures": [
+      {
+       "name": "合并K线",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "中枢",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "笔",
+       "overlap": 9,
+       "processed": 9
+      },
+      {
+       "name": "线段",
+       "overlap": 0,
+       "processed": 0
+      }
+     ]
+    },
+    "idle": {
+     "rebuilds": 0,
+     "total": 0
+    },
+    "saved30": {
+     "start": 281,
+     "end": 299,
+     "count": 19,
+     "total": 352,
+     "low": 9.73,
+     "high": 10.02,
+     "extent": [
+      9.71,
+      10.04
+     ],
+     "structures": [
+      {
+       "name": "合并K线",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "中枢",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "笔",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "线段",
+       "overlap": 0,
+       "processed": 0
+      }
+     ]
+    },
+    "singleBarCoverage": {
+     "width": 1.3818181818181756,
+     "data": [
+      {
+       "value": [
+        6399,
+        6399,
+        1
+       ]
+      }
+     ]
+    },
+    "returned30": {
+     "start": 281,
+     "end": 299,
+     "count": 19,
+     "total": 352,
+     "low": 9.73,
+     "high": 10.02,
+     "extent": [
+      9.71,
+      10.04
+     ],
+     "structures": [
+      {
+       "name": "合并K线",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "中枢",
+       "overlap": 0,
+       "processed": 0
+      },
+      {
+       "name": "笔",
+       "overlap": 1,
+       "processed": 1
+      },
+      {
+       "name": "线段",
+       "overlap": 0,
+       "processed": 0
+      }
+     ]
+    }
+   },
    "学习": {
     "canvasCount": 1,
     "canvasW": 390,
@@ -53,12 +463,10 @@
    "练习": {
     "marked": false
    },
-   "多周期": {
-    "canvases": 3
-   },
    "无横向溢出": true
   }
  ],
  "consoleErrors": [],
- "全部通过": true
+ "全部通过": true,
+ "headed": true
 }

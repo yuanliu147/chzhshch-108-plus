@@ -1,11 +1,33 @@
 // 缠论引擎核心类型。区间一律表示为 [low, high]，与 配图自检.py 参考内核一致。
 
+export interface TimeRange { startMs: number; endMs: number }
+export type SourceQuality = 'verified' | 'incomplete' | 'unknown';
+export interface SourceEvidence {
+  endMs: number;
+  coverage: TimeRange[];
+  complete: boolean;
+  quality: SourceQuality;
+  continuityId: string;
+}
+/** 接收旧的覆盖元信息；真实行情适配器必须补齐 quality/continuityId。 */
+export type InputTime = Pick<SourceEvidence, 'endMs' | 'coverage' | 'complete'> & Partial<Pick<SourceEvidence, 'quality' | 'continuityId'>>;
+export type RefKind = 'fractal' | 'bi' | 'segment' | 'center' | 'trend' | 'divergence' | 'point';
+/** 可选仅为纯函数历史 fixture 兼容；生产输出必须带完整来源。 */
+export interface StructureEvidence {
+  continuityId?: string;
+  dependencyKeys?: string[];
+  quality?: SourceQuality;
+}
+
 /** 引擎输入：已走完的原始K线。high/low 用于结构；可选 close 用于 MACD/背驰（缺省时 MACD 口径不可用）。 */
 export interface KInput {
   date: string;
   high: number;
   low: number;
   close?: number;
+  /** 数据源 bar 结束时刻（UTC epoch ms）；缺省时由 date 按中国市场语义推导。 */
+  endMs?: number;
+  time?: InputTime;
 }
 
 export type StartDir = 'up' | 'down';
@@ -56,8 +78,10 @@ export interface MergedBar {
 
 export type FractalType = 'top' | 'bottom';
 
-export interface Fractal {
+export interface Fractal extends StructureEvidence {
   id: number;
+  /** 不随数组位置变化的来源键（候选端点变化时可能更新；确认后稳定）。 */
+  key?: string;
   type: FractalType;
   /** 中间根在 validBars 中的下标。 */
   middle: number;
@@ -72,8 +96,9 @@ export interface Fractal {
   confirmedAt: number | null;
 }
 
-export interface Bi {
+export interface Bi extends StructureEvidence {
   id: number;
+  key?: string;
   start: number;
   end: number;
   /** 先底后顶=向上一笔。 */
@@ -83,8 +108,9 @@ export interface Bi {
 }
 
 /** 线段：由连续笔构成（≥3笔且前三笔有重叠），端点为一顶一底分型。 */
-export interface Segment {
+export interface Segment extends StructureEvidence {
   id: number;
+  key?: string;
   /** 线段方向＝其首笔方向；向上线段止于顶、向下线段止于底。 */
   dir: 'up' | 'down';
   /** 起止分型 id（溯源到笔/分型）。 */
@@ -100,9 +126,10 @@ export interface Segment {
 }
 
 /** 中枢：连续三个次级别构件（笔或线段）重叠构成。核心 [ZD,ZG] 与外围 GG/DD/G/D 都存。 */
-export interface Center {
+export interface Center extends StructureEvidence {
   id: number;
-  unit: 'bi' | 'segment';
+  key?: string;
+  unit: 'bi' | 'segment' | 'trend';
   /** 中枢方向＝首个构件（Z走势段）方向；回升形成=up，回调形成=down。 */
   dir: 'up' | 'down';
   startRaw: number;
@@ -115,32 +142,62 @@ export interface Center {
   D: number;  // max(各构件低点)
   /** 构件段数（含延伸），9段升级判据用。 */
   segCount: number;
+  /** 结构递归层；degree 不是 K 线周期。基础层中枢为1。 */
+  degree?: number;
+  /** 三个完成构件形成中枢的最早 raw 时刻；形成不等于终结。 */
+  formedAt: number;
+  /** 初三构件的几何终点，与首次可知时刻分开。 */
+  formedRaw?: number;
+  terminatedRaw?: number | null;
+  /** 离开+回抽不回或升级导致终结的最早 raw 时刻；仍在延伸为 null。 */
+  terminatedAt: number | null;
+  evolution: 'forming' | 'extending' | 'terminated' | 'upgraded';
+  /** 与前一中枢的关系：新生（含外围都不重叠）/扩展（核心不重叠但外围重叠）。 */
+  relation?: 'first' | 'new' | 'expanded';
+  /** 兼容旧消费者：confirmed 表示终结已经确认，candidate 表示已形成但仍在运行/待确认。 */
   status: 'candidate' | 'confirmed';
   confirmedAt: number | null;
 }
 
 /** 走势类型：盘整=单中枢；趋势=≥2个同向且依次不重叠的中枢（上涨/下跌）。 */
-export interface Trend {
+export interface Trend extends StructureEvidence {
   id: number;
+  key?: string;
   kind: '盘整' | '上涨' | '下跌';
   /** 组成的中枢 id（按时间顺序）。 */
   centerIds: number[];
   startRaw: number;
   endRaw: number;
+  /** 递归合成走势时使用的来自中枢包络的价格范围。 */
+  startPrice?: number;
+  endPrice?: number;
+  degree?: number;
   status: 'candidate' | 'confirmed';
   confirmedAt: number | null;
 }
 
+/** 一个结构递归层；degree 不是 K 线周期。 */
+export interface LevelSnapshot {
+  degree: number;
+  basis: 'bi' | 'segment' | 'completed-trend';
+  centers: Center[];
+  trends: Trend[];
+  /** 可作为更高级构件的已完成走势。 */
+  completed: Trend[];
+  note: string;
+}
+
 /** MACD 副图序列（对齐原始K线下标）。 */
 export interface MacdSeries {
-  dif: number[];
-  dea: number[];
-  hist: number[];
+  dif: (number | null)[];
+  dea: (number | null)[];
+  hist: (number | null)[];
 }
 
 /** 背驰：比较进入段(b)与离开段(c)力度，c<b 则背驰。趋势背驰=趋势末中枢后；盘整背驰=盘整中枢。 */
-export interface Divergence {
+export interface Divergence extends StructureEvidence {
   id: number;
+  key?: string;
   kind: '趋势背驰' | '盘整背驰';
   metric: DivMetricRule;
   /** 背驰方向：上涨背驰（顶）/下跌背驰（底）。 */
@@ -160,8 +217,9 @@ export interface Divergence {
 }
 
 /** 买卖点。atRaw=结构位置（原始K线下标），confirmedAt=首次可知时间（事后性）。 */
-export interface BuySellPoint {
+export interface BuySellPoint extends StructureEvidence {
   id: number;
+  key?: string;
   side: 'buy' | 'sell';
   /** 1=背驰转折点；2=一买后回抽再探底；3=离开中枢后首次回试不破边界。 */
   klass: 1 | 2 | 3;
@@ -169,6 +227,8 @@ export interface BuySellPoint {
   price: number;
   /** 关联的中枢或背驰 id（溯源）。 */
   refId?: number;
+  refKind?: RefKind;
+  refKey?: string;
   status: 'candidate' | 'confirmed';
   confirmedAt: number | null;
 }
@@ -211,6 +271,10 @@ export interface ChanEvent {
 }
 
 export interface ComputeResult {
+  asOfMs?: number;
+  inputCount?: number;
+  /** 原始输入对齐的归一化来源；不可信位置也保留。 */
+  sourceEvidence?: SourceEvidence[];
   configId: string;
   config: ChanConfig;
   validBars: MergedBar[];
@@ -227,6 +291,8 @@ export interface ComputeResult {
   divergences: Divergence[];
   /** 买卖点（一/二/三类，买/卖）。 */
   points: BuySellPoint[];
+  /** 从基础构件自底向上的结构级别；周期≠degree。 */
+  levels: LevelSnapshot[];
   /** MACD 副图序列（仅当输入含 close 时存在）。 */
   macd?: MacdSeries;
   events: ChanEvent[];

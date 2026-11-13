@@ -4,8 +4,9 @@
 //   b段=[前一同级中枢.startRaw, 末中枢.startRaw]（进入末中枢的推动）；
 //   c段=[末中枢.startRaw, 下一运行段首中枢.startRaw（已确认）或最新（候选）]（最后的推动）。
 // 纯函数重算：已确认运行段窗口固定 ⇒ 背驰确认冻结；候选 MACD 用 ×2 估算(24课)。
-import type { Center, ChanConfig, Divergence, KInput, Trend } from './types.ts';
+import type { Center, ChanConfig, Divergence, KInput, Segment, Trend } from './types.ts';
 import { areaBetween } from './macd.ts';
+import { evidenceOf, sameContinuity, sourceKey } from './sourceEvidence.ts';
 
 function priceAt(bars: readonly KInput[], raw: number): number {
   const i = Math.max(0, Math.min(bars.length - 1, Math.round(raw)));
@@ -29,11 +30,11 @@ function extremeRaw(bars: readonly KInput[], a: number, b: number, dir: 'up' | '
   return best;
 }
 
-/** 段力度：MACD=同向柱面积；几何=段净位移 |末价-初价|（33课 c段力度比b段小=幅度更小）。 */function forceOf(bars: readonly KInput[], hist: readonly number[] | null, a: number, b: number, dir: 'up' | 'down', metric: string): number {
+/** 段力度：MACD=同向柱面积；几何=段净位移 |末价-初价|（33课 c段力度比b段小=幅度更小）。 */function forceOf(bars: readonly KInput[], hist: readonly (number | null)[] | null, a: number, b: number, dir: 'up' | 'down', metric: string): number | null {
   const s = Math.max(0, Math.ceil(a));
   const e = Math.min(bars.length - 1, Math.floor(b));
   if (e < s) return 0;
-  if (metric === 'MACD面积') return hist ? areaBetween(hist, a, b, dir === 'up') : 0;
+  if (metric === 'MACD面积') return hist ? areaBetween(hist, a, b, dir === 'up') : null;
   return Math.abs(priceAt(bars, b) - priceAt(bars, a)); // 几何：段净位移
 }
 
@@ -42,12 +43,15 @@ export function detectDivergences(
   trends: readonly Trend[],
   centers: readonly Center[],
   bars: readonly KInput[],
-  hist: readonly number[] | null,
+  hist: readonly (number | null)[] | null,
   cfg: ChanConfig,
+  /** 已完成次级别走势，用于盘整背驰的进入/离开段；缺省时保留旧的窗口估计。 */
+  movements: readonly Segment[] = [],
 ): Divergence[] {
   const metric = cfg.divMetric;
   if (metric === 'MACD面积' && !hist) return []; // MACD 口径需 close
   const byId = new Map(centers.map((c) => [c.id, c]));
+  const completed = movements.filter((m) => m.status === 'confirmed').sort((a, b) => a.startRaw - b.startRaw);
   const lastRaw = bars.length - 1;
   const out: Divergence[] = [];
   const n = trends.length;
@@ -58,14 +62,21 @@ export function detectDivergences(
     const cs = centersOf(T);
     if (cs.length === 0) continue;
     const B = cs[cs.length - 1]!; // 运行段末中枢
-    const A = byId.get(B.id - 1); // 前一同级中枢（按 id 顺序）
-    if (!A) continue; // 首个中枢无前段，无法比较
+    const ordered = centers.filter((c) => sameContinuity(c, B) && (c.degree ?? 1) === (B.degree ?? 1)).sort((a, b) => a.startRaw - b.startRaw);
+    const A = ordered[ordered.findIndex((c) => c.id === B.id) - 1];
     const isTrend = T.kind !== '盘整';
-    const bStart = A.startRaw;
-    const bEnd = B.startRaw;
-    const isLast = t === n - 1;
-    const cStart = B.startRaw;
-    const windowEnd = isLast ? lastRaw : trends[t + 1]!.startRaw;
+    // 趋势用前一同级中枢到末中枢作为进入段；盘整用中枢前最后一个已完成次级别走势作为进入段。
+    const localMovements = completed.filter((m) => sameContinuity(m, T));
+    const entry = A ? null : localMovements.filter((m) => m.endRaw <= cs[0]!.startRaw + 0.6).at(-1);
+    if (!A && !entry) continue;
+    const bStart = A ? A.startRaw : entry!.startRaw;
+    const bEnd = A ? B.startRaw : cs[0]!.startRaw;
+    const nextTrend = trends.slice(t + 1).find((x) => sameContinuity(x, T));
+    const closedWindowEnd = T.status === 'confirmed' ? nextTrend?.startRaw : undefined;
+    const leave = localMovements.find((m) => m.startRaw >= B.endRaw - 0.6
+      && (closedWindowEnd == null || m.endRaw <= closedWindowEnd + 0.6));
+    const cStart = leave ? leave.startRaw : B.startRaw;
+    const windowEnd = leave ? leave.endRaw : closedWindowEnd ?? lastRaw;
     let dir: 'up' | 'down';
     if (isTrend) dir = T.kind === '上涨' ? 'up' : 'down';
     else dir = priceAt(bars, windowEnd) >= priceAt(bars, cStart) ? 'up' : 'down';
@@ -73,11 +84,18 @@ export function detectDivergences(
     const cEnd = extremeRaw(bars, cStart, windowEnd, dir);
     const bForce = forceOf(bars, hist, bStart, bEnd, dir, metric);
     let cForce = forceOf(bars, hist, cStart, cEnd, dir, metric);
-    const est = T.status === 'candidate';
+    if (bForce == null || cForce == null || !Number.isFinite(bForce) || !Number.isFinite(cForce)) continue;
+    const sources = [T, B, ...(A ? [A] : entry ? [entry] : []), ...(leave ? [leave] : [])];
+    const entryKey = sourceKey(A ?? entry!, A ? 'center' : 'segment');
+    const leaveKey = leave ? sourceKey(leave, 'segment') : 'open';
+    const evidence = evidenceOf(sources, [sourceKey(T, 'trend'), sourceKey(B, 'center'), entryKey, ...(leave ? [leaveKey] : [])]);
+    const est = T.status !== 'confirmed' || closedWindowEnd == null || !leave || evidence.quality !== 'verified';
     if (est && metric === 'MACD面积') cForce *= 2; // 24课 候选×2估算整段
     if (!(cForce < bForce)) continue; // 背驰成立：c<b
     out.push({
       id: 0,
+      ...evidence,
+      key: `div:${evidence.continuityId}:${sourceKey(T, 'trend')}:${entryKey}:${leaveKey}`,
       kind: isTrend ? '趋势背驰' : '盘整背驰',
       metric,
       dir,
@@ -89,7 +107,7 @@ export function detectDivergences(
       cForce,
       est,
       status: est ? 'candidate' : 'confirmed',
-      confirmedAt: null,
+      confirmedAt: est ? null : Math.max(T.confirmedAt ?? T.endRaw, B.confirmedAt ?? B.endRaw, A?.confirmedAt ?? entry?.confirmedAt ?? bEnd, leave!.confirmedAt ?? leave!.endRaw),
     });
   }
   out.forEach((d, k) => {

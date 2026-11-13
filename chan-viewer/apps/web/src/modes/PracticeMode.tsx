@@ -128,7 +128,7 @@ export function PracticeMode() {
     setHistory(arr);
   };
 
-  const layers = { merged: true, fractal: submitted, bi: false, candidate: submitted, segment: false, center: false, divergence: false, point: false };
+  const layers = { merged: true, fractal: submitted, bi: false, candidate: submitted, segment: false, center: false, divergence: false, point: false, volume: false };
 
   return (
     <div className="main">

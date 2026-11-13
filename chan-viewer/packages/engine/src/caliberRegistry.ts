@@ -14,7 +14,7 @@ export interface CaliberEntry {
   note?: string;
 }
 
-export const 口径注册 = {
+export const CALIBER_REGISTRY = {
   startDir: {
     up: {
       value: 'up',
@@ -298,8 +298,8 @@ export function configId(c: ChanConfig): string {
 }
 
 /** 预设：完整显式配置（命名预设，非隐式默认）。 */
-export const 预设 = {
-  原文默认: {
+export const CHAN_PRESETS = {
+  originalDefault: {
     startDir: 'up',
     precision: { digits: 'raw' },
     biRule: '77课',

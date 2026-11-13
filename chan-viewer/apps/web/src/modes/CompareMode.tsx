@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import { Select } from 'antd';
 import { compute, type ComputeResult } from '@chan/engine';
-import { useStore, 对比预设对 } from '../store.ts';
+import { useStore, COMPARE_PRESET_PAIRS } from '../store.ts';
 import { Chart } from '../components/Chart.tsx';
 import { ConfigPanel } from '../components/ConfigPanel.tsx';
 import type { RawBar } from '../api.ts';
@@ -69,7 +69,7 @@ export function CompareMode() {
   const ra = useMemo(() => compute(bars, configA), [bars, configA]);
   const rb = useMemo(() => compute(bars, configB), [bars, configB]);
   const diff = useMemo(() => buildDiff(bars, ra, rb), [bars, ra, rb]);
-  const presetName = 对比预设对.find((p) => JSON.stringify(p.a) === JSON.stringify(configA) && JSON.stringify(p.b) === JSON.stringify(configB))?.name;
+  const presetName = COMPARE_PRESET_PAIRS.find((p) => JSON.stringify(p.a) === JSON.stringify(configA) && JSON.stringify(p.b) === JSON.stringify(configB))?.name;
 
   return (
     <div className="main">
@@ -81,9 +81,9 @@ export function CompareMode() {
               value={presetName}
               placeholder="自定义（右侧可改）"
               style={{ minWidth: 200 }}
-              options={对比预设对.map((p) => ({ value: p.name, label: p.name }))}
+              options={COMPARE_PRESET_PAIRS.map((p) => ({ value: p.name, label: p.name }))}
               onChange={(name) => {
-                const p = 对比预设对.find((x) => x.name === name);
+                const p = COMPARE_PRESET_PAIRS.find((x) => x.name === name);
                 if (p) {
                   setConfigA({ ...p.a });
                   setConfigB({ ...p.b });
@@ -91,7 +91,7 @@ export function CompareMode() {
               }}
             />
           </label>
-          <span className="hint">{对比预设对.find((p) => p.name === presetName)?.note ?? '同一份数据，两套口径，结构差异如下。'}</span>
+          <span className="hint">{COMPARE_PRESET_PAIRS.find((p) => p.name === presetName)?.note ?? '同一份数据，两套口径，结构差异如下。'}</span>
         </div>
         <div className="compare-charts">
           <div>

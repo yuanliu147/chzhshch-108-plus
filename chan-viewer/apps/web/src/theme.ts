@@ -2,7 +2,7 @@
 import { theme } from 'antd';
 import type { ThemeConfig } from 'antd';
 
-export const 主题: ThemeConfig = {
+export const terminalTheme: ThemeConfig = {
   algorithm: theme.darkAlgorithm,
   token: {
     colorPrimary: '#4c8dff',

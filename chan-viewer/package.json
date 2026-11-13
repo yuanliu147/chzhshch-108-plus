@@ -9,11 +9,13 @@
   ],
   "scripts": {
     "dev": "node tools/dev.js",
-    "test": "npm run test -w @chan/engine",
+    "test": "npm run test -w @chan/engine && npm run test:aux",
+    "test:aux": "node --no-warnings --import tsx --test apps/server/test/*.spec.ts apps/web/test/*.spec.ts",
     "build": "npm run build -w @chan/web && npm run build -w @chan/server",
     "start": "node apps/server/dist/index.js",
     "crosscheck": "python3 tools/cross_check.py",
-    "pagecheck": "node tools/page_check.js"
+    "pagecheck": "node tools/page-check-v2.js",
+    "pagecheck:headed": "CHAN_HEADED=1 node tools/page-check-v2.js"
   },
   "devDependencies": {
     "tsx": "^4.20.6",

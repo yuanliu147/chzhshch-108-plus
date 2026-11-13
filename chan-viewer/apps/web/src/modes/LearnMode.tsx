@@ -2,22 +2,11 @@
 import { useMemo } from 'react';
 import { Checkbox, Tag } from 'antd';
 import { compute } from '@chan/engine';
-import { useStore, type Layers } from '../store.ts';
+import { LAYER_LABELS, useStore } from '../store.ts';
 import { Chart } from '../components/Chart.tsx';
 import { ConfigPanel } from '../components/ConfigPanel.tsx';
 import { ReplayBar } from '../components/ReplayBar.tsx';
 import { EventLog } from '../components/EventLog.tsx';
-
-const LAYER_LABELS: { key: keyof Layers; label: string }[] = [
-  { key: 'merged', label: '合并K线' },
-  { key: 'fractal', label: '分型' },
-  { key: 'bi', label: '笔' },
-  { key: 'segment', label: '线段' },
-  { key: 'center', label: '中枢' },
-  { key: 'divergence', label: '背驰/MACD' },
-  { key: 'point', label: '买卖点' },
-  { key: 'candidate', label: '候选' },
-];
 
 export function LearnMode() {
   const { bars, cursor, configA, layers, highlight, setConfigA, toggleLayer } = useStore();

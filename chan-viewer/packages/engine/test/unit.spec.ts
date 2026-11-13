@@ -27,7 +27,7 @@ import {
   type KInput,
 } from '../src/index.ts';
 
-const 原文: ChanConfig = {
+const originalConfig: ChanConfig = {
   startDir: 'up',
   precision: { digits: 'raw' },
   biRule: '77课',
@@ -68,7 +68,7 @@ describe('方向来源与反向合并后果（移植 配图自检.py L72–83）
     expect(e).toEqual([false, false, true]);
   });
   it('正确合并得[9,13]，保住新低点9，与前一根无包含', () => {
-    const r = compute(bars(fxK), 原文);
+    const r = compute(bars(fxK), originalConfig);
     const tail = r.validBars[r.validBars.length - 1]!;
     expect([tail.low, tail.high]).toEqual([9, 13]);
     expect(noInclusion(r.validBars)).toBe(true);
@@ -76,8 +76,8 @@ describe('方向来源与反向合并后果（移植 配图自检.py L72–83）
   it('错误示范口径抹掉新低点（与原文口径结果不同）', () => {
     // tail=(9,14), new=(10,14)：错误规则 new.high>=tail.high → 向上 → (10,14)；正确向下 → (9,14)。
     const seq: [number, number][] = [[10, 15], [9, 14], [10, 14]];
-    const ok = compute(bars(seq), 原文);
-    const bad = compute(bars(seq), { ...原文, mergeDir: '直接用前一根' });
+    const ok = compute(bars(seq), originalConfig);
+    const bad = compute(bars(seq), { ...originalConfig, mergeDir: '直接用前一根' });
     const okTail = ok.validBars[ok.validBars.length - 1]!;
     const badTail = bad.validBars[bad.validBars.length - 1]!;
     expect([okTail.low, okTail.high]).toEqual([9, 14]);
@@ -101,7 +101,7 @@ describe('分型（移植 配图自检.py L85–93）', () => {
   });
   it('分型陷阱：先合并再判分型', () => {
     // 原始四根 (8,14),(10,16),(12,15),(11,15)：第3根被第2根包含，合并后成顶分型。
-    const r = compute(bars([[8, 14], [10, 16], [12, 15], [11, 15]]), 原文);
+    const r = compute(bars([[8, 14], [10, 16], [12, 15], [11, 15]]), originalConfig);
     expect(r.validBars.length).toBe(3);
     expect(r.fractals.some((f) => f.type === 'top')).toBe(true);
   });
@@ -148,7 +148,7 @@ describe('管线确定性用例：顶→底→顶 成笔与确认时机', () => 
     [10, 12], [12, 14], [14, 16], [13, 15], [11, 13], [9, 11], [7, 9],
     [8, 10], [10, 12], [12, 14], [14, 16], [13, 15], [11, 13],
   ];
-  const r = compute(bars(seq), 原文);
+  const r = compute(bars(seq), originalConfig);
   it('有效K线无包含且等于原始（无包含发生）', () => {
     expect(r.validBars.length).toBe(seq.length);
     expect(noInclusion(r.validBars)).toBe(true);
@@ -205,36 +205,36 @@ describe('线段内核（移植 配图自检.py L118–140）', () => {
 
 describe('边界与口径校验', () => {
   it('空输入', () => {
-    const r = compute([], 原文);    expect(r.validBars.length).toBe(0);
+    const r = compute([], originalConfig);    expect(r.validBars.length).toBe(0);
     expect(r.fractals.length).toBe(0);
     expect(r.bis.length).toBe(0);
   });
   it('1根/2根无分型', () => {
-    expect(compute(bars([[1, 2]]), 原文).fractals.length).toBe(0);
-    expect(compute(bars([[1, 2], [3, 4]]), 原文).fractals.length).toBe(0);
+    expect(compute(bars([[1, 2]]), originalConfig).fractals.length).toBe(0);
+    expect(compute(bars([[1, 2], [3, 4]]), originalConfig).fractals.length).toBe(0);
   });
   it('全相等区间：包含合并，起点方向写日志', () => {
-    const r = compute(bars([[5, 5], [5, 5], [5, 5]]), 原文);
+    const r = compute(bars([[5, 5], [5, 5], [5, 5]]), originalConfig);
     expect(r.validBars.length).toBe(1);
     expect(r.events.some((e) => e.kind === '起点方向')).toBe(true);
   });
   it('拒绝缺省/非法口径', () => {
     expect(() => compute([], {} as ChanConfig)).toThrow();
-    expect(() => compute([], { ...原文, biRule: '随便' as never })).toThrow();
-    expect(() => compute([], { ...原文, precision: { digits: 9 as never } })).toThrow();
+    expect(() => compute([], { ...originalConfig, biRule: '随便' as never })).toThrow();
+    expect(() => compute([], { ...originalConfig, precision: { digits: 9 as never } })).toThrow();
   });
   it('精度舍入改变包含判定（half-up）', () => {
     // raw 交叉无包含：bar1(10.04,10.12) bar2(10.0,10.06)；取个位都=(10,10) → 包含。
     const seq: [number, number][] = [[10.04, 10.12], [10.0, 10.06]];
-    const raw = compute(bars(seq), 原文);
-    const d0 = compute(bars(seq), { ...原文, precision: { digits: 0 } });
+    const raw = compute(bars(seq), originalConfig);
+    const d0 = compute(bars(seq), { ...originalConfig, precision: { digits: 0 } });
     expect(raw.validBars.length).toBe(2);
     expect(d0.validBars.length).toBe(1);
   });
   it('configId 稳定且随口径变化', () => {
-    const a = compute([], 原文).configId;
-    const b = compute([], 原文).configId;
-    const c = compute([], { ...原文, startDir: 'down' }).configId;
+    const a = compute([], originalConfig).configId;
+    const b = compute([], originalConfig).configId;
+    const c = compute([], { ...originalConfig, startDir: 'down' }).configId;
     expect(a).toBe(b);
     expect(a).not.toBe(c);
   });
@@ -263,25 +263,26 @@ describe('走势类型（移植 配图自检.py L159–163）', () => {
   const centerOf = (id: number, zd: number, zg: number): Center => ({
     id, unit: 'segment', dir: 'up', startRaw: id * 10, endRaw: id * 10 + 9,
     ZG: zg, ZD: zd, GG: zg + 1, DD: zd - 1, G: zg, D: zd, segCount: 3,
+    formedAt: id * 10 + 9, terminatedAt: id * 10 + 10, evolution: 'terminated',
     status: 'confirmed', confirmedAt: null,
   });
   it('两中枢向上不重叠 → 上涨趋势', () => {
-    const ts = detectTrends([centerOf(1, 10, 13), centerOf(2, 16, 19)], 原文);
+    const ts = detectTrends([centerOf(1, 10, 13), centerOf(2, 16, 19)], originalConfig);
     expect(ts.length).toBe(1);
     expect(ts[0]!.kind).toBe('上涨');
     expect(ts[0]!.centerIds).toEqual([1, 2]);
   });
   it('两中枢向下不重叠 → 下跌趋势', () => {
-    const ts = detectTrends([centerOf(1, 17, 20), centerOf(2, 11, 14)], 原文);
+    const ts = detectTrends([centerOf(1, 17, 20), centerOf(2, 11, 14)], originalConfig);
     expect(ts[0]!.kind).toBe('下跌');
   });
   it('单中枢 → 盘整', () => {
-    const ts = detectTrends([centerOf(1, 10, 13)], 原文);
+    const ts = detectTrends([centerOf(1, 10, 13)], originalConfig);
     expect(ts[0]!.kind).toBe('盘整');
     expect(ts[0]!.centerIds).toEqual([1]);
   });
   it('两中枢重叠 → 不合并为趋势（各自盘整）', () => {
-    const ts = detectTrends([centerOf(1, 10, 13), centerOf(2, 12, 15)], 原文);
+    const ts = detectTrends([centerOf(1, 10, 13), centerOf(2, 12, 15)], originalConfig);
     expect(ts.length).toBe(2);
     expect(ts.every((t) => t.kind === '盘整')).toBe(true);
   });
@@ -307,6 +308,7 @@ describe('MACD 与背驰（移植 配图自检.py L166–174）', () => {
     const areaC = areaBetween(hist, 10, 11, false);
     expect(areaA).toBeCloseTo(3.2);
     expect(areaC).toBeCloseTo(1.6);
+    if (areaA == null || areaC == null) throw new Error('完整 MACD 窗口必须有面积判据');
     expect(areaC).toBeLessThan(areaA);
   });
 });
@@ -325,21 +327,21 @@ describe('买卖点（20/21/101课口径分歧）', () => {
     id: 1, kind: '趋势背驰', metric: 'MACD面积', dir, bStart: 0, bEnd: 5, cStart: 5, cEnd, bForce: 2, cForce: 1, est: false, status: 'confirmed', confirmedAt: null,
   });
   const centerOf2 = (zg: number, zd: number, endRaw: number): Center => ({
-    id: 1, unit: 'segment', dir: 'up', startRaw: 0, endRaw, ZG: zg, ZD: zd, GG: zg + 1, DD: zd - 1, G: zg, D: zd, segCount: 3, status: 'confirmed', confirmedAt: null,
+    id: 1, unit: 'segment', dir: 'up', startRaw: 0, endRaw, ZG: zg, ZD: zd, GG: zg + 1, DD: zd - 1, G: zg, D: zd, segCount: 3, formedAt: 0, terminatedAt: endRaw, evolution: 'terminated', status: 'confirmed', confirmedAt: null,
   });
 
   it('一买=下跌趋势背驰转折点；一卖=上涨趋势背驰', () => {
     const bars = kb(12);
-    expect(detectPoints([trendDiv('down', 10)], [], [], vb(bars), bars, 原文).some((p) => p.klass === 1 && p.side === 'buy')).toBe(true);
-    expect(detectPoints([trendDiv('up', 10)], [], [], vb(bars), bars, 原文).some((p) => p.klass === 1 && p.side === 'sell')).toBe(true);
+    expect(detectPoints([trendDiv('down', 10)], [], [], vb(bars), bars, originalConfig, [], 'historical-fractals').some((p) => p.klass === 1 && p.side === 'buy')).toBe(true);
+    expect(detectPoints([trendDiv('up', 10)], [], [], vb(bars), bars, originalConfig, [], 'historical-fractals').some((p) => p.klass === 1 && p.side === 'sell')).toBe(true);
   });
   it('三买边界：不跌破ZG(>=) vs 不触及ZG(>) 在端点相接时分歧', () => {
     // 中枢 ZG=13，bars[6].high=14 向上离开，底分型 middle=8 低点=13（==ZG）。
     const bars = kb(12, (i) => (i === 6 ? [12, 14] : [10, 12]));
     const center = centerOf2(13, 10, 5);
     const bot = fxOf(1, 'bottom', 8, 13);
-    const yes = detectPoints([], [center], [bot], vb(bars), bars, { ...原文, bsp3Touch: '不跌破ZG' });
-    const no = detectPoints([], [center], [bot], vb(bars), bars, { ...原文, bsp3Touch: '不触及ZG' });
+    const yes = detectPoints([], [center], [bot], vb(bars), bars, { ...originalConfig, bsp3Touch: '不跌破ZG' }, [], 'historical-fractals');
+    const no = detectPoints([], [center], [bot], vb(bars), bars, { ...originalConfig, bsp3Touch: '不触及ZG' }, [], 'historical-fractals');
     expect(yes.some((p) => p.klass === 3 && p.side === 'buy')).toBe(true); // 13>=13 不跌破→三买
     expect(no.some((p) => p.klass === 3)).toBe(false); // 13>13 不触及→非三买
   });
@@ -348,8 +350,8 @@ describe('买卖点（20/21/101课口径分歧）', () => {
     const bars = kb(16);
     const top = fxOf(2, 'top', 12, 20);
     const bot2 = fxOf(3, 'bottom', 14, 9);
-    const allow = detectPoints([trendDiv('down', 10)], [], [top, bot2], vb(bars), bars, { ...原文, bsp2Filter: '允许二买低于一买' });
-    const filt = detectPoints([trendDiv('down', 10)], [], [top, bot2], vb(bars), bars, { ...原文, bsp2Filter: '过滤二买须高于一买' });
+    const allow = detectPoints([trendDiv('down', 10)], [], [top, bot2], vb(bars), bars, { ...originalConfig, bsp2Filter: '允许二买低于一买' }, [], 'historical-fractals');
+    const filt = detectPoints([trendDiv('down', 10)], [], [top, bot2], vb(bars), bars, { ...originalConfig, bsp2Filter: '过滤二买须高于一买' }, [], 'historical-fractals');
     expect(allow.some((p) => p.klass === 2 && p.side === 'buy')).toBe(true);
     expect(filt.some((p) => p.klass === 2)).toBe(false);
   });

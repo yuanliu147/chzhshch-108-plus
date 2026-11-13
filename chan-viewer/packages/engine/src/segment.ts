@@ -3,6 +3,7 @@
 // 已确认笔不可变且只增 ⇒ 划分对前缀单调（已确认线段不被后续改写），天然满足遮右不回填。
 // 区间一律 [low, high]，内核与 配图自检.py 同构。
 import type { Bi, ChanConfig, Fractal, MergedBar, Segment } from './types.ts';
+import { evidenceOf, sameContinuity, sourceKey } from './sourceEvidence.ts';
 
 export interface Iv {
   low: number;
@@ -60,11 +61,12 @@ function standardize(els: readonly FeatEl[], up: boolean): FeatEl[] {
     const last = out[out.length - 1];
     if (last && either(last, e)) {
       const m = mergeIv(last, e, direction);
+      // 极值来源必须跟随当前合并方向：向上合并时低点也取较高者，不能固定按“更低”溯源。
       out[out.length - 1] = {
         low: m.low,
         high: m.high,
-        hiBi: last.high >= e.high ? last.hiBi : e.hiBi,
-        loBi: last.low <= e.low ? last.loBi : e.loBi,
+        hiBi: m.high === last.high ? last.hiBi : e.hiBi,
+        loBi: m.low === last.low ? last.loBi : e.loBi,
       };
     } else {
       if (last) direction = e.high >= last.high;
@@ -75,6 +77,7 @@ function standardize(els: readonly FeatEl[], up: boolean): FeatEl[] {
 }
 
 interface BiInfo {
+  bi: Bi;
   iv: Iv;
   startFx: Fractal;
   endFx: Fractal;
@@ -102,6 +105,21 @@ export function detectSegments(
   validBars: MergedBar[],
   cfg: ChanConfig,
 ): Segment[] {
+  const out: Segment[] = [];
+  let start = 0;
+  for (let end = 1; end <= bis.length; end++) {
+    if (end === bis.length || !sameContinuity(bis[end - 1]!, bis[end]!)) {
+      out.push(...detectContinuousSegments(bis.slice(start, end), fxById, validBars, cfg));
+      start = end;
+    }
+  }
+  out.forEach((s, i) => { s.id = i + 1; });
+  return out;
+}
+
+function detectContinuousSegments(
+  bis: readonly Bi[], fxById: ReadonlyMap<number, Fractal>, validBars: MergedBar[], cfg: ChanConfig,
+): Segment[] {
   const touch = cfg.touchOverlap === '相接算重叠';
   const doMerge = cfg.segMerge === '做包含处理';
   const n = bis.length;
@@ -111,6 +129,7 @@ export function detectSegments(
     const e = fxById.get(b.end);
     if (!s || !e) return [];
     info.push({
+      bi: b,
       iv: { low: Math.min(s.price, e.price), high: Math.max(s.price, e.price) },
       startFx: s,
       endFx: e,
@@ -121,6 +140,10 @@ export function detectSegments(
   const segs: Segment[] = [];
   let i = 0;
   while (i < n) {
+    // 线段定义前提：至少三笔且前三笔有共同重叠；不重叠则向后寻找合法起点。
+    if (i + 2 >= n) break;
+    const seed = overlapAll([info[i]!.iv, info[i + 1]!.iv, info[i + 2]!.iv], touch);
+    if (!seed) { i++; continue; }
     const built = buildSegment(info, i, validBars, touch, doMerge);
     if (!built) break;
     segs.push(built.seg);
@@ -164,11 +187,17 @@ function buildSegment(
     secondFeat: FeatEl[]; // 第二特征序列（自分界点的反向序列）
   } = null;
 
-  const mkSeg = (endFx: Fractal, status: 'candidate' | 'confirmed'): Segment => {
+  const mkSeg = (endFx: Fractal, status: 'candidate' | 'confirmed', boundary: number): Segment => {
     const a = fxRaw(startFx, validBars);
     const b = fxRaw(endFx, validBars);
+    const consumed = info.slice(start, boundary + 1);
+    const keys = consumed.map((x) => sourceKey(x.bi, 'bi'));
+    const evidence = evidenceOf(consumed.map((x) => x.bi), keys);
+    if (evidence.quality !== 'verified') status = 'candidate';
     return {
       id: 0,
+      ...evidence,
+      key: `seg:${evidence.continuityId}:${sourceKey(startFx, 'fx')}:${sourceKey(endFx, 'fx')}:${status === 'confirmed' ? keys.join('|') : 'open'}`,
       dir,
       startFx: startFx.id,
       endFx: endFx.id,
@@ -177,41 +206,40 @@ function buildSegment(
       high: Math.max(startFx.price, endFx.price),
       low: Math.min(startFx.price, endFx.price),
       status,
-      confirmedAt: null,
+      confirmedAt: status === 'confirmed' ? Math.max(...consumed.map((x) => x.bi.confirmedAt ?? x.endFx.confirmedAt ?? x.endFx.endRaw)) : null,
     };
   };
 
   for (let k = start + 1; k < n; k++) {
     const bi = info[k]!;
     if (bi.dir === dir) {
-      // 同向笔：延续线段，更新极值。第二种挂起中若同向创新高/低 → 破坏不成立，撤销挂起（78课）。
+      // 同向笔：延续线段，更新极值。第二种挂起中若创出比候选终点更极端的新高/低，
+      // 原破坏不成立（78课）；否则该同向笔属于反转线段的特征序列。
       const p = up ? bi.iv.high : bi.iv.low;
       const moreExtreme = up ? p > extremePrice : p < extremePrice;
       if (moreExtreme) {
         extremePrice = p;
         extremeFx = bi.endFx;
-        if (pending) pending = null;
+        pending = null;
+        continue;
       }
-      continue;
-    }
-
-    // 反向笔 → 特征元素。
-    const el: FeatEl = { low: bi.iv.low, high: bi.iv.high, hiBi: k, loBi: k };
-
-    if (pending) {
-      // 第二特征序列（自分界点的反向序列）：78课须做包含处理（doMerge 控制）。
-      pending.secondFeat.push(el);
-      const sf = doMerge ? standardize(pending.secondFeat, !up) : pending.secondFeat;
-      if (sf.length >= 3) {
-        const tri = sf.slice(-3);
-        const hit = up ? bot3(tri) : top3(tri); // 上起等第二序列底分型；下起等顶分型
-        if (hit) {
-          // 第二种情况成立：线段在假设分界点结束（确认）。
-          return { seg: mkSeg(pending.breakFx, 'confirmed'), next: pending.breakBi };
+      if (pending) {
+        const el: FeatEl = { low: bi.iv.low, high: bi.iv.high, hiBi: k, loBi: k };
+        pending.secondFeat.push(el);
+        const sf = doMerge ? standardize(pending.secondFeat, !up) : pending.secondFeat;
+        if (sf.length >= 3) {
+          const tri = sf.slice(-3);
+          const hit = up ? bot3(tri) : top3(tri);
+          if (hit) return { seg: mkSeg(pending.breakFx, 'confirmed', k), next: pending.breakBi };
         }
       }
       continue;
     }
+
+    // 反向笔是原方向线段的特征元素；第二种挂起后，反向笔属于反转线段本体，
+    // 第二特征序列由“与原线段同向”的笔构成，不能再把这些反向笔塞入第二序列。
+    if (pending) continue;
+    const el: FeatEl = { low: bi.iv.low, high: bi.iv.high, hiBi: k, loBi: k };
 
     // 正常累计特征序列。
     feat.push(el);
@@ -230,12 +258,18 @@ function buildSegment(
     const hasGap = !overlap(tri[0]!, tri[1]!, touch);
     if (!hasGap) {
       // 第一种情况：直接结束。
-      return { seg: mkSeg(breakFx, 'confirmed'), next: breakBi };
+      return { seg: mkSeg(breakFx, 'confirmed', k), next: breakBi };
     }
-    // 第二种情况：挂起，等第二特征序列分型。
-    pending = { breakFx, breakBi, secondFeat: [] };
+    // 第二种情况：挂起。第二特征序列从假设分界点后的第一笔开始；
+    // 该笔可能已在识别出缺口分型之前遍历过，需要从历史笔重建而不只收集未来笔。
+    const secondFeat: FeatEl[] = [];
+    for (let q = breakBi + 1; q < k; q++) {
+      const prev = info[q]!;
+      if (prev.dir === dir) secondFeat.push({ low: prev.iv.low, high: prev.iv.high, hiBi: q, loBi: q });
+    }
+    pending = { breakFx, breakBi, secondFeat };
   }
 
   // 数据末尾：线段未确认结束 → 候选，端点取当前极值分型。
-  return { seg: mkSeg(extremeFx, 'candidate'), next: n };
+  return { seg: mkSeg(extremeFx, 'candidate', n - 1), next: n };
 }

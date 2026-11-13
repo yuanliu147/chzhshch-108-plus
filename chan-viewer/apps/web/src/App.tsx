@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { Alert, ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import { useStore } from './store.ts';
-import { 主题 } from './theme.ts';
+import { terminalTheme } from './theme.ts';
 import { TopBar } from './components/TopBar.tsx';
 import { LearnMode } from './modes/LearnMode.tsx';
 import { CompareMode } from './modes/CompareMode.tsx';
 import { PracticeMode } from './modes/PracticeMode.tsx';
-import { MultiMode } from './modes/MultiMode.tsx';
+import { TerminalMode } from './modes/TerminalMode.tsx';
 
 export function App() {
   const mode = useStore((s) => s.mode);
@@ -20,14 +20,14 @@ export function App() {
   }, [load]);
 
   return (
-    <ConfigProvider locale={zhCN} theme={主题}>
+    <ConfigProvider locale={zhCN} theme={terminalTheme}>
       <div className="app">
         <TopBar />
         {error && <Alert type="error" banner message={error} />}
         {mode === 'learn' && <LearnMode />}
         {mode === 'compare' && <CompareMode />}
         {mode === 'practice' && <PracticeMode />}
-        {mode === 'multi' && <MultiMode />}
+        {mode === 'multi' && <TerminalMode />}
       </div>
     </ConfigProvider>
   );

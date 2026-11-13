@@ -31,12 +31,13 @@ export function macd(closes: readonly number[]): Macd {
 }
 
 /** 段内同向柱面积：up=true 累加红柱(hist>0)，false 累加绿柱(|hist<0|)。区间取 [ceil(a),floor(b)]。 */
-export function areaBetween(hist: readonly number[], a: number, b: number, up: boolean): number {
+export function areaBetween(hist: readonly (number | null)[], a: number, b: number, up: boolean): number | null {
   const s = Math.max(0, Math.ceil(a));
   const e = Math.min(hist.length - 1, Math.floor(b));
   let sum = 0;
   for (let i = s; i <= e; i++) {
-    const h = hist[i]!;
+    const h = hist[i];
+    if (h == null || !Number.isFinite(h)) return null;
     if (up ? h > 0 : h < 0) sum += Math.abs(h);
   }
   return sum;

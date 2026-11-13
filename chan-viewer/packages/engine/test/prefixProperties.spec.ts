@@ -46,7 +46,7 @@ const base: ChanConfig = {
   bsp3Touch: '不跌破ZG',
   bsp2Filter: '允许二买低于一买',
 };
-const 口径矩阵: ChanConfig[] = [
+const CALIBER_MATRIX: ChanConfig[] = [
   base,
   { ...base, startDir: 'down' },
   { ...base, precision: { digits: 0 } },
@@ -64,7 +64,7 @@ const 口径矩阵: ChanConfig[] = [
 ];
 
 describe('P2 批==增量拼接 & P1 前缀事件一致', () => {
-  for (const cfg of 口径矩阵) {
+  for (const cfg of CALIBER_MATRIX) {
     it(`口径 ${cfg.biRule}/${cfg.mergeDir}/d${cfg.precision.digits}/${cfg.startDir}`, () => {
       const bars = walk(42, 300);
       const full = compute(bars, cfg);
@@ -86,7 +86,7 @@ describe('P3 已确认对象不回填', () => {
   it('分型撤销只针对候选；改端点只针对候选笔', () => {
     for (const seed of [1, 7, 42, 99, 2026]) {
       const bars = walk(seed, 400);
-      for (const cfg of 口径矩阵) {
+      for (const cfg of CALIBER_MATRIX) {
         const { events } = compute(bars, cfg);
         const confirmedFxAt = new Map<number, number>();
         const confirmedBiAt = new Map<number, number>();
@@ -121,7 +121,7 @@ describe('P4 有效K线无包含（原文方向口径）', () => {
 describe('P5 笔顶底交替且首尾相接', () => {  it('随机游走', () => {
     for (const seed of [1, 7, 42, 99, 2026]) {
       const bars = walk(seed, 500);
-      for (const cfg of 口径矩阵) {
+      for (const cfg of CALIBER_MATRIX) {
         const { bis, fractals } = compute(bars, cfg);
         const byId = new Map(fractals.map((f) => [f.id, f]));
         for (let i = 0; i < bis.length; i++) {
@@ -144,7 +144,7 @@ describe('P6 线段：方向交替、首尾相接、已确认对前缀稳定', (
   it('随机游走 + 多口径', () => {
     for (const seed of [1, 7, 42, 99, 2026]) {
       const bars = walk(seed, 500);
-      for (const cfg of 口径矩阵) {
+      for (const cfg of CALIBER_MATRIX) {
         const full = compute(bars, cfg);
         const { segments } = full;
         const byId = new Map(full.fractals.map((f) => [f.id, f]));
@@ -178,7 +178,7 @@ describe('P7 中枢：核心有效、外围包络、已确认对前缀稳定', (
   it('随机游走 + 多口径', () => {
     for (const seed of [1, 7, 42, 99, 2026]) {
       const bars = walk(seed, 500);
-      for (const cfg of 口径矩阵) {
+      for (const cfg of CALIBER_MATRIX) {
         const full = compute(bars, cfg);
         for (const c of full.centers) {
           expect(c.ZD).toBeLessThanOrEqual(c.ZG); // 核心有效
@@ -205,7 +205,7 @@ describe('P8 走势类型：盘整单中枢、趋势同向不重叠、已确认�
   it('随机游走 + 多口径', () => {
     for (const seed of [1, 7, 42, 99, 2026]) {
       const bars = walk(seed, 500);
-      for (const cfg of 口径矩阵) {
+      for (const cfg of CALIBER_MATRIX) {
         const full = compute(bars, cfg);
         const centerById = new Map(full.centers.map((c) => [c.id, c]));
         for (const t of full.trends) {
@@ -236,7 +236,7 @@ describe('P9 背驰：c<b、已确认对前缀稳定', () => {
   it('随机游走 + 多口径', () => {
     for (const seed of [1, 7, 42, 99, 2026]) {
       const bars = walk(seed, 500);
-      for (const cfg of 口径矩阵) {
+      for (const cfg of CALIBER_MATRIX) {
         const full = compute(bars, cfg);
         for (const d of full.divergences) {
           expect(d.cForce).toBeLessThan(d.bForce); // 背驰成立条件

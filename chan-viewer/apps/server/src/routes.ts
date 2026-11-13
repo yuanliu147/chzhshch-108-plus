@@ -1,6 +1,6 @@
 // API 路由：/api/symbols、/api/kline、/api/minkline、/api/mincap。只读供数，不做缠论计算（引擎在 web 端）。
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { lookupSymbol, minCapability, queryKline, queryMinKline, searchSymbols } from './db.js';
+import { lookupSymbol, minCapability, queryKline, queryMinKlineData, searchSymbols } from './db.js';
 
 const ADJUST_LABEL: Record<string, string> = { '1': '后复权', '2': '前复权', '3': '不复权' };
 
@@ -32,8 +32,8 @@ export function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): 
     if (!isIndex && !ADJUST_LABEL[adjust!]) return json(res, 400, { error: `adjust 非法：${adjust}` }), true;
 
     let limit = Number(url.searchParams.get('limit') ?? 400);
-    if (!Number.isFinite(limit) || limit <= 0) limit = 400;
-    limit = Math.min(limit, 2000);
+    if (limit !== 0 && (!Number.isFinite(limit) || limit < 0)) limit = 400;
+    if (limit !== 0) limit = Math.min(limit, 2000); // 显式 limit=0 = 全量
     const start = url.searchParams.get('start') ?? undefined;
     const end = url.searchParams.get('end') ?? undefined;
 
@@ -50,6 +50,8 @@ export function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): 
       bars: data.bars,
       meta: {
         source: 'baostock',
+        timezone: 'Asia/Shanghai',
+        timeBasis: 'bar-end',
         code: sym.code,
         codeName: sym.code_name,
         kind: sym.kind,
@@ -83,23 +85,33 @@ export function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): 
     let freq = Number(url.searchParams.get('freq') ?? 30);
     if (![5, 15, 30, 60].includes(freq)) freq = 30;
     let limit = Number(url.searchParams.get('limit') ?? 400);
-    if (!Number.isFinite(limit) || limit <= 0) limit = 400;
-    limit = Math.min(limit, 2000);
+    if (limit !== 0 && (!Number.isFinite(limit) || limit < 0)) limit = 400;
+    if (limit !== 0) limit = Math.min(limit, 2000); // 显式 limit=0 = 全量
     const start = url.searchParams.get('start') ?? undefined;
     const end = url.searchParams.get('end') ?? undefined;
 
     const cap = minCapability(code);
     const warnings: string[] = [];
-    if (!cap.hasMin) warnings.push('该标的无分钟线数据（分钟线仅覆盖部分股票，2020年起）。');
-    const bars = cap.hasMin ? queryMinKline({ code, freq, start, end, limit }) : [];
+    if (!cap.hasMin) warnings.push('该标的无分钟线数据（分钟线仅覆盖部分股票，且各股票、各日期可能缺根）。');
+    const { bars, ...coverageMeta } = queryMinKlineData({ code, freq, start, end, limit }, cap);
     if (cap.hasMin && bars.length === 0) warnings.push('该区间无分钟数据。');
+    if (coverageMeta.coverageGaps.length > 0) warnings.push('已证明的交易覆盖存在缺口（可能整桶或整交易日无来源）；未补行情柱。');
+    if (coverageMeta.coverageStatus === 'unknown') warnings.push('部分请求范围缺少分钟库覆盖或可靠交易日证据，来源状态未知。');
+    const partialBars = bars.filter((b) => !b.timeMeta.complete).length;
+    if (partialBars > 0) warnings.push(`当前返回 ${partialBars} 根不完整分钟柱（来源缺根或边界截断）；不按完整收盘解释。`);
     json(res, 200, {
-      // date 字段承载完整时间戳（YYYY-MM-DD HH:MM:SS），供引擎/图表使用。
-      bars: bars.map((b) => ({ date: b.time, open: b.open, high: b.high, low: b.low, close: b.close, volume: b.volume, amount: b.amount, pct_chg: null, is_st: null })),
+      // date 为实际 bar 结束时间（YYYY-MM-DD HH:MM:SS）；time 保存来源覆盖、名义桶与完整性。
+      bars: bars.map((b) => ({
+        date: b.time, open: b.open, high: b.high, low: b.low, close: b.close,
+        volume: b.volume, amount: b.amount, pct_chg: null, is_st: null,
+        time: b.timeMeta,
+      })),
       meta: {
         source: 'baostock_min', code, freq, adjust: '3', adjustLabel: '不复权',
+        timezone: 'Asia/Shanghai', timeBasis: 'bar-end',
         hasMin: cap.hasMin, firstTime: cap.firstTime, lastTime: cap.lastTime,
-        dataAsOf: cap.lastTime, count: bars.length, warnings,
+        dataAsOf: cap.lastTime, count: bars.length, partialBars,
+        completeBars: bars.length - partialBars, ...coverageMeta, warnings,
       },
     });
     return true;

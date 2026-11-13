@@ -1,7 +1,7 @@
 // 口径面板：四维显式选择，每维带来源徽标与逐字引文（口径注册表唯一来源）。控件用 antd。
 import type { ReactNode } from 'react';
 import { Select, Tag } from 'antd';
-import { 口径注册, type ChanConfig } from '@chan/engine';
+import { CALIBER_REGISTRY, type ChanConfig } from '@chan/engine';
 
 interface Props {
   config: ChanConfig;
@@ -9,7 +9,7 @@ interface Props {
   title?: string;
 }
 
-const SOURCE_COLOR: Record<string, string> = { 原文: 'success', 社区: 'warning', 错误示范: 'error', 实现假设: 'geekblue' };
+const SOURCE_COLOR: Record<string, string> = { '原文': 'success', '社区': 'warning', '错误示范': 'error', '实现假设': 'geekblue' };
 
 function Badge({ source }: { source: string }) {
   return <Tag color={SOURCE_COLOR[source] ?? 'default'} style={{ marginInlineEnd: 0 }}>{source}</Tag>;
@@ -35,19 +35,19 @@ export function ConfigPanel({ config, onChange, title }: Props) {
     </div>
   );
 
-  const startEntry = 口径注册.startDir[config.startDir];
-  const precKey = config.precision.digits === 'raw' ? 'raw' : (`d${config.precision.digits}` as keyof typeof 口径注册.precision);
-  const precEntry = 口径注册.precision[precKey];
-  const biEntry = 口径注册.biRule[config.biRule];
-  const mergeEntry = 口径注册.mergeDir[config.mergeDir];
-  const touchEntry = 口径注册.touchOverlap[config.touchOverlap];
-  const segMergeEntry = 口径注册.segMerge[config.segMerge];
-  const centerUnitEntry = 口径注册.centerUnit[config.centerUnit];
-  const centerUpgradeEntry = 口径注册.centerUpgrade[config.centerUpgrade];
-  const trendOverlapEntry = 口径注册.trendOverlap[config.trendOverlap];
-  const divMetricEntry = 口径注册.divMetric[config.divMetric];
-  const bsp3Entry = 口径注册.bsp3Touch[config.bsp3Touch];
-  const bsp2Entry = 口径注册.bsp2Filter[config.bsp2Filter];
+  const startEntry = CALIBER_REGISTRY.startDir[config.startDir];
+  const precKey = config.precision.digits === 'raw' ? 'raw' : (`d${config.precision.digits}` as keyof typeof CALIBER_REGISTRY.precision);
+  const precEntry = CALIBER_REGISTRY.precision[precKey];
+  const biEntry = CALIBER_REGISTRY.biRule[config.biRule];
+  const mergeEntry = CALIBER_REGISTRY.mergeDir[config.mergeDir];
+  const touchEntry = CALIBER_REGISTRY.touchOverlap[config.touchOverlap];
+  const segMergeEntry = CALIBER_REGISTRY.segMerge[config.segMerge];
+  const centerUnitEntry = CALIBER_REGISTRY.centerUnit[config.centerUnit];
+  const centerUpgradeEntry = CALIBER_REGISTRY.centerUpgrade[config.centerUpgrade];
+  const trendOverlapEntry = CALIBER_REGISTRY.trendOverlap[config.trendOverlap];
+  const divMetricEntry = CALIBER_REGISTRY.divMetric[config.divMetric];
+  const bsp3Entry = CALIBER_REGISTRY.bsp3Touch[config.bsp3Touch];
+  const bsp2Entry = CALIBER_REGISTRY.bsp2Filter[config.bsp2Filter];
 
   return (
     <div>
@@ -58,7 +58,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.startDir}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.startDir).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.startDir).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, startDir: v as ChanConfig['startDir'] })}
         />,
       )}
@@ -68,7 +68,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={String(config.precision.digits)}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.precision).map((o) => ({ value: String(o.value), label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.precision).map((o) => ({ value: String(o.value), label: o.label }))}
           onChange={(v) => onChange({ ...config, precision: { digits: v === 'raw' ? 'raw' : (Number(v) as 0 | 1 | 2 | 3 | 4) } })}
         />,
       )}
@@ -78,7 +78,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.biRule}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.biRule).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.biRule).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, biRule: v as ChanConfig['biRule'] })}
         />,
       )}
@@ -88,7 +88,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.mergeDir}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.mergeDir).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.mergeDir).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, mergeDir: v as ChanConfig['mergeDir'] })}
         />,
       )}
@@ -98,7 +98,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.touchOverlap}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.touchOverlap).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.touchOverlap).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, touchOverlap: v as ChanConfig['touchOverlap'] })}
         />,
       )}
@@ -108,7 +108,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.segMerge}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.segMerge).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.segMerge).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, segMerge: v as ChanConfig['segMerge'] })}
         />,
       )}
@@ -118,7 +118,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.centerUnit}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.centerUnit).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.centerUnit).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, centerUnit: v as ChanConfig['centerUnit'] })}
         />,
       )}
@@ -128,7 +128,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.centerUpgrade}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.centerUpgrade).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.centerUpgrade).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, centerUpgrade: v as ChanConfig['centerUpgrade'] })}
         />,
       )}
@@ -138,7 +138,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.trendOverlap}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.trendOverlap).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.trendOverlap).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, trendOverlap: v as ChanConfig['trendOverlap'] })}
         />,
       )}
@@ -148,7 +148,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.divMetric}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.divMetric).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.divMetric).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, divMetric: v as ChanConfig['divMetric'] })}
         />,
       )}
@@ -158,7 +158,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.bsp3Touch}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.bsp3Touch).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.bsp3Touch).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, bsp3Touch: v as ChanConfig['bsp3Touch'] })}
         />,
       )}
@@ -168,7 +168,7 @@ export function ConfigPanel({ config, onChange, title }: Props) {
         <Select
           value={config.bsp2Filter}
           style={{ width: '100%' }}
-          options={Object.values(口径注册.bsp2Filter).map((o) => ({ value: o.value, label: o.label }))}
+          options={Object.values(CALIBER_REGISTRY.bsp2Filter).map((o) => ({ value: o.value, label: o.label }))}
           onChange={(v) => onChange({ ...config, bsp2Filter: v as ChanConfig['bsp2Filter'] })}
         />,
       )}
