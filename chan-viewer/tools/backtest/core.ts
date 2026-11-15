@@ -79,6 +79,17 @@ export const DEFAULT_BACKTEST_CONFIG: BacktestConfig = {
   lotSize: 100,
 };
 
+export interface ExitPlanOverride {
+  date: string | null;
+  signalDate: string | null;
+  reason: string;
+}
+
+export interface SimulationOptions {
+  /** 探索研究可预计算独立离场；未返回计划时沿用原exitRule。 */
+  exitPlan?: (candidate: EntryCandidate) => ExitPlanOverride | undefined;
+}
+
 export interface RejectedCandidate {
   code: string;
   klass: PointClass;
@@ -122,6 +133,7 @@ export interface OpenPosition {
   name: string;
   klass: PointClass;
   pointKey: string;
+  structureDate: string;
   signalDate: string;
   entryDate: string;
   entryRawPrice: number;
@@ -320,6 +332,7 @@ export function simulatePortfolio(
   candidates: readonly EntryCandidate[],
   calendar: readonly string[],
   config: BacktestConfig,
+  options: SimulationOptions = {},
 ): ScenarioResult {
   const cfg = { ...config, initialCapital: config.initialCapital };
   const relevant = candidates.filter(c => c.klass === klass && c.entryDate >= cfg.startDate && c.entryDate <= cfg.endDate);
@@ -410,12 +423,14 @@ export function simulatePortfolio(
         cash -= entry.total;
         totalCommission += entry.commission;
         totalSlippage += entry.slippage;
+        const override = options.exitPlan?.(candidate);
         positions.set(candidate.code, {
           code: candidate.code, name: stock.name, klass, pointKey: candidate.pointKey, structureDate: candidate.structureDate, signalDate: candidate.signalDate,
           entryDate: date, entryRawPrice: bar.open, entryHfqPrice: bar.hfqOpen!, quantity,
           units: entry.gross / bar.hfqOpen!, entryGross: entry.gross, entryCommission: entry.commission,
-          entrySlippage: entry.slippage, entryTotalCost: entry.total, plannedExitDate: candidate.exitDates[exitRule],
-          exitReason: reasonLabel(exitRule), exitSignalDate: exitRule === 'hold-20' || exitRule === 'hold-60' ? null : candidate.exitSignalDates[exitRule],
+          entrySlippage: entry.slippage, entryTotalCost: entry.total, plannedExitDate: override?.date ?? (override ? null : candidate.exitDates[exitRule]),
+          exitReason: override?.reason ?? reasonLabel(exitRule),
+          exitSignalDate: override ? override.signalDate : exitRule === 'hold-20' || exitRule === 'hold-60' ? null : candidate.exitSignalDates[exitRule],
           lastDate: date, lastHfqClose: bar.hfqClose ?? bar.hfqOpen!,
         });
       }
@@ -435,7 +450,7 @@ export function simulatePortfolio(
   }
 
   const openPositions: OpenPosition[] = [...positions.values()].map(p => ({
-    code: p.code, name: p.name, klass, pointKey: p.pointKey, signalDate: p.signalDate, entryDate: p.entryDate,
+    code: p.code, name: p.name, klass, pointKey: p.pointKey, structureDate: p.structureDate, signalDate: p.signalDate, entryDate: p.entryDate,
     entryRawPrice: p.entryRawPrice, quantity: p.quantity, entryTotalCost: p.entryTotalCost, lastDate: p.lastDate,
     marketValue: p.units * p.lastHfqClose, unrealizedPnl: p.units * p.lastHfqClose - p.entryTotalCost,
     plannedExitDate: p.plannedExitDate, exitReason: p.exitReason,
